@@ -1,0 +1,59 @@
+
+.rui-tabset {
+    /* border-bottom: 1px solid #EEE; */
+
+}
+
+.rui-tabset-c {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+}
+
+.rui-tabset-ctrl {
+
+    cursor: pointer;
+    padding: 6px 14px;
+}
+.rui-tabset-ctrl-material {
+    flex: 1;
+    text-align: center;
+}
+
+.rui-tabset-ctrl-material-active {
+    border-top: 1px solid #44b6ae;
+    border-bottom: 1px solid #44b6ae;
+}
+
+.rui-tabset-ctrl-material-inactive {
+    border-top: 1px solid #EEE;
+     border-bottom: 1px solid #EEE;
+    border-right: 1px solid #EEE;
+}
+.rui-tabset-ctrl-classic {
+    border-top: 1px solid #EEE;
+    border-right: 1px solid #EEE;
+}
+
+.rui-tabset-ctrl-classic-inactive {
+    border-top: 1px solid #EEE;
+
+}
+
+.rui-tabset-ctrl-pills {
+    border-radius: 18px;
+    margin: 4px;
+}
+
+.rui-tab-active {
+    font-weight: bold;
+    color: #FFF;
+    background: #44b6ae;
+}
+
+.rui-tab-inactive {
+    color: #AAA;
+}
+
+.rui-tab-c {
+    padding: 10px;
+    border-top: 1px solid #EEE;
+}
