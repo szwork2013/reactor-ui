@@ -54,7 +54,9 @@ var TabSet = React.createClass({
                 <div className={"rui-tabset"} style={ {display: "flex", flexFlow: "row"}}>
                     { tabControls }
                 </div>
-                {this.createChildrenTabs()}
+                <div style={this.props.style}>
+                    {this.createChildrenTabs()}
+                </div>
             </div>
         );
     }

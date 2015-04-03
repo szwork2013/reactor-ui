@@ -1,7 +1,6 @@
 
+/** Tabs */
 .rui-tabset {
-    /* border-bottom: 1px solid #EEE; */
-
 }
 
 .rui-tabset-c {
@@ -56,4 +55,73 @@
 .rui-tab-c {
     padding: 10px;
     border-top: 1px solid #EEE;
+}
+
+/* End Tabs */
+
+/** Panels */
+
+.rui-panel-c {
+
+}
+
+.rui-panel-close {
+
+}
+
+.rui-panel-collapsable {
+
+}
+
+.rui-panel-control {
+    color: #AAA;
+    cursor: pointer;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.rui-panel-control:hover {
+    color: #555;
+}
+
+.rui-panel-header {
+    display: flex;
+    padding: 10px;
+    border: 1px solid #eee;
+}
+
+.rui-panel-title {
+    font-weight: bold;
+    color: #138a72;
+}
+
+.rui-panel-controls {
+    margin-left: auto;
+}
+
+.rui-panel-body {
+    padding: 10px;
+    border: 1px solid #eee;
+    border-top: none;
+    overflow: auto;
+}
+
+/** End Panels */
+
+
+/** Pills */
+
+.rui-pill {
+    cursor: pointer;
+    color: inherit;
+    display: inline;
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid #EEE;
+}
+
+.rui-pill-primary {
+    color: #FFF;
+    background-color: #1ab394;
+    border-color: #1ab394;
 }
