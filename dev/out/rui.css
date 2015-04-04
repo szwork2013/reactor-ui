@@ -62,7 +62,7 @@
 /** Panels */
 
 .rui-panel-c {
-
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
 }
 
 .rui-panel-close {
@@ -122,6 +122,8 @@
 
 .rui-pill-primary {
     color: #FFF;
-    background-color: #1ab394;
-    border-color: #1ab394;
+    background-color: #009688;
+    border-color: #009688;
 }
+
+/** End Pills */
