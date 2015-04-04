@@ -35,7 +35,9 @@ module.exports = function(config) {
         stats: {
            colors: true
         },
-        progress: true,
+        quiet: true,
+        silent: true,
+        progress: false,
         debug: false
     },
     // preprocess matching files before serving them to the browser

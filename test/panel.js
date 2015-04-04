@@ -1,3 +1,6 @@
+/*globals require,describe,it */
+/* jshint -W097, esnext: true */
+'use strict';
 
 var assert = require("assert");
 var Panel = require("reactor-ui/panel");
@@ -23,11 +26,10 @@ describe("Panel Tests" ,function() {
         var collapseToggle = React.findDOMNode(panel1.refs.collapseToggle);
         expect(collapseToggle.tagName).to.equal("SPAN");
 
-        expect(panelDom.style['display']).to.equal('');
+        expect(panelDom.style.display).to.equal('');
         Simulate.click(collapseToggle);
-        expect(panelDom.style['display']).to.equal('none');
+        expect(panelDom.style.display).to.equal('none');
         Simulate.click(collapseToggle);
-        expect(panelDom.style['display']).to.equal('');
-
+        expect(panelDom.style.display).to.equal('');
     });
 });
