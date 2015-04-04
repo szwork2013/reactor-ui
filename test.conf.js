@@ -15,7 +15,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/*.js',
       'test/*.js'
     ],
 
@@ -24,10 +23,26 @@ module.exports = function(config) {
     exclude: [
     ],
 
+    webpack: {
 
+        module: {
+            loaders: [
+                { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"}
+            ]
+        }
+    },
+    webpackMiddleware: {
+        stats: {
+           colors: true
+        },
+        progress: true,
+        debug: false
+    },
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      '**/*.js': ['webpack']
+
     },
 
 
@@ -56,11 +71,15 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: false,
+
+    commonjsPreprocessor: {
+      modulesRoot: '.'
+    }
   });
 };

@@ -3,9 +3,6 @@ var webpack = require('webpack');
 
 var plugins = [
     new webpack.DefinePlugin({
-        '__DEV__': ""
-    }),
-    new webpack.DefinePlugin({
         '__DEV__': 'true'
     })
 ];
@@ -23,8 +20,6 @@ if (process.env.COMPRESS) {
 }
 
 module.exports = {
-
-
 
     node: {
         buffer: false

@@ -27,7 +27,7 @@ var Panel = React.createClass({
 
     collapseComponent() {
         if ( this.props.collapsable === true ) {
-            return <span onClick={this.collapseClicked} className={cs("rui-panel-control","rui-panel-collapsable","fa",
+            return <span ref="collapseToggle" onClick={this.collapseClicked} className={cs("rui-panel-control","rui-panel-collapsable","fa",
                 { "fa-chevron-up" : this.state.bodyShown }, {"fa-chevron-down": !this.state.bodyShown})}></span>
         }
         return null;
