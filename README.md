@@ -11,6 +11,8 @@ Note that this is very much on its initial development phase.
 
 ### Basic Buttons
 
+![alt ss](https://raw.githubusercontent.com/wmira/reactor-ui/master/ss/buttons.png
+
 ```javascript
 
     var Btn = require("reactor-ui/button/Btn");
@@ -33,6 +35,7 @@ Note that this is very much on its initial development phase.
 | text         | string | The text of the button | N | undefined/null |
 | iconCls      | string | The icon class for the button | N | undefined/null |
 | onClick      | function | Listener function when the button is clicked | N
+
 
 
 ##Tabs
