@@ -39,7 +39,7 @@ Note that this is very much on its initial development phase.
 
 ### Button Groups
 
-![alt button groups](https://raw.githubusercontent.com/wmira/reactor-ui/master/ss/buttons.png)
+![alt button groups](https://raw.githubusercontent.com/wmira/reactor-ui/master/ss/buttongroups.png)
 
 ```javascript
 
