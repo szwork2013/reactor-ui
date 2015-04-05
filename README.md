@@ -11,7 +11,7 @@ Note that this is very much on its initial development phase.
 
 ### Basic Buttons
 
-![alt ss](https://raw.githubusercontent.com/wmira/reactor-ui/master/ss/buttons.png
+![alt ss](https://raw.githubusercontent.com/wmira/reactor-ui/master/ss/buttons.png)
 
 ```javascript
 
