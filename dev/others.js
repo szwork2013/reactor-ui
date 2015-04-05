@@ -59,7 +59,7 @@ var BtnGroupDemo = React.createClass({
     render: function() {
         return <div>
             <Btn width="120px" text={ this.state.disabled ? "Enable" : "Disable"} onClick={this.onClick} /><span> </span>
-                <BtnGroup disabled={this.state.disabled} scheme="violet" active="clock">
+            <BtnGroup disabled={this.state.disabled} scheme="violet" active="clock">
                 <Btn iconCls="fa fa-clock-o" value="clock"/>
                 <Btn iconCls="fa fa-heart" value="heart"/>
                 <Btn iconCls="fa fa-adjust" value="adjust"/>

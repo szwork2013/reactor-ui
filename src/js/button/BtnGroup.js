@@ -31,6 +31,9 @@ var BtnGroup = React.createClass({
     },
 
     buttonClicked : function(event,value) {
+        if ( this.props.onClick ) {
+           this.props.onClick(value);
+        }
         this.setState({active : value});
     },
 
