@@ -6,6 +6,7 @@ var React = require("react");
 var Pill = require("reactor-ui/Pill");
 var Btn = require("reactor-ui/button/Btn");
 var BtnGroup = require("reactor-ui/button/BtnGroup");
+var BtnDrpDown = require("reactor-ui/button/BtnDrpDown");
 
 React.render(
     <span>
@@ -43,10 +44,38 @@ React.render(
 document.getElementById("cont3"));
 
 
-React.render(
-        <BtnGroup scheme="violet" active="clock">
-            <Btn iconCls="fa fa-clock-o" value="clock"/>
-            <Btn iconCls="fa fa-heart" value="heart"/>
-            <Btn iconCls="fa fa-adjust" value="adjust"/>
-        </BtnGroup>,
+var BtnGroupDemo = React.createClass({
+    shouldComponentUpdate : function() {
+        return true;
+    },
+    getInitialState: function() {
+        return {disabled:  this.props.disabled ? true : false };
+    },
+    onClick : function() {
+
+        this.setState({disabled : !this.state.disabled })
+    },
+
+    render: function() {
+        return <div>
+            <Btn width="120px" text={ this.state.disabled ? "Enable" : "Disable"} onClick={this.onClick} /><span> </span>
+                <BtnGroup disabled={this.state.disabled} scheme="violet" active="clock">
+                <Btn iconCls="fa fa-clock-o" value="clock"/>
+                <Btn iconCls="fa fa-heart" value="heart"/>
+                <Btn iconCls="fa fa-adjust" value="adjust"/>
+            </BtnGroup>
+        </div>
+    }
+
+});
+
+React.render(<BtnGroupDemo/>,
 document.getElementById("cont4"));
+
+var dropdownList = ["Action 1", "Action 2", "Action 3"];
+
+React.render(<BtnDrpDown defaultText="Select Action" items={dropdownList}/>,
+    document.getElementById("cont5"));
+
+React.render(<BtnDrpDown scheme="blue" defaultText="Select Action" items={dropdownList}/>,
+    document.getElementById("cont6"));

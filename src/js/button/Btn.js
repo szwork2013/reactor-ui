@@ -2,11 +2,27 @@
 /* jshint -W097, esnext: true */
 'use strict';
 
-var React = require("react");
+var React = require("react/addons");
 var cn = require("classnames");
+var PureRenderMixin = React.addons.PureRenderMixin;
 
+/**
+ * Btn element
+ *
+ * @type {*|Function}
+ */
 var Btn = React.createClass({
+    mixins: [PureRenderMixin],
+    propTypes : {
+        /** theme */
+        scheme : React.PropTypes.string,
+        /** text of the  button */
+        text : React.PropTypes.string,
+        /** if button is in disabled mode */
 
+        /** value of this button */
+        value : React.PropTypes.string
+    },
 
     createText : function() {
         if ( this.props.text ) {
@@ -21,21 +37,30 @@ var Btn = React.createClass({
         }
         return null;
     },
-    shouldComponentUpdate(nextProps) {
-        return nextProps.active !== this.props.value ||
-            this.props.active !==nextProps.value;
 
-    },
     __onClickHandler : function(e) {
         if ( this.props.onClick ) {
             this.props.onClick(e,this.props.value);
         }
     },
+
+    createContent : function() {
+        if ( React.Children.count(this.props.children) === 0 ) {
+            return <span>{this.createIcon()} {this.createText()}</span>;
+        } else {
+            return this.props.children;
+        }
+    },
+
     render: function() {
+
         var disabled = ( this.props.disabled === true );
-        var text = this.props.text;
         var scheme = this.props.scheme;
         var active = this.props.active;
+        var style = {};
+        if ( this.props.width ) {
+            style.width = this.props.width;
+        }
         var classNames =  cn(
             "rui-btn",
             {"rui-btn-green" : (scheme === "green") },
@@ -43,9 +68,11 @@ var Btn = React.createClass({
             {"rui-btn-violet" : (scheme === "violet") },
             {"rui-btn-red" : (scheme === "red") },
             {"rui-btn-orange" : (scheme === "orange") },
-            {"rui-btn-group-active-violet" : this.props.value === active }
+            {"rui-btn-group-active-violet" : ( this.props.value === active && scheme === "violet" && this.props.value !== undefined ) }
         );
-        return (<button value={this.props.value} className={classNames} disabled={disabled} onClick={this.__onClickHandler}>{this.createIcon()} {this.createText()}</button>);
+        return (<button onBlur={this.props.onBlur} style={style} value={this.props.value} className={classNames} disabled={disabled} onClick={this.__onClickHandler}>
+            { this.createContent() }
+        </button>);
     }
 });
 

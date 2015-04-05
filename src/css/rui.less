@@ -62,9 +62,9 @@
     border: 1px solid @color-border-neutral;
     background: #FFF;
     display: inline-block;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.45;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
     white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;
@@ -132,6 +132,9 @@
     .rui-btn-theme-hover(@color-red)
 }
 
+.rui-btn-group {
+    display: inline-block;
+}
 
 .rui-btn-group-active-violet {
     .rui-btn-theme(@color-violet-dark);
@@ -199,3 +202,44 @@
 }
 
 /* End Tabs */
+
+/** List */
+
+.rui-list-float {
+  position: absolute;
+}
+.rui-list-c {
+  border: 1px solid @color-border-neutral;
+}
+.rui-li {
+  padding: 8px 20px;
+  cursor: pointer;
+}
+
+.rui-li:hover {
+  background: darken(@color-neutral,5%);
+}
+
+.rui-li-scheme(@color) {
+
+}
+.rui-li-scheme-hover(@color) {
+  background: @color;
+  color: #FFF;
+}
+
+.rui-li-green {
+  .rui-li-scheme(@color-green)
+}
+.rui-li-blue {
+  .rui-li-scheme(@color-blue)
+}
+
+.rui-li-green:hover {
+  .rui-li-scheme-hover(@color-green);
+}
+
+.rui-li-blue:hover {
+  .rui-li-scheme-hover(@color-blue);
+}
+/** End List */

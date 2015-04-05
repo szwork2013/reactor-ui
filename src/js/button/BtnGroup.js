@@ -2,28 +2,35 @@
 /* jshint -W097, esnext: true */
 'use strict';
 
-var React = require("react");
+var React = require("react/addons");
 var cn = require("classnames");
 var Btn = require("./Btn");
-
+var PureRenderMixin = React.addons.PureRenderMixin;
 
 var BtnGroup = React.createClass({
+    mixins: [PureRenderMixin],
+    propTypes : {
+        /** theme */
+        scheme : React.PropTypes.string,
+        /** text of the  button */
+        active : React.PropTypes.string
+        /** if this button group is disabled */
+
+    },
 
     getInitialState: function() {
-        return {active : this.props.active};
+        return {active : this.props.active };
     },
 
     processBtnGroup() {
 
-        var activeValue = this.state.active;
         return React.Children.map(this.props.children, ( child ) => {
-            return React.cloneElement(child,{scheme: this.props.scheme, active: this.state.active,onClick : this.buttonClicked});
+            return React.cloneElement(child,{ disabled: this.props.disabled , scheme: this.props.scheme, active: this.state.active,onClick : this.buttonClicked});
         });
 
     },
 
     buttonClicked : function(event,value) {
-        //TODO: pass to listener, then transition if all good.        
         this.setState({active : value});
     },
 
