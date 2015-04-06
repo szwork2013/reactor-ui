@@ -45,8 +45,19 @@ var Btn = React.createClass({
     },
 
     createContent : function() {
+        var contentEls = [],
+            icon, text;
+
         if ( React.Children.count(this.props.children) === 0 ) {
-            return <span>{this.createIcon()} {this.createText()}</span>;
+            icon = this.createIcon();
+            text = this.createText();
+            if ( icon ) {
+                contentEls.push(icon);
+            }
+            if ( text ) {
+                contentEls.push(text);
+            }
+            return contentEls;
         } else {
             return this.props.children;
         }
@@ -54,13 +65,14 @@ var Btn = React.createClass({
 
     render: function() {
 
-        var disabled = ( this.props.disabled === true );
+        var disabled = ( this.props.disabled === true  );
         var scheme = this.props.scheme;
         var active = this.props.active;
         var style = {};
         if ( this.props.width ) {
             style.width = this.props.width;
         }
+
         var classNames =  cn(
             "rui-btn",
             {"rui-btn-green" : (scheme === "green") },
@@ -70,7 +82,7 @@ var Btn = React.createClass({
             {"rui-btn-orange" : (scheme === "orange") },
             {"rui-btn-group-active-violet" : ( this.props.value === active && scheme === "violet" && this.props.value !== undefined ) }
         );
-        return (<button onBlur={this.props.onBlur} style={style} value={this.props.value} className={classNames} disabled={disabled} onClick={this.__onClickHandler}>
+        return (<button ref="btn" onBlur={this.props.onBlur} style={style} value={this.props.value} className={classNames} disabled={disabled} onClick={this.__onClickHandler}>
             { this.createContent() }
         </button>);
     }

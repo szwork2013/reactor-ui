@@ -25,6 +25,10 @@ var BtnGroup = React.createClass({
     processBtnGroup() {
 
         return React.Children.map(this.props.children, ( child ) => {
+
+            if ( child.type !== Btn ) {
+                throw new Error("Only Btn type is allowed");
+            }
             return React.cloneElement(child,{ disabled: this.props.disabled , scheme: this.props.scheme, active: this.state.active,onClick : this.buttonClicked});
         });
 
