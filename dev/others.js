@@ -45,9 +45,7 @@ document.getElementById("cont3"));
 
 
 var BtnGroupDemo = React.createClass({
-    shouldComponentUpdate : function() {
-        return true;
-    },
+
     getInitialState: function() {
         return {disabled:  this.props.disabled ? true : false };
     },

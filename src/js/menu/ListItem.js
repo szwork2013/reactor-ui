@@ -21,7 +21,7 @@ var ListItem =  React.createClass({
     render : function() {
 
         var scheme = this.props.scheme;
-        console.log("scheme: " + scheme);
+
         var classNames =  cn(
             "rui-li",
             {"rui-li-green" : (scheme === "green") },

@@ -24,6 +24,7 @@ var BtnDropDown = React.createClass({
             if (this.props.items) {
                 return <List onClick={this.onItemClick}  scheme={this.props.scheme} items={this.props.items} minWidth={this.state.listMinWidth}/>
             } else {
+                //FIXME, we should listener here
                 return this.props.children;
             }
         } else {
@@ -32,11 +33,13 @@ var BtnDropDown = React.createClass({
     },
 
     onItemLick : function() {
-
+        if ( this.props.onClick ) {
+            this.props.onClick.apply(null,arguments);
+        }
     },
 
     onBlur : function() {
-       // this.setState({listVisible: !this.state.listVisible});
+       this.setState({listVisible: !this.state.listVisible});
     },
     buttonClicked : function() {
         var element = this.refs.btn.getDOMNode();

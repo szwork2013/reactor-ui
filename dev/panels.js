@@ -3,7 +3,7 @@
 var React = require("react");
 
 var Panel = require("reactor-ui/panel");
-var Pill = require("reactor-ui/pill");
+var Pill = require("reactor-ui/Pill");
 
 React.render(
     <Panel title="Panel Example" closeable={true} collapsable={true}>

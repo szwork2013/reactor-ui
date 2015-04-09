@@ -61,13 +61,71 @@ Note that this is very much on its initial development phase.
 | onClick      | function | Listener function when a button from the group is clicked | N | |
 
 
+### Button Menus/ Button Dropdown
+
+![alt button dropdown](https://raw.githubusercontent.com/wmira/reactor-ui/master/ss/buttondropdown.png)
+
+```javascript
+
+   <BtnDrpDown scheme="blue" defaultText="Select Action" items={dropdownList}/>
+
+   <BtnDrpDown scheme="red" defaultText="Select Action">
+        <List>
+            <ListItem value="1">One</ListItem>
+            <ListItem value="2">Two</ListItem>
+            <ListItem value="3">Three</ListItem>
+        </List>
+   <BtnDrpDown>
+
+```
+
+#### Properties
+
+| Property     | Type | Description   | Required  | Default  |
+| ------------:|------:|-------------:| ---------:|---------:|
+| disabled      | boolean | Setting this to true will disable the button group | N | false |
+| scheme       | string | The scheme of the button. Possible values (green,blue,violet,red,orange)  | N | undefined/null |
+| onClick      | function | Listener function when an item is clicked | N | |
+
 
 ##Tabs
 
+![alt tabs](https://raw.githubusercontent.com/wmira/reactor-ui/master/ss/tabs.png)
+
+```javascript
+
+    <TabSet >
+        <Tab text="Tab 1" closeable={true} id="tab1">
+            This is tab 1
+        </Tab>
+        <Tab text="Tab 2" closeable={false} id="tab2">
+            This is tab 2
+        </Tab>
+        <Tab text="Tab 3" closeable={false} id="tab3">
+            This is tab 3
+        </Tab>
+    </TabSet>
+
+```
+#### Properties
+
+
+##Panel
+
+![alt tabs](https://raw.githubusercontent.com/wmira/reactor-ui/master/ss/panels.png)
+
+```javascript
+    <Panel title="Panel Example" closeable={true} collapsable={true} maxHeight="150px">
+        <div>
+           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                 Esse enim quam vellet iniquus iustus poterat inpune.
+           </p>
+        </div>
+    </Panel>
+```
 
 ##Forms
 
-##Panel
 
 ##Dialog
 
