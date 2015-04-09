@@ -1,5 +1,5 @@
 {
-  "name": "reactor-tab",
+  "name": "reactor-ui",
   "version": "0.0.1",
   "description": "Reactor UI Kit",
   "main": "src/index.js",
