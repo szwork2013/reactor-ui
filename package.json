@@ -1,7 +1,7 @@
 {
   "name": "reactor-tab",
   "version": "0.0.1",
-  "description": "Reactor UI Tab Component",
+  "description": "Reactor UI Kit",
   "main": "src/index.js",
   "scripts": {
     "watch-dev-tabs": "webpack --config webpack.dev.config.js dev/tab.js dev/out/tab.js --watch",
@@ -10,6 +10,11 @@
     "watch-dev-others": "webpack --config webpack.dev.config.js dev/others.js dev/out/others.js --watch",
     "less-compile": "lessc src/css/rui.less > dev/out/rui-styles.css"
   },
+  "keywords" : [
+    "react",
+    "react-component",
+    "react ui"
+  ],
   "author": "Warren Mira warrenmira@gmail.com",
   "license": "MIT",
   "devDependencies": {

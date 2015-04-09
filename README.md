@@ -3,7 +3,7 @@ Reactor UI
 
 Reactor UI is a reusable UI components written in react.
 
-Note that this is very much on its initial development phase.
+Note that this is very much on its initial development phase, a work in progress...
 
 #Components
 
