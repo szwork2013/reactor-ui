@@ -245,3 +245,55 @@
   .rui-li-scheme-hover(@color-blue);
 }
 /** End List */
+
+/** Side Nav */
+
+
+.rui-snav-base() {
+  cursor: pointer;
+  border-left: 4px solid transparent;
+  font-weight: bold;
+}
+
+.rui-snav-active-bg() {
+  background: #2c3e50;
+}
+
+.rui-snav-grp {
+  .rui-snav-base();
+  padding: 12px 10px;
+  font-weight: bold;
+}
+
+
+.rui-snav-item {
+  .rui-snav-base();
+  padding: 12px 10px;
+}
+
+.rui-snav-grp-c {
+
+}
+
+.rui-snav-active {
+  .rui-snav-active-bg();
+  border-left: 4px solid #2ecc71;
+}
+.rui-snav-item:hover {
+  .rui-snav-active-bg();
+}
+
+.rui-snav-grp:hover {
+  .rui-snav-active-bg();
+}
+
+.rui-snav-items {
+  overflow: hidden;
+  transition: height 0.15s ease-out;
+}
+
+.rui-snav-grp-c > .rui-snav-items > .rui-snav-item:hover {
+
+}
+
+/** End SideNav */

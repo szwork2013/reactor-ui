@@ -20,7 +20,7 @@ var BtnGroup = React.createClass({
 
     getInitialState: function() {
         return {active : this.props.active };
-    },    
+    },
 
     processBtnGroup() {
 

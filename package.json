@@ -5,9 +5,6 @@
   "main": "src/index.js",
   "scripts": {
     "watch-dev-tabs": "webpack --config webpack.dev.config.js dev/tab.js dev/out/tab.js --watch",
-    "watch-dev-forms": "webpack --config webpack.dev.config.js dev/forms.js dev/out/form.js --watch",
-    "watch-dev-panels": "webpack --config webpack.dev.config.js dev/panels.js dev/out/panels.js --watch",
-    "watch-dev-others": "webpack --config webpack.dev.config.js dev/others.js dev/out/others.js --watch",
     "less-compile": "lessc src/css/rui.less > dev/out/rui-styles.css"
   },
   "keywords" : [
