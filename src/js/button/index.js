@@ -1,5 +1,9 @@
 
 
-var Btn = require("./Btn");
 
-module.exports = Btn;
+
+module.exports = {
+    Btn : require("./Btn"),
+    BtnDrpDown : require("./BtnDrpDown"),
+    BtnGroup: require("./BtnGroup")
+};

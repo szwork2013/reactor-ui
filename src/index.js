@@ -1,1 +1,4 @@
-//require each component
+
+module.exports = {
+    "sidenav" : require("./js/sidenav")
+};
