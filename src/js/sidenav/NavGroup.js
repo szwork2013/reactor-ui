@@ -7,22 +7,39 @@ const React = require("react");
 const Nav = require("./Nav");
 const IconTextSchemeMixin = require("./IconTextSchemeMixin");
 const cn = require("classnames");
+const PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 const NavGroup = React.createClass({
 
-    mixins: [IconTextSchemeMixin],
+    mixins: [IconTextSchemeMixin,PureRenderMixin],
+
 
     getInitialState() {
-        return { collapsed: false };
+
+        return { collapsed: false , selected : this.props.selected };
     },
+
     buildChildren() {
 
         if ( this.props.nav ) {
             return this.props.nav.navlist.map( nav => {
-                return (<Nav {...nav}/>);
+                return (<Nav selected={this.state.selected} onClick={this.onSubNavClick} {...nav}/>);
             });
         } else {
             return this.props.children;
+        }
+    },
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({selected: nextProps.selected});
+    },
+
+    /**
+     *  The ID of this would be this.props.id/the clicked nav id
+     */
+    onSubNavClick : function(id) {
+        if ( this.props.onClick ) {
+            this.props.onClick(this.props.id,id);
         }
     },
 
@@ -32,13 +49,16 @@ const NavGroup = React.createClass({
 
     componentDidMount() {
         //we cant transition 0 height to auto height.. so below is the result
-        var cloned = this.refs.cont.getDOMNode().cloneNode(true);
-        cloned.style.position = "absolute";
-        cloned.style.left = "-9999px";
-        cloned.style.height = "auto";
-        document.body.appendChild(cloned);
-        this.computedHeight = cloned.clientHeight;
-        document.body.removeChild(cloned);
+        if ( !this.__computedHeight ) {
+            var cloned = this.refs.cont.getDOMNode().cloneNode(true);
+            cloned.style.position = "absolute";
+            cloned.style.left = "-9999px";
+            cloned.style.height = "auto";
+            document.body.appendChild(cloned);
+            this.__computedHeight = cloned.clientHeight + 6; //FIXME: this is missing 6pixels
+            document.body.removeChild(cloned);
+        }
+
     },
 
     render() {
@@ -48,7 +68,7 @@ const NavGroup = React.createClass({
 
         var style = {};
         if ( this.state.collapsed ) {
-            style['height'] = this.computedHeight; // this.refs.cont.getDOMNode().offsetHeight + "px"; //'auto';
+            style['height'] = this.__computedHeight;
         } else {
             style['height'] = 0;
         }

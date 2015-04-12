@@ -6,6 +6,14 @@ const IconTextSchemeMixin = require("./IconTextSchemeMixin");
 const PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 const cn = require("classnames");
 
+var isActive = function(props) {
+    return   ( props.selected.id === props.id
+    && props.selected.group === props.group)
+};
+
+/**
+ * The Single Nav Element
+ */
 const Nav = React.createClass({
 
     propTypes: {
@@ -18,11 +26,14 @@ const Nav = React.createClass({
     mixins: [IconTextSchemeMixin,PureRenderMixin],
 
     getInitialState() {
-        return { active: this.props.selected === this.props.id };
+        return { active: isActive(this.props) };
     },
+
+
     componentWillReceiveProps(nextProps) {
-        this.setState({active: nextProps.selected === this.props.id});
+        this.setState({ active: isActive(nextProps) });
     },
+
 
 
     itemClicked() {

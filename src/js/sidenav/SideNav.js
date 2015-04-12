@@ -24,7 +24,7 @@ var SideNav = React.createClass({
 
 
     getInitialState() {
-        return { selected : this.props.selected };
+        return { selected : {id: this.props.selected} };
     },
 
     buildFromSettings() {
@@ -32,18 +32,29 @@ var SideNav = React.createClass({
         return this.props.navs.map( navkind => {
             //nav kind could have a navlist, which we assume it contains a group of navs link
             if ( navkind.navlist ) {
-                return <NavGroup nav={navkind}/>;
+                return <NavGroup selected={this.state.selected} onClick={this.onSubNavClick} nav={navkind}/>;
             } else {
                 return (<Nav selected={this.state.selected} {...navkind} onClick={this.onClick}/>);
             }
         });
 
     },
-
+    onSubNavClick(group,child) {
+        var selection = {group: group, id: child};
+        this.setState({selected: selection});
+        this.dispatchSelection(selection);
+    },
     onClick(id) {
-        this.setState({selected: id});
+        var selection = {id: id};
+        this.setState({selected: selection});
+        this.dispatchSelection(selection);
     },
 
+    dispatchSelection: function(selection) {
+        if ( this.props.onSelection ) {
+            this.props.onSelection(selection);
+        }
+    },
     buildChildren() {
 
         if ( this.props.navs ) {
