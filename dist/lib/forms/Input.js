@@ -21,7 +21,7 @@ var Input = React.createClass({
             "div",
             null,
             this.getLabel(),
-            React.createElement("input", _extends({ value: value, onChange: this.dispatchInputChange, ref: this.inputRef, className: "formx-input", placeholder: this.props.placeholder }, this.props))
+            React.createElement("input", _extends({ value: value, onChange: this.dispatchInputChange, ref: this.inputRef, className: "rui-form-input", placeholder: this.props.placeholder }, this.props))
         );
     }
 

@@ -24,7 +24,7 @@ var DatePicker = React.createClass({
             "div",
             null,
             this.getLabel(),
-            React.createElement("input", _extends({ type: "date", ref: this.inputRef, value: value, onChange: this.dispatchInputChange, className: "formx-input", placeholder: this.props.placeholder }, this.props))
+            React.createElement("input", _extends({ type: "date", ref: this.inputRef, value: value, onChange: this.dispatchInputChange, className: "rui-form-input", placeholder: this.props.placeholder }, this.props))
         );
     }
 

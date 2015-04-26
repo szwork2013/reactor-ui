@@ -60,7 +60,7 @@ var Select = React.createClass({
             this.getLabel(),
             React.createElement(
                 "select",
-                { ref: this.inputRef, onChange: this.dispatchInputChange, className: "formx-input" },
+                { ref: this.inputRef, onChange: this.dispatchInputChange, className: "rui-form-input" },
                 this.createOptions()
             )
         );

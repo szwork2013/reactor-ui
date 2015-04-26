@@ -15,7 +15,7 @@ var Col = React.createClass({
         }
         return React.createElement(
             "div",
-            { style: style, className: "formx-container formx-column" },
+            { style: style, className: "rui-form-container rui-form-column" },
             this.cloneChildren()
         );
     }
@@ -30,7 +30,7 @@ var BCont = React.createClass({
 
         return React.createElement(
             "div",
-            { className: "formx-block" },
+            { className: "rui-form-block" },
             this.cloneChildren()
         );
     }

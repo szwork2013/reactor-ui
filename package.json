@@ -4,7 +4,7 @@
   "description": "Reactor UI Kit",
   "main": "lib",
   "scripts": {
-    "build-npm" : "babel -d lib ./src/js && cp README.md lib/ && cp package.json lib/",
+    "build-npm" : "babel -d dist/lib ./src/js && cp README.md dist/ && cp package.json dist/",
     "watch-dev-tabs": "webpack --config webpack.dev.config.js dev/tab.js dev/out/tab.js --watch",
     "less-compile": "lessc src/css/rui.less > dev/out/rui-styles.css"
   },

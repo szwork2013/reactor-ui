@@ -67,21 +67,22 @@ var Btn = React.createClass({
     },
 
     render: function render() {
-
+        var style = {},
+            classNames;
         var disabled = this.props.disabled === true;
         var scheme = this.props.scheme;
         //var active = this.props.active; // FIXME: this is actually when we are together in a btn group,
         var schemeTheme = null;
         if (scheme) {
-            schemeTheme = "rui-btn-$scheme";
+            schemeTheme = "rui-btn-" + scheme;
         }
-        var style = {};
+
         if (this.props.width) {
             style.width = this.props.width;
         }
 
-        var classNames = cn("rui-btn", { schemeTheme: scheme }
-        //{"rui-btn-group-active-violet" : ( this.props.value === active && scheme === "violet" && this.props.value !== undefined ) }
+        classNames = cn("rui-btn", schemeTheme
+        //{"rui-btn-group-active-violet" : ( this.props.value === active && scheme === "violet" && this.props.value !== undefined ) } //FIXME bro!
         );
         return React.createElement(
             "button",
