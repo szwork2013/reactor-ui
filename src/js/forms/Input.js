@@ -16,7 +16,7 @@ var Input = React.createClass({
         return (
             <div>
                 {this.getLabel()}
-                <input value={value} onChange={this.dispatchInputChange} ref={this.inputRef} className="formx-input" placeholder={this.props.placeholder} {...this.props}/>
+                <input value={value} onChange={this.dispatchInputChange} ref={this.inputRef} className="rui-form-input" placeholder={this.props.placeholder} {...this.props}/>
             </div>
         );
     }

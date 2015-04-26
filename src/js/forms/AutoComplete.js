@@ -47,7 +47,7 @@ var AutoComplete = React.createClass({
         return (
             <div>
                 {this.getLabel()}
-                <div className="formx-ac-cont formx-input" onClick={this.containerClick}>
+                <div className="rui-form-ac-cont rui-form-input" onClick={this.containerClick}>
                     <div>{this.renderValue()}</div>
                     {this.renderInput()}
                 </div>

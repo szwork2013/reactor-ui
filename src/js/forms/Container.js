@@ -12,7 +12,7 @@ var Col = React.createClass({
             style["width"] = this.props.width;
         }
         return (
-            <div style={style} className="formx-container formx-column">
+            <div style={style} className="rui-form-container rui-form-column">
                 {this.cloneChildren()}
             </div>
         );
@@ -26,7 +26,7 @@ var BCont = React.createClass({
     render : function() {
 
         return (
-            <div className="formx-block" >
+            <div className="rui-form-block" >
                 {this.cloneChildren()}
             </div>
         );

@@ -50,7 +50,7 @@ var Select = React.createClass({
         return (
             <div>
                 {this.getLabel()}
-                <select ref={this.inputRef} onChange={this.dispatchInputChange} className="formx-input">
+                <select ref={this.inputRef} onChange={this.dispatchInputChange} className="rui-form-input">
                 {this.createOptions()}
                 </select>
             </div>

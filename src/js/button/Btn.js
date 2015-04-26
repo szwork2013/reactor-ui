@@ -64,24 +64,26 @@ var Btn = React.createClass({
     },
 
     render: function() {
-
+        var style = {},
+            classNames;
         var disabled = ( this.props.disabled === true  );
         var scheme = this.props.scheme;
         //var active = this.props.active; // FIXME: this is actually when we are together in a btn group,
         var schemeTheme = null;
         if ( scheme ) {
-            schemeTheme = `rui-btn-$scheme`;
+            schemeTheme = `rui-btn-${scheme}`;
         }
-        var style = {};
+
+
         if ( this.props.width ) {
             style.width = this.props.width;
         }
 
 
-        var classNames =  cn(
+        classNames =  cn(
             "rui-btn",
-            { schemeTheme : scheme  }
-            //{"rui-btn-group-active-violet" : ( this.props.value === active && scheme === "violet" && this.props.value !== undefined ) }
+            schemeTheme
+            //{"rui-btn-group-active-violet" : ( this.props.value === active && scheme === "violet" && this.props.value !== undefined ) } //FIXME bro!
         );
         return (<button ref="btn" onBlur={this.props.onBlur} style={style} value={this.props.value} className={classNames} disabled={disabled} onClick={this.__onClickHandler}>
             { this.createContent() }

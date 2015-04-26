@@ -66,7 +66,7 @@ var SideNav = React.createClass({
 
     render() {
         return (
-            <div>
+            <div style={{width: '100%'}}>
                 {this.buildChildren()}
             </div>
         );
