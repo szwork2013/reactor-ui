@@ -8,15 +8,28 @@ var Btn = require("reactor-ui/button/Btn");
 var BtnGroup = require("reactor-ui/button/BtnGroup");
 var BtnDrpDown = require("reactor-ui/button/BtnDrpDown");
 
+var Grid = require("reactor-ui/grid/Grid");
+var Unit = require("reactor-ui/grid/Unit");
+
 React.render(
-    <span>
-        <Pill ><span className="fa fa-heart"></span> Love</Pill>
-        <Pill scheme="green"><span className="fa fa-heart"></span> Love</Pill>
-        <Pill scheme="blue"><span className="fa fa-heart"></span> Love</Pill>
-        <Pill scheme="violet"><span className="fa fa-heart"></span> Love</Pill>
-        <Pill scheme="red"><span className="fa fa-heart"></span> Love</Pill>
-        <Pill scheme="orange"><span className="fa fa-heart"></span> Love</Pill>
-    </span>,
+    <Grid>
+        <Unit unit="1-2">
+            <span>
+                <Pill ><span className="fa fa-heart"></span> Love</Pill>
+                <Pill scheme="green"><span className="fa fa-heart"></span> Love</Pill>
+                <Pill scheme="blue"><span className="fa fa-heart"></span> Love</Pill>
+            </span>
+        </Unit>
+        <Unit unit="1-2">
+            <span>
+                <Pill scheme="violet"><span className="fa fa-heart"></span> Love</Pill>
+                <Pill scheme="red"><span className="fa fa-heart"></span> Love</Pill>
+                <Pill scheme="orange"><span className="fa fa-heart"></span> Love</Pill>
+            </span>
+        </Unit>
+
+    </Grid>,
+
     document.getElementById("cont1"));
 
 
