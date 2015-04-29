@@ -9,7 +9,7 @@ var React = require('react');
 var Row = React.createClass({
 
     render() {
-        return(<div style={{padding : '10px'}}>
+        return(<div style={{padding : '10px', width: '100%'}}>
             {this.props.children}
         </div>)
     }
