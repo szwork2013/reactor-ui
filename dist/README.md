@@ -155,11 +155,47 @@ Note that this is very much on its initial development phase, a work in progress
 | navs        | obj | The navigation structure  to create | Y | n/a |
 | onSelection      | function | Listener function when an item is selected. This gets passed an object { group: ..., id: ...} | N | n/a |
 
-##Forms
+##Grid System
 
+Reactor UI's grid system uses Pure CSS's grid system. 
+
+```javascript
+    
+   var Grid = require('reactor-ui/grid/Grid');
+   var Row = require('reactor-ui/grid/Row');
+   var Unit = require('reactor-ui/grid/Unit');
+   
+   var MyLayout = React.createClass({
+   
+        render() {
+            
+            return(<Grid>
+                <Row>
+                    /* 1/3 of the available width */
+                    <Unit unit="1-3"> 
+                        <Panel.../>
+                    </Unit>
+                    <Unit unit="1-3"> 
+                        <Panel.../>                
+                    </Unit>
+                    <Unit unit="1-3"> 
+                        <Panel.../>                                    
+                    </Unit>
+                </Row>
+            </Grid>
+        } 
+   
+   });
+   
+    
+```
+
+##Forms
 
 ##Dialog
 
 ##Table
 
-##Containers
+
+# Contributing
+
