@@ -5,7 +5,7 @@
 import React from 'react';
 
 
-const Column = React.createClass({
+var Column = React.createClass({
 
 
     /**
@@ -20,4 +20,4 @@ const Column = React.createClass({
 
 });
 
-export {Column};
+module.exports = Column;

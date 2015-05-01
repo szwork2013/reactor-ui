@@ -1,5 +1,5 @@
 
 
-export {Datagrid} from './Datagrid';
-export {Column} from './Column';
-export {ArrayRecordProvider} from './ArrayRecordProvider';
+exports.Datagrid = require('./Datagrid');
+exports.Column = require('./Column');
+//export {ArrayRecordProvider} from './ArrayRecordProvider';
