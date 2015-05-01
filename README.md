@@ -194,7 +194,8 @@ Reactor UI's grid system uses Pure CSS's grid system.
 
 ##Dialog
 
-##Table
+##DataGrid/DataTable
+
 
 
 # Contributing
