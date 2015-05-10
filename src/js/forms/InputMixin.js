@@ -1,3 +1,7 @@
+/* global module,require */
+/* jshint esnext: true, -W097 */
+
+
 'use strict';
 
 var React = require("react");

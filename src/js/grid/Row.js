@@ -1,5 +1,5 @@
 /*globals require,module */
-/* jshint -W097 */
+/* jshint -W097, esnext: true */
 
 'use strict';
 var React = require('react');
@@ -9,9 +9,9 @@ var React = require('react');
 var Row = React.createClass({
 
     render() {
-        return(<div style={{padding : '10px', width: '100%'}}>
+        return(<div className="row" {...this.props}>
             {this.props.children}
-        </div>)
+        </div>);
     }
 
 

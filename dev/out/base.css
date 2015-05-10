@@ -1,5 +1,8 @@
 html,body {
     color : #333;
     background: #FFF;
-    font-family: 'Open Sans', sans-serif; font-size: 12px;
+    font-family: "Helvetica", sans-serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
 }

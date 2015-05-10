@@ -1,3 +1,6 @@
+/* global module,require */
+/* jshint esnext: true, -W097 */
+
 'use strict';
 
 var React = require('react');
@@ -7,20 +10,26 @@ var ValueChangeMixin = require("./ValueChangeMixin");
 
 var Input = React.createClass({
     propTypes: {
-        requiredName : React.PropTypes.string.isRequired
+        name : React.PropTypes.string.isRequired
     },
     mixins: [InputMixin,LabelMixin,ValueChangeMixin],
 
     render : function() {
         var value= this.props.model[this.props.name] || "";
+        var readonly = null;
+        if ( !this.props.readonly ) {//if falsy
+            readonly = "";
+        } else {
+            readonly = "readonly";
+        }
         return (
             <div>
                 {this.getLabel()}
-                <input value={value} onChange={this.dispatchInputChange} ref={this.inputRef} className="rui-form-input" placeholder={this.props.placeholder} {...this.props}/>
+                <input value={value} readonly={readonly} onChange={this.dispatchInputChange} ref={this.inputRef} className="rui-form-input" placeholder={this.props.placeholder} {...this.props}/>
             </div>
         );
     }
 
 });
-        
+
 module.exports = Input;

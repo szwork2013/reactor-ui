@@ -1,10 +1,14 @@
+/* global module,require */
+/* jshint esnext: true, -W097 */
+
 
 'use strict';
 
-var React = require("react");
-var InputMixin = require("./InputMixin");
-var LabelMixin = require("./LabelMixin");
-var ValueChangeMixin = require("./ValueChangeMixin");
+import React from "react";
+import InputMixin from "./InputMixin";
+import LabelMixin from "./LabelMixin";
+import ValueChangeMixin from "./ValueChangeMixin";
+
 
 var Select = React.createClass({
     propTypes: {
@@ -16,15 +20,19 @@ var Select = React.createClass({
         var selected = this.props.model[this.props.name];
         var optional = this.props.optional === false ? this.props.optional : true;
         var optionalText = this.props.optionalText || "";
-        var options = this.props.selection || [];
+        var options = this.props.selection || this.props.options || [];
         var isSelection;
 
         var optionsEls =  options.map ( option => {
+
             var obj = option, value, text;
 
             if ( typeof obj === 'string' ) {
                 value = obj;
                 text = obj;
+            } else {
+                value = obj.value;
+                text = obj.text;
             }
             if ( selected && selected === value ) {
                 isSelection = true;
@@ -32,14 +40,14 @@ var Select = React.createClass({
                 isSelection = false; //make sure to reset
             }
 
-            return <option value={value} selected={isSelection}>{text}</option>
-
+            return <option value={value} selected={isSelection}>{text}</option>;
 
 
         });
         if ( optional ) {
             optionsEls.unshift(<option value="">{optionalText}</option>);
         }
+
         return optionsEls;
 
     },

@@ -4,11 +4,11 @@
   "description": "Reactor UI Kit",
   "main": "lib",
   "scripts": {
-    "build-npm" : "babel -d dist/ ./src/js && cp README.md dist/ && cp package.json dist/",
+    "build-npm": "babel -d dist/ ./src/js && cp README.md dist/ && cp package.json dist/",
     "watch-dev-tabs": "webpack --config webpack.dev.config.js dev/tab.js dev/out/tab.js --watch",
     "less-compile": "lessc src/css/rui.less > dev/out/rui-styles.css"
   },
-  "keywords" : [
+  "keywords": [
     "react",
     "react-component",
     "react ui",
@@ -21,24 +21,21 @@
   ],
   "author": "Warren Mira warrenmira@gmail.com",
   "license": "MIT",
-
-  "dependencies" : {
+  "dependencies": {
     "react": "*",
     "classnames": "^1.2.0"
   },
-
   "devDependencies": {
     "babel": "^4.7.16",
     "babel-core": "^4.7.16",
     "babel-loader": "^4.3.0",
     "chai": "^2.2.0",
-
     "karma": "^0.12.31",
     "karma-chrome-launcher": "^0.1.7",
     "karma-mocha": "^0.1.10",
     "karma-webpack": "^1.5.0",
     "mocha": "^2.2.1",
-
+    "object-assign": "^2.0.0",
     "sinon": "^1.14.1",
     "webpack": "^1.7.3"
   }

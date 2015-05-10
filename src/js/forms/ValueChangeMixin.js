@@ -1,3 +1,6 @@
+/* global module,require */
+/* jshint esnext: true, -W097 */
+
 'use strict';
 
 var React = require("react");
@@ -6,8 +9,7 @@ var ValueChangeMixin = {
 
 
     dispatchInputChange : function() {
-        if ( this.props.changeListener ) {
-
+        if ( this.props.changeListener ) {            
             var elNode = this.__input.getDOMNode();
             this.props.changeListener(this.props.name,elNode.value);
         }

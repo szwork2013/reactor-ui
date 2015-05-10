@@ -1,5 +1,5 @@
 /*globals require,module */
-/* jshint -W097 */
+/* jshint -W097, esnext: true */
 
 'use strict';
 
@@ -11,10 +11,18 @@ var Unit = React.createClass({
 
 
     render() {
-        var partName = "rui-g" + this.props.unit;
-        return(<div className={partName}>
+        var offset = this.props.offset;
+        var screen = this.props.screen || "sm";
+        var unit = this.props.unit || "12";
+        var className = "col-" + screen + "-" + unit;
+
+        if ( offset ) {
+            className += " col-" + screen + "-" + "offset-" + offset;
+        }
+
+        return(<div className={className}>
             {this.props.children}
-        </div>)
+        </div>);
     }
 
 

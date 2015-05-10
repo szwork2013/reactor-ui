@@ -10,24 +10,26 @@ var BtnDrpDown = require("reactor-ui/button/BtnDrpDown");
 
 var Grid = require("reactor-ui/grid/Grid");
 var Unit = require("reactor-ui/grid/Unit");
+var Row = require("reactor-ui/grid/Row");
 
 React.render(
     <Grid>
-        <Unit unit="1-2">
-            <span>
-                <Pill ><span className="fa fa-heart"></span> Love</Pill>
-                <Pill scheme="green"><span className="fa fa-heart"></span> Love</Pill>
-                <Pill scheme="blue"><span className="fa fa-heart"></span> Love</Pill>
-            </span>
-        </Unit>
-        <Unit unit="1-2">
-            <span>
-                <Pill scheme="violet"><span className="fa fa-heart"></span> Love</Pill>
-                <Pill scheme="red"><span className="fa fa-heart"></span> Love</Pill>
-                <Pill scheme="orange"><span className="fa fa-heart"></span> Love</Pill>
-            </span>
-        </Unit>
-
+        <Row>
+            <Unit unit="6">
+                <span>
+                    <Pill ><span className="fa fa-heart"></span> Love</Pill>
+                    <Pill scheme="green"><span className="fa fa-heart"></span> Love</Pill>
+                    <Pill scheme="blue"><span className="fa fa-heart"></span> Love</Pill>
+                </span>
+            </Unit>
+            <Unit unit="6">
+                <span>
+                    <Pill scheme="violet"><span className="fa fa-heart"></span> Love</Pill>
+                    <Pill scheme="red"><span className="fa fa-heart"></span> Love</Pill>
+                    <Pill scheme="orange"><span className="fa fa-heart"></span> Love</Pill>
+                </span>
+            </Unit>
+        </Row>
     </Grid>,
 
     document.getElementById("cont1"));

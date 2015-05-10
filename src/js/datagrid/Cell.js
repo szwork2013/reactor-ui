@@ -34,14 +34,21 @@ var Cell = React.createClass({
         var dataProvider = this.props.dataProvider;
         var record = this.props.dataProvider.recordAt(this.props.index);
 
-        return <div>{record[pathToUse]}</div>
+        return <div>{record[pathToUse]}</div>;
     },
     render() {
 
-        return (
-            <div style={{width: this.props.config.width}}  ref="cell" onClick={this._onClick} className="rui-dg-cell-cont">
-                <div className="rui-dg-cell">{this._getCellValue()}</div>
+        var width = this.props.config.width;
+        var flex;
+        if ( width ) {
+            flex = "0 0 " + width;
+        } else {
+            flex = "1 1 10px";
+        }
 
+        return (
+            <div style={{flex : flex}}  ref="cell" onClick={this._onClick} className="rui-dt-cell-cont">
+                <div className="rui-dt-cell">{this._getCellValue()}</div>
             </div>
         );
 

@@ -1,5 +1,5 @@
 /*globals require,module */
-/* jshint -W097 */
+/* jshint -W097, esnext: true */
 
 'use strict';
 
@@ -7,15 +7,20 @@ var React = require('react');
 
 /** we will use pure css for now abstracted by our Container classes */
 
-var Container = React.createClass({
+var Grid = React.createClass({
 
     render() {
-        return(<div className="rui-g">
+        var className = "container";
+        if ( this.props.fluid ) {
+            className += "-fluid";
+        }
+
+        return(<div className={className} {...this.props}>
             {this.props.children}
-        </div>)
+        </div>);
     }
 
 
 });
 
-module.exports = Container;
+module.exports = Grid;

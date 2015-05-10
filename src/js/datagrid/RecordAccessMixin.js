@@ -7,21 +7,22 @@ var traverse = require('object-traverse');
 var RecordAccessMixin = {
 
     getRecordData : function(index,config,ref) {
-        var dataProvider = this.props.dataProvider || this.state.dataProvider;
-        var {formatter,renderer,path,id, editor} = config || this.props.config;
+        var dataProvider =  this.state.dataProvider;
+        var {formatter,renderer,path,id, editor} = config;
         var pathToUse = path || id; //we use path, if not id
         var cellRef = (function() {
           if ( ref ) {
               var element = ref.getDOMNode();
               return {
-                  width : element.offsetWidth -5,
-                  height : element.offsetHeight -5 ,
+                  width : element.offsetWidth,
+                  height : element.offsetHeight,
                   left : element.offsetLeft,
                   top : element.offsetTop
               };
           }
           return {};
         })();
+    
         var record = dataProvider.recordAt(index);
         var traversedRecord = traverse(record);
         var value = null, formattedValue;
@@ -51,7 +52,7 @@ var RecordAccessMixin = {
             renderer: renderer,
             id: id
 
-        }
+        };
     }
 };
 

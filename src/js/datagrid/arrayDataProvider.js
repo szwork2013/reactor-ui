@@ -23,7 +23,7 @@ module.exports = function(array) {
          *
          * mapper is passed the following parameters
          *
-         * record, index, endIdx,dataProvider
+         * record, index, endIdx, dataProvider
          *
          *
          * @param mapper
@@ -33,13 +33,14 @@ module.exports = function(array) {
         map(mapper,startIdx,endIdx) {
             var start = startIdx || 0;
             var end = endIdx || this.length;
+            var result = [];
 
             for ( var i=start; i < end; i++ ) {
-                mapper.apply(mapper,[this.recordAt(i),i,end,this]);
+                result.push(mapper.apply(mapper,[this.recordAt(i),i,end,this]));
             }
+            return result;
 
         }
 
-    }
+    };
 };
-

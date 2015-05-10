@@ -12,9 +12,17 @@ import React from 'react';
 var Header = React.createClass({
 
     render() {
-        return <div style={ {width: this.props.width} } className="rui-dg-cell-cont">
-            <div className="rui-dg-cell rui-dg-hcell"><span>{this.props.title}</span></div>
-        </div>
+        var width = this.props.width;
+        var flex;
+        if ( width ) {
+            flex = "0 0 " + width;
+        } else {
+            flex = "1 1 10px";
+        }
+        
+        return <div style={ {flex: flex} } className="rui-dt-cell-cont">
+            <div className="rui-dt-cell"><span>{this.props.title}</span></div>
+        </div>;
     }
 
 });

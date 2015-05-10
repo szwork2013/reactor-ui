@@ -14,16 +14,13 @@ import cx from 'classnames';
 var GridRow = React.createClass({
 
     render() {
-        var clsName = cx("rui-dg-row",{ "rui-dg-header": this.props.header});
-        var style = {};
-        if ( this.props.header ) {
-            style.position = 'absolute';
-            style.left = 0;
-            style.top = 0;
-        }
-        return <div style={style} className={clsName}>
+        var clsName = cx(
+            { "rui-dt-colcont" : this.props.header === true} ,
+            { "rui-dt-rowcont" : !this.props.header}
+        );
+        return <div className={clsName}>
             {this.props.children}
-        </div>
+        </div>;
     }
 
 });
