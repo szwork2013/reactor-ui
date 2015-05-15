@@ -1,12 +1,16 @@
 {
   "name": "reactor-ui",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Reactor UI Kit",
   "main": "lib",
   "scripts": {
     "build-npm": "babel -d dist/ ./src/js && cp README.md dist/ && cp package.json dist/",
     "watch-dev-tabs": "webpack --config webpack.dev.config.js dev/tab.js dev/out/tab.js --watch",
     "less-compile": "lessc src/css/rui.less > dev/out/rui-styles.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wmira/reactor-ui"
   },
   "keywords": [
     "react",
@@ -22,8 +26,10 @@
   "author": "Warren Mira warrenmira@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "react": "*",
-    "classnames": "^1.2.0"
+    "classnames": "^1.2.0",
+    "object-assign": "^2.0.0",
+    "object-traverse": "^1.1.1",
+    "react": "*"
   },
   "devDependencies": {
     "babel": "^4.7.16",

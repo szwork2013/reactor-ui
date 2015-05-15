@@ -1,6 +1,11 @@
+/* jshint esnext: true, -W097 */
+/* global module */
+
 "use strict";
 
-var React = require("react");
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+var React = _interopRequire(require("react"));
 
 var LabelMixin = {
 

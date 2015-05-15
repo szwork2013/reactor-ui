@@ -1,10 +1,17 @@
+/* global module,require */
+/* jshint esnext: true, -W097 */
 
 "use strict";
 
-var React = require("react");
-var InputMixin = require("./InputMixin");
-var LabelMixin = require("./LabelMixin");
-var ValueChangeMixin = require("./ValueChangeMixin");
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+var React = _interopRequire(require("react"));
+
+var InputMixin = _interopRequire(require("./InputMixin"));
+
+var LabelMixin = _interopRequire(require("./LabelMixin"));
+
+var ValueChangeMixin = _interopRequire(require("./ValueChangeMixin"));
 
 var Select = React.createClass({
     displayName: "Select",
@@ -18,10 +25,11 @@ var Select = React.createClass({
         var selected = this.props.model[this.props.name];
         var optional = this.props.optional === false ? this.props.optional : true;
         var optionalText = this.props.optionalText || "";
-        var options = this.props.selection || [];
+        var options = this.props.selection || this.props.options || [];
         var isSelection;
 
         var optionsEls = options.map(function (option) {
+
             var obj = option,
                 value,
                 text;
@@ -29,6 +37,9 @@ var Select = React.createClass({
             if (typeof obj === "string") {
                 value = obj;
                 text = obj;
+            } else {
+                value = obj.value;
+                text = obj.text;
             }
             if (selected && selected === value) {
                 isSelection = true;
@@ -49,6 +60,7 @@ var Select = React.createClass({
                 optionalText
             ));
         }
+
         return optionsEls;
     },
 

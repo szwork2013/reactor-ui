@@ -8,10 +8,12 @@ var React = require("react");
 var ValueChangeMixin = {
 
 
-    dispatchInputChange : function() {
-        if ( this.props.changeListener ) {            
+    dispatchInputChange : function() {        
+        this._getContext().changeListener();
+        if ( this._getContext().changeListener ) {
             var elNode = this.__input.getDOMNode();
-            this.props.changeListener(this.props.name,elNode.value);
+            //this.props.changeListener(this.props.name,elNode.value);
+            this._getContext().changeListener(this.props.name,elNode.value);
         }
     }
 

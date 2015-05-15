@@ -13,7 +13,10 @@ var InputMixin = {
         return this.props.type || 'text';
     },
 
-
+    //we are in deep shit
+    _getContext() {
+        return this._reactInternalInstance._context;
+    },
     inputRef : function(el) {
         this.__input = el;
     }

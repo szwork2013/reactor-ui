@@ -2,23 +2,41 @@
 /* jshint esnext: true, -W097 */
 
 import React from 'react';
+var {Children} = React;
+
 
 /**
- * Reaction is a Routing library within Reactor-UI
-
- <Reaction-Routes path="/app/trade-manager">
-    <Route default={true} path="/"/>
-    <Route path="/channel">
-        <Route path="/list" destroy={false} view={ChannelList}/>
-        <Route path="/add" view={AddChannel}/>
-        <Route path="/add" view={AddChannel}/>
-    </Route>
-</Reaction-Routes>
-
+ * Highly experimental Route api
  */
+var Reaction = {};
+
+var addRoute = function(map,route) {
+    var path = route.props.path;
+};
+
+/**
+ *
+ */
+Reaction.run = function(routes) {
 
 
+    //create a map of routes
+    var routeMap = {};
+    Children.forEach(routes.props.children, (route) => {
 
-var Reaction = React.createClass({
+    });
 
-});
+    //listen to the url
+    window.on("hashchange", () => {
+        console.log(window.location.hash);
+    });
+
+    var ReactionRoute = React.createClass({
+        render() {
+
+        }
+    });
+
+};
+
+module.exports = Reaction;

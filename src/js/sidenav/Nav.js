@@ -49,7 +49,6 @@ const Nav = React.createClass({
             "rui-snav-item",
             {"rui-snav-active" : this.state.active }
         );
-
         return <div onClick={this.itemClicked} className={classNames}>
             {this.createIconTextContent()}
         </div>

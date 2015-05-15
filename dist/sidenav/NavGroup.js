@@ -58,7 +58,7 @@ var NavGroup = React.createClass({
             cloned.style.left = "-9999px";
             cloned.style.height = "auto";
             document.body.appendChild(cloned);
-            this.__computedHeight = cloned.clientHeight + 6; //FIXME: this is missing 6pixels
+            this.__computedHeight = cloned.clientHeight;
             document.body.removeChild(cloned);
         }
     },

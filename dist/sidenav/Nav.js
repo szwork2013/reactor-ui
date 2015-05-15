@@ -42,7 +42,6 @@ var Nav = React.createClass({
 
     render: function render() {
         var classNames = cn("rui-snav-item", { "rui-snav-active": this.state.active });
-
         return React.createElement(
             "div",
             { onClick: this.itemClicked, className: classNames },

@@ -3,29 +3,45 @@
 
 'use strict';
 
-var React = require('react');
-var InputMixin = require("./InputMixin");
-var LabelMixin = require("./LabelMixin");
-var ValueChangeMixin = require("./ValueChangeMixin");
+import React from 'react';
+import cx from 'classnames';
 
-var Input = React.createClass({
+import InputMixin from './InputMixin';
+import LabelMixin from './LabelMixin';
+import ValueChangeMixin from './ValueChangeMixin';
+
+
+
+const Input = React.createClass({
     propTypes: {
         name : React.PropTypes.string.isRequired
     },
+
     mixins: [InputMixin,LabelMixin,ValueChangeMixin],
 
+    contextTypes: {
+        model: React.PropTypes.object.isRequired,
+        changeListener : React.PropTypes.any,
+        inputRegistry: React.PropTypes.any
+    },
+
+    componentDidMount() {
+        this._getContext().inputRegistry(this);
+    },
+
     render : function() {
-        var value= this.props.model[this.props.name] || "";
-        var readonly = null;
-        if ( !this.props.readonly ) {//if falsy
-            readonly = "";
+        const value= this._getContext().model[this.props.name] || "";
+        let readOnly = null;
+        if ( !this.props.readOnly ) {//if falsy
+            readOnly = "";
         } else {
-            readonly = "readonly";
+            readOnly = "readonly";
         }
+
         return (
-            <div>
+            <div className={"rui-form-cont"}>
                 {this.getLabel()}
-                <input value={value} readonly={readonly} onChange={this.dispatchInputChange} ref={this.inputRef} className="rui-form-input" placeholder={this.props.placeholder} {...this.props}/>
+                <input value={value} readOnly={readOnly} onChange={this.dispatchInputChange} ref={this.inputRef} className="rui-form-input" placeholder={this.props.placeholder} {...this.props}/>
             </div>
         );
     }

@@ -1,27 +1,47 @@
 /* jshint esnext: true */
 
 import React from 'react';
+import Input from './Input';
+import AutoComplete from './AutoComplete';
+import Select from './Select';
 
-//TODO: we need to recurvsively parse the children and get their props
-//the problem is if its nested from any of the container or layout components
-var Forms = React.createClass({
+var Form = React.createClass({
 
+    childContextTypes: {
+        model: React.PropTypes.object.isRequired,
+        changeListener : React.PropTypes.any,
+        inputRegistry: React.PropTypes.any //so we can introspect coming
+    },
+
+    getChildContext: function () {
+        return { model: this.props.model, changeListener : this.dispatchChange , inputRegistry: this._inputRegistry };
+    },
+
+    /**
+     * Register the input
+     */
+    _inputRegistry(input) {
+
+        
+
+    },
     /**
      * Render a form
      */
     render : function() {
-        return (<form><div style={ { display: "flex" }}>
+
+        return (<div>
             {
                 React.Children.map(this.props.children, child => {
-                    return React.cloneElement(child,{ model: this.props.model, changeListener : this.dispatchChange });
+                    return React.cloneElement(child, {  });
                 })
             }
-        </div>
-        </form>);
+        </div>);
     },
 
 
     dispatchChange : function(name,value) {
+
         if ( this.props.changeListener ) {
             this.props.changeListener(name,value);
         }
@@ -30,4 +50,15 @@ var Forms = React.createClass({
 });
 
 
-module.exports = Forms;
+var FormWrapper = React.createClass({
+
+    render() {
+        return <Form model={this.props.model} changeListener={this.props.changeListener}>{this.props.children}</Form>;
+    }
+
+});
+
+exports.Forms = FormWrapper;
+exports.Input = Input;
+exports.AutoComplete = AutoComplete;
+exports.Select = Select;

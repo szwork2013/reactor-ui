@@ -1,6 +1,9 @@
+/* jshint esnext: true, -W097 */
+/* global module */
+
 'use strict';
 
-var React = require("react");
+import React from 'react';
 
 var LabelMixin = {
 
