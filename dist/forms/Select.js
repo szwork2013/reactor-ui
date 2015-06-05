@@ -21,8 +21,14 @@ var Select = React.createClass({
     },
     mixins: [InputMixin, LabelMixin, ValueChangeMixin],
 
+    contextTypes: {
+        model: React.PropTypes.object.isRequired,
+        changeListener: React.PropTypes.any,
+        inputRegistry: React.PropTypes.any
+    },
+
     createOptions: function createOptions() {
-        var selected = this.props.model[this.props.name];
+        var selected = this._getContext().model[this.props.name];
         var optional = this.props.optional === false ? this.props.optional : true;
         var optionalText = this.props.optionalText || "";
         var options = this.props.selection || this.props.options || [];
@@ -64,11 +70,15 @@ var Select = React.createClass({
         return optionsEls;
     },
 
+    /**
+     * We need to set the state here because we have selected something ( if we ever )
+     */
+
     render: function render() {
 
         return React.createElement(
             "div",
-            null,
+            { className: "rui-form-cont" },
             this.getLabel(),
             React.createElement(
                 "select",

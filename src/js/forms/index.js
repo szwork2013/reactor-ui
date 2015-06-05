@@ -22,8 +22,6 @@ var Form = React.createClass({
      */
     _inputRegistry(input) {
 
-        
-
     },
     /**
      * Render a form
@@ -35,7 +33,7 @@ var Form = React.createClass({
                 React.Children.map(this.props.children, child => {
                     return React.cloneElement(child, {  });
                 })
-            }
+             }
         </div>);
     },
 

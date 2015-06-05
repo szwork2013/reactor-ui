@@ -1,5 +1,5 @@
 /*globals require,module,document */
-/* jshint -W097, esnext: true */
+/* jshint esnext:true, -W097, maxstatements:15, maxdepth:2, maxcomplexity:5 */
 'use strict';
 
 import React  from 'react';
@@ -22,7 +22,7 @@ var Datatable = React.createClass({
     getInitialState() {
         var data = this.props.data;
         var providedDataProvider = this.props.dataProvider;
-        var dataProvider;
+        var dataProvider;                
 
         //use pager if it exists
         if ( this.props.pager ) {
@@ -48,7 +48,7 @@ var Datatable = React.createClass({
     _createHeader() {
 
         var headerCells = this.state.colconfig.map( config => {
-            return (<Header width={config.width} title={config.title || config.id} />);
+            return (<Header config={config} width={config.width} title={config.title || config.id} />);
         });
 
         return <div style={{position: 'relative'}} ref="headerCont" className={"rui-dt-colgroup"}>
@@ -73,6 +73,10 @@ var Datatable = React.createClass({
             return <GridRow key={index}>{this._createGridRow(index)}</GridRow>;
         },0);
 
+    },
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({dataProvider: arrayDataProvider(nextProps.data || [])});
     },
 
     _createBody() {

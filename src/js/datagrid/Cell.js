@@ -39,11 +39,12 @@ var Cell = React.createClass({
     render() {
 
         var width = this.props.config.width;
-        var flex;
+        var flex,flexInt;
         if ( width ) {
             flex = "0 0 " + width;
         } else {
-            flex = "1 1 10px";
+            flexInt = this.props.config.flex ? this.props.config.flex : "1";
+            flex = flexInt + " 1 10px";
         }
 
         return (

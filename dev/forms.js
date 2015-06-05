@@ -5,7 +5,7 @@
 
 import React from 'react';
 
-import {Forms,Input} from 'reactor-ui/forms';
+import {Forms,Input,Select} from 'reactor-ui/forms';
 import {Grid,Row,Col} from 'reactor-ui/grid';
 import assign from 'object-assign';
 
@@ -32,12 +32,13 @@ var Formx = React.createClass({
             <Grid>
                 <Row>
                     <Col unit="6">
-                        <Input name="firstname" placeholder="Firstname" />
-                        <Input name="lastname" placeholder="Lastname" />
+                        <Input enable={"$lastname.isValid"} required={true} name="firstname" placeholder="Firstname" />
+                        <Input required={true} name="lastname" placeholder="Lastname" />
                     </Col>
                     <Col unit="6">
-                        <Input required={true} name="email" placeholder="Email" />
+                        <Input  required={true} name="email" placeholder="Email" />
                         <Input required={true} name="phoneNumber" placeholder="Phone Number" />
+                        <Select required={true} name="phoneNumber" placeholder="Phone Number" />
                     </Col>
                 </Row>
 
