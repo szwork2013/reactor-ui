@@ -37,7 +37,7 @@ var DatatableMixin = {
     },
 
     _createEditor: function _createEditor() {
-        if (this.state.editorData) {
+        if (this.state.editorData && this.state.editorData.config.editable) {
             var editorData = this.state.editorData;
             return React.createElement(
                 "div",

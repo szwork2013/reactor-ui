@@ -35,7 +35,7 @@ var DatatableMixin = {
     },
 
     _createEditor() {
-        if ( this.state.editorData ) {
+        if ( this.state.editorData && this.state.editorData.config.editable  ) {
             var editorData = this.state.editorData;
             return <div  ref="editorContainer" style={{ left: editorData.cellRef.left, top: editorData.cellRef.top + editorData.cellRef.height,position: 'absolute'}}>
                 <input ref="editorInput" onChange={this._editorInputChange} value={editorData.value} style={{width: editorData.cellRef.width, height: editorData.cellRef.height}} />

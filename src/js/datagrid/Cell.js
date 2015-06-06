@@ -3,15 +3,24 @@
 'use strict';
 
 import React from 'react';
-
-
-
+import RecordAccessMixin from './RecordAccessMixin';
 
 var Cell = React.createClass({
 
+    mixins: [RecordAccessMixin],
+
+    propTypes: {
+        index: React.PropTypes.number.isRequired,
+        dataProvider: React.PropTypes.object.isRequired,
+        config: React.PropTypes.object.isRequired
+    },
+
     getInitialState() {
 
-        return { edited : false };
+        return {
+            edited : false,
+            dataProvider: this.props.dataProvider
+        };
     },
 
     _onClick(e) {
@@ -29,17 +38,33 @@ var Cell = React.createClass({
      */
     _getCellValue() {
         //FIXME use the mixin here
-        var {formatter,renderer,path,id, editor} = this.props.config;
-        var pathToUse = path || id; //we use path, if not id
-        var dataProvider = this.props.dataProvider;
-        var record = this.props.dataProvider.recordAt(this.props.index);
+        var recData = this.getRecordData(this.props.index,this.props.config);
+        var renderedData = recData.value;
+        var toRenderer;
 
-        return <div>{record[pathToUse]}</div>;
+        if ( recData.renderer ) {
+            toRenderer = { //TODO: we probably should just pass this shit
+                    value: recData.value,
+                    formattedValue: recData.formattedValue,
+                    record: recData.record,
+                    config: recData.config,
+                    id: recData.id
+            };
+            renderedData = recData.renderer(toRenderer);
+        }
+
+        return <div>{renderedData}</div>;
     },
     render() {
-
+        var cellStyle = {};
+        var cellAlign = this.props.config.cellAlign;
         var width = this.props.config.width;
         var flex,flexInt;
+
+        if ( cellAlign ) {
+            cellStyle = { textAlign: cellAlign };
+        }
+
         if ( width ) {
             flex = "0 0 " + width;
         } else {
@@ -49,7 +74,7 @@ var Cell = React.createClass({
 
         return (
             <div style={{flex : flex}}  ref="cell" onClick={this._onClick} className="rui-dt-cell-cont">
-                <div className="rui-dt-cell">{this._getCellValue()}</div>
+                <div style={cellStyle} className="rui-dt-cell">{this._getCellValue()}</div>
             </div>
         );
 

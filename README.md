@@ -5,6 +5,15 @@ Reactor UI is a reusable UI components written in react.
 
 Note that this is very much on its initial development phase, a work in progress...
 
+#ChangeLog
+
+0.0.10
+      1. DataTable
+            * renderer now implemented
+            * cell editing is off by default
+            * default cell style can be applied e.g. Column cellAlign={"center"}  
+
+
 #Components
 
 ##Buttons
@@ -157,37 +166,37 @@ Note that this is very much on its initial development phase, a work in progress
 
 ##Grid System
 
-Reactor UI's grid system uses Pure CSS's grid system. 
+Reactor UI's grid system uses Pure CSS's grid system.
 
 ```javascript
-    
+
    var Grid = require('reactor-ui/grid/Grid');
    var Row = require('reactor-ui/grid/Row');
    var Unit = require('reactor-ui/grid/Unit');
-   
+
    var MyLayout = React.createClass({
-   
+
         render() {
-            
+
             return(<Grid>
                 <Row>
                     /* 1/3 of the available width */
-                    <Unit unit="1-3"> 
+                    <Unit unit="1-3">
                         <Panel.../>
                     </Unit>
-                    <Unit unit="1-3"> 
-                        <Panel.../>                
+                    <Unit unit="1-3">
+                        <Panel.../>
                     </Unit>
-                    <Unit unit="1-3"> 
-                        <Panel.../>                                    
+                    <Unit unit="1-3">
+                        <Panel.../>
                     </Unit>
                 </Row>
             </Grid>
-        } 
-   
+        }
+
    });
-   
-    
+
+
 ```
 
 ##Forms
@@ -208,4 +217,3 @@ Reactor UI's grid system uses Pure CSS's grid system.
 ![alt datagrid](https://raw.githubusercontent.com/wmira/reactor-ui/master/ss/datagrid.png)
 
 # Contributing
-

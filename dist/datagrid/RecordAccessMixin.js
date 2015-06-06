@@ -6,6 +6,7 @@ var traverse = require("object-traverse");
 
 var RecordAccessMixin = {
 
+    //FIXME: we should break this up, we can't get refs all the time e.g. when we are on render
     getRecordData: function getRecordData(index, config, ref) {
         var dataProvider = this.state.dataProvider;
         var formatter = config.formatter;
@@ -56,7 +57,8 @@ var RecordAccessMixin = {
             formattedValue: formattedValue,
             formatter: formatter,
             renderer: renderer,
-            id: id
+            id: id,
+            config: config
 
         };
     }

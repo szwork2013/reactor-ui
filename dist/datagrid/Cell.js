@@ -6,12 +6,25 @@ var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["defau
 
 var React = _interopRequire(require("react"));
 
+var RecordAccessMixin = _interopRequire(require("./RecordAccessMixin"));
+
 var Cell = React.createClass({
     displayName: "Cell",
 
+    mixins: [RecordAccessMixin],
+
+    propTypes: {
+        index: React.PropTypes.number.isRequired,
+        dataProvider: React.PropTypes.object.isRequired,
+        config: React.PropTypes.object.isRequired
+    },
+
     getInitialState: function getInitialState() {
 
-        return { edited: false };
+        return {
+            edited: false,
+            dataProvider: this.props.dataProvider
+        };
     },
 
     _onClick: function _onClick(e) {
@@ -29,27 +42,37 @@ var Cell = React.createClass({
      */
     _getCellValue: function _getCellValue() {
         //FIXME use the mixin here
-        var _props$config = this.props.config;
-        var formatter = _props$config.formatter;
-        var renderer = _props$config.renderer;
-        var path = _props$config.path;
-        var id = _props$config.id;
-        var editor = _props$config.editor;
+        var recData = this.getRecordData(this.props.index, this.props.config);
+        var renderedData = recData.value;
+        var toRenderer;
 
-        var pathToUse = path || id; //we use path, if not id
-        var dataProvider = this.props.dataProvider;
-        var record = this.props.dataProvider.recordAt(this.props.index);
+        if (recData.renderer) {
+            toRenderer = { //TODO: we probably should just pass this shit
+                value: recData.value,
+                formattedValue: recData.formattedValue,
+                record: recData.record,
+                config: recData.config,
+                id: recData.id
+            };
+            renderedData = recData.renderer(toRenderer);
+        }
 
         return React.createElement(
             "div",
             null,
-            record[pathToUse]
+            renderedData
         );
     },
     render: function render() {
-
+        var cellStyle = {};
+        var cellAlign = this.props.config.cellAlign;
         var width = this.props.config.width;
         var flex, flexInt;
+
+        if (cellAlign) {
+            cellStyle = { textAlign: cellAlign };
+        }
+
         if (width) {
             flex = "0 0 " + width;
         } else {
@@ -62,7 +85,7 @@ var Cell = React.createClass({
             { style: { flex: flex }, ref: "cell", onClick: this._onClick, className: "rui-dt-cell-cont" },
             React.createElement(
                 "div",
-                { className: "rui-dt-cell" },
+                { style: cellStyle, className: "rui-dt-cell" },
                 this._getCellValue()
             )
         );
