@@ -7,7 +7,7 @@ Note that this is very much on its initial development phase, a work in progress
 
 #ChangeLog
 
-0.0.10
+* 0.0.10
       1. DataTable
             * renderer now implemented
             * cell editing is off by default
