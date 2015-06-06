@@ -9,9 +9,9 @@ Note that this is very much on its initial development phase, a work in progress
 
 * 0.0.10
       1. DataTable
-            * renderer now implemented
-            * cell editing is off by default
-            * default cell style can be applied e.g. Column cellAlign={"center"}  
+            - renderer now implemented
+            - cell editing is off by default
+            - default cell style can be applied e.g. Column cellAlign={"center"}  
 
 
 #Components
