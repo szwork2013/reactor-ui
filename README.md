@@ -3,7 +3,7 @@ Reactor UI
 
 Reactor UI is a reusable UI components written in react.
 
-Note that this is very much on its initial development phase, a work in progress...
+Note that this is very much on its initial development phase, a work in progress.
 
 #ChangeLog
 
@@ -12,6 +12,26 @@ Note that this is very much on its initial development phase, a work in progress
       * Datatable: cell editing is off by default
       * Datatable: default cell style can be applied e.g. Column cellAlign={"center"}  
 
+#Router
+
+  reaction is a basic router that can be used to do routing within reactor-ui app.
+
+```javascript
+
+    // /users route, can be chained to define sub routes
+    reaction.route("/users")
+      .default(<UsersList/>)
+      .route("/edit/{id}", <EditUser/> ); // /users/edit/{id}
+
+    reaction.route("/reports", <Reports />);
+    reaction.route("/products", <Reports />);
+
+    reaction.onRoute("*", listener ); //whenever a route is activated, listener is called
+    reaction.onRoute("/users", anotherlistener ); //listen to /users route
+
+    reaction.run(document.getElementById("container"));
+
+  ```
 
 #Components
 
