@@ -5,16 +5,12 @@
 import React from 'react';
 import {Datatable, Column} from   'reactor-ui/datagrid';
 import Pill from 'reactor-ui/Pill';
-import Reaction from 'reactor-ui/reaction';
+
+import reaction from 'reactor-ui/reaction';
 import data from './griddata';
 
-var Route = Reaction.Route;
 
-var Sample = React.createClass({
-    render() {
-        return <div/>;
-    }
-});
+
 /*
 var routes = (
     <Route path="/">
@@ -36,6 +32,9 @@ Reaction.run(routes,
     document.getElementById('cont1'));
 
 */
+
+    /*
+
 var idRenderer = function(recdata) {
     return <Pill scheme="blue">{recdata.formattedValue}</Pill>; //<span style={{color: 'red', fontWeight: 'bold'}}>{recdata.formattedValue}</span>;
 };
@@ -49,3 +48,4 @@ React.render(
         <Column id='price' title='Price'/>
     </Datatable>,
     document.getElementById('cont1'));
+    */
