@@ -27,12 +27,25 @@ var Reports = React.createClass({
     }
 });
 
+var Index = React.createClass({
+    render() {
+        return <div>
+            <ul>
+                <li><a href="#users">Users</a></li>
+                <li><a href="#reports">Reports</a></li>
+            </ul>
 
-reaction.route("/users")
-    .default(<UsersList/>)
+        </div>;
+    }
+});
+
+
+reaction.default(<Index/>);
+
+reaction.route("/users",<UsersList/>)
     .route("/edit/{id}", <EditUser/> );
 
-reaction.route("/reports", <Reports />);            
+reaction.route("/reports", <Reports />);
 
 
 reaction.run(document.getElementById('cont1'));
