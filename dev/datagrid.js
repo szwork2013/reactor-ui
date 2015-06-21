@@ -5,6 +5,7 @@
 import React from 'react';
 import {Datatable, Column} from   'reactor-ui/datagrid';
 import Pill from 'reactor-ui/Pill';
+import Portlet from 'reactor-ui/portlet';
 
 import reaction from 'reactor-ui/reaction';
 //import data from './griddata';
@@ -84,3 +85,16 @@ document.getElementById('btn1').addEventListener('click',function() {
 });
 
 renderGrid();
+
+
+
+React.render(
+    <Portlet titleIcon="fa fa-bar-chart" title="React Panel" subtitle="this is a subtitle">
+        <Datatable  data={data}>
+            <Column cellAlign={"center"} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
+            <Column id='productId' title='Product Id'/>
+            <Column id='price' title='Price'/>
+        </Datatable>
+    </Portlet>,
+    document.getElementById('p1')
+);
