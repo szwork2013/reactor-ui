@@ -1,5 +1,4 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
+
 'use strict';
 
 import React from 'react';
@@ -21,6 +20,13 @@ var Cell = React.createClass({
             edited : false,
             dataProvider: this.props.dataProvider
         };
+    },
+    componentWillReceiveProps(nextProps) {
+
+        if ( nextProps.dataProvider ) {
+            this.setState ( { dataProvider: nextProps.dataProvider});
+        }
+
     },
 
     _onClick(e) {

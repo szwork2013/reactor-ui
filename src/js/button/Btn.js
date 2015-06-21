@@ -5,6 +5,7 @@
 var React = require("react/addons");
 var cn = require("classnames");
 var PureRenderMixin = React.addons.PureRenderMixin;
+import assign from 'object-assign';
 
 /**
  * Btn element
@@ -68,22 +69,26 @@ var Btn = React.createClass({
             classNames;
         var disabled = ( this.props.disabled === true  );
         var scheme = this.props.scheme;
-        //var active = this.props.active; // FIXME: this is actually when we are together in a btn group,
+        var active = this.props.active;
+
         var schemeTheme = null;
         if ( scheme ) {
             schemeTheme = `rui-btn-${scheme}`;
         }
-
-
+        style = assign(style,this.props.style);
         if ( this.props.width ) {
             style.width = this.props.width;
         }
 
-
+        //TODO: the active here is a bit nasty, redo this
         classNames =  cn(
             "rui-btn",
-            schemeTheme
-            //{"rui-btn-group-active-violet" : ( this.props.value === active && scheme === "violet" && this.props.value !== undefined ) } //FIXME bro!
+            schemeTheme,
+            {"rui-btn-group-active-violet" : ( this.props.value === active && scheme === "violet" && this.props.value !== undefined ) },
+            {"rui-btn-group-active-green" : ( this.props.value === active && scheme === "green" && this.props.value !== undefined ) },
+            {"rui-btn-group-active-red" : ( this.props.value === active && scheme === "red" && this.props.value !== undefined ) },
+            {"rui-btn-group-active-blue" : ( this.props.value === active && scheme === "blue" && this.props.value !== undefined ) },
+            {"rui-btn-group-active-orange" : ( this.props.value === active && scheme === "orange" && this.props.value !== undefined ) }
         );
         return (<button ref="btn" onBlur={this.props.onBlur} style={style} value={this.props.value} className={classNames} disabled={disabled} onClick={this.__onClickHandler}>
             { this.createContent() }
@@ -92,4 +97,3 @@ var Btn = React.createClass({
 });
 
 module.exports = Btn;
-

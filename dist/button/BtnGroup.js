@@ -1,10 +1,12 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
+
 "use strict";
 
-var React = require("react/addons");
-var cn = require("classnames");
-var Btn = require("./Btn");
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+var React = _interopRequire(require("react/addons"));
+
+var Btn = _interopRequire(require("./Btn"));
+
 var PureRenderMixin = React.addons.PureRenderMixin;
 
 var BtnGroup = React.createClass({
@@ -32,7 +34,7 @@ var BtnGroup = React.createClass({
             if (child.type !== Btn) {
                 throw new Error("Only Btn type is allowed");
             }
-            return React.cloneElement(child, { disabled: _this.props.disabled, scheme: _this.props.scheme, active: _this.state.active, onClick: _this.buttonClicked });
+            return React.cloneElement(child, { style: { marginLeft: 2 }, disabled: _this.props.disabled, scheme: _this.props.scheme, active: _this.state.active, onClick: _this.buttonClicked });
         });
     },
 

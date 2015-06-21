@@ -1,5 +1,4 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
+
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -25,6 +24,12 @@ var Cell = React.createClass({
             edited: false,
             dataProvider: this.props.dataProvider
         };
+    },
+    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+
+        if (nextProps.dataProvider) {
+            this.setState({ dataProvider: nextProps.dataProvider });
+        }
     },
 
     _onClick: function _onClick(e) {

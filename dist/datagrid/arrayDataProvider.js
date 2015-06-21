@@ -7,6 +7,7 @@ module.exports = function (array) {
     if (!Array.isArray(array)) {
         throw new Error("argument must be an array");
     }
+
     return Object.defineProperties({
 
         recordAt: function recordAt(i) {

@@ -1,9 +1,10 @@
-/* global module,require */
-/* jshint esnext: true, -W097 */
+/* jshint esnext: true, -W097,unused: vars */
+/* global module  */
+
 
 import React from 'react';
 
-var htmlElement;
+let htmlElement;
 
 const DEFAULT_PATH_KEY = "";
 const routesMap = {};
@@ -21,13 +22,15 @@ const createUrlPath = function(routePath) {
     return {
 
         matches: function(urlPath) {
+
             var tmpUrlPath = createUrlPath(urlPath);
 
             for ( var i=0; i < tmpUrlPath.pathArr.length; i++  ) {
 
+                /*
                 if ( pathArr[i] !== tmpUrlPath.pathArr[i] ) {
                     return false;
-                }
+                }*/
             }
 
             return true;
@@ -131,9 +134,6 @@ const dispatchRoute = function() {
 
 
 const run = function(htmlEl) {
-
-    var currentUrl = window.location.href;
-    var path;
 
     htmlElement = htmlEl;
 

@@ -1,11 +1,11 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
+
 'use strict';
 
-var React = require("react/addons");
-var cn = require("classnames");
-var Btn = require("./Btn");
-var PureRenderMixin = React.addons.PureRenderMixin;
+
+import React from 'react/addons';
+import Btn from './Btn';
+
+const PureRenderMixin = React.addons.PureRenderMixin;
 
 var BtnGroup = React.createClass({
     mixins: [PureRenderMixin],
@@ -29,7 +29,7 @@ var BtnGroup = React.createClass({
             if ( child.type !== Btn ) {
                 throw new Error("Only Btn type is allowed");
             }
-            return React.cloneElement(child,{ disabled: this.props.disabled , scheme: this.props.scheme, active: this.state.active,onClick : this.buttonClicked});
+            return React.cloneElement(child,{ style: { marginLeft: 2} , disabled: this.props.disabled , scheme: this.props.scheme, active: this.state.active,onClick : this.buttonClicked});
         });
 
     },

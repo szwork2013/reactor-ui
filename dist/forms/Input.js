@@ -9,8 +9,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var React = _interopRequire(require("react"));
 
-var cx = _interopRequire(require("classnames"));
-
 var InputMixin = _interopRequire(require("./InputMixin"));
 
 var LabelMixin = _interopRequire(require("./LabelMixin"));

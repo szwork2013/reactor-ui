@@ -4,7 +4,7 @@
 'use strict';
 
 import React from 'react';
-import cx from 'classnames';
+
 
 import InputMixin from './InputMixin';
 import LabelMixin from './LabelMixin';
@@ -30,7 +30,7 @@ const Input = React.createClass({
     },
 
     render : function() {
-        const value= this._getContext().model[this.props.name] || "";
+        const value=  this._getContext().model[this.props.name] || "";
         let readOnly = null;
         if ( !this.props.readOnly ) {//if falsy
             readOnly = "";
