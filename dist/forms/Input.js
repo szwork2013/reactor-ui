@@ -1,4 +1,4 @@
-/* global module,require */
+/* global module */
 /* jshint esnext: true, -W097 */
 
 "use strict";
@@ -19,8 +19,10 @@ var Input = React.createClass({
     displayName: "Input",
 
     propTypes: {
-        name: React.PropTypes.string.isRequired
-    },
+        name: React.PropTypes.string.isRequired,
+        labelInline: React.PropTypes.boolean,
+        labelWidth: React.PropTypes.any,
+        inputWidth: React.PropTypes.any },
 
     mixins: [InputMixin, LabelMixin, ValueChangeMixin],
 
@@ -31,24 +33,21 @@ var Input = React.createClass({
     },
 
     componentDidMount: function componentDidMount() {
-        this._getContext().inputRegistry(this);
+        if (this.hasContext() && this._getContext().inputRegistry) {
+            this._getContext().inputRegistry(this);
+        }
     },
 
     render: function render() {
-        var value = this._getContext().model[this.props.name] || "";
-        var readOnly = null;
-        if (!this.props.readOnly) {
-            //if falsy
-            readOnly = "";
-        } else {
-            readOnly = "readonly";
-        }
+        var value = this.getInputValue(); //this._getContext().model[this.props.name] || "";
+        var params = this.getInputParams();
 
         return React.createElement(
             "div",
             { className: "rui-form-cont" },
             this.getLabel(),
-            React.createElement("input", _extends({ value: value, readOnly: readOnly, onChange: this.dispatchInputChange, ref: this.inputRef, className: "rui-form-input", placeholder: this.props.placeholder }, this.props))
+            React.createElement("input", _extends({ style: params.style, value: value, readOnly: params.readOnly, onChange: this.dispatchInputChange,
+                ref: this.inputRef, className: "rui-form-input " + params.className, placeholder: this.props.placeholder }, this.props))
         );
     }
 

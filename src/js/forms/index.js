@@ -22,6 +22,7 @@ var Form = React.createClass({
      */
     _inputRegistry(input) {
 
+        
     },
     /**
      * Render a form

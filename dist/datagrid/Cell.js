@@ -7,6 +7,8 @@ var React = _interopRequire(require("react"));
 
 var RecordAccessMixin = _interopRequire(require("./RecordAccessMixin"));
 
+var assign = _interopRequire(require("object-assign"));
+
 var Cell = React.createClass({
     displayName: "Cell",
 
@@ -73,7 +75,7 @@ var Cell = React.createClass({
         var cellAlign = this.props.config.cellAlign;
         var width = this.props.config.width;
         var flex, flexInt;
-
+        var style;
         if (cellAlign) {
             cellStyle = { textAlign: cellAlign };
         }
@@ -84,7 +86,7 @@ var Cell = React.createClass({
             flexInt = this.props.config.flex ? this.props.config.flex : "1";
             flex = flexInt + " 1 10px";
         }
-
+        style = assign({ flex: flex }, this.props.config.style);
         return React.createElement(
             "div",
             { style: { flex: flex }, ref: "cell", onClick: this._onClick, className: "rui-dt-cell-cont" },

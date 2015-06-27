@@ -3,6 +3,9 @@
     "esnext": true,
     "unused" : "vars",
     "node" : true,
+    "maxstatements": 15,
+    "maxdepth":2,
+    "maxcomplexity": 5,
     "globals": {
         "module" : false,
         "require": false,

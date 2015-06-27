@@ -11,12 +11,21 @@ var LabelMixin = {
 
     getLabel : function() {
         var hasLabel = this.props.label ? true : false;
-        var label = this.props.label || this.props.name;
+        var labelText = this.props.label || this.props.name;
+        var labelWidth = this.props.labelWidth || "100%";
+        var labelStyle = { width: labelWidth};
+        var showLabel = true;
+        if ( this.props.showLabel !== undefined ) {
+            showLabel = this.props.showLabel;
+        }
 
         if ( !hasLabel ) {
-            label = label.substring(0,1).toUpperCase() + label.substring(1);
+            labelText = labelText.substring(0,1).toUpperCase() + labelText.substring(1);
         }
-        return <label >{label}</label>;
+        if ( showLabel ) {
+            return <label style={labelStyle} >{labelText}</label>;
+        }
+        return undefined;
 
     }
 
