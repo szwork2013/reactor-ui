@@ -7,8 +7,7 @@ import React from 'react';
 
 var LabelMixin = {
 
-
-
+    
     getLabel() {
         var hasLabel = this.props.label ? true : false;
         var labelText = this.props.label || this.props.name;
@@ -25,7 +24,6 @@ var LabelMixin = {
         if ( showLabel ) {
             return <label style={labelStyle} >{labelText}</label>;
         }
-        return undefined;
 
     }
 

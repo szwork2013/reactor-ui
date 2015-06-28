@@ -29,7 +29,6 @@ var LabelMixin = {
                 labelText
             );
         }
-        return undefined;
     }
 
 };

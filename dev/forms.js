@@ -13,11 +13,11 @@ var model = {firstname: 'Warren'};
 var nums = [{value: 1, text: 'One'}];
 
 var acData = [
-    {id:'A', text: 'Abc'},
-    {id:'B',text: 'Def 123'},
-    {id:'C',text: 'Another K'},
-    {id:'D',text: 'Xyz Elephant'},
-    {id:'E',text: 'Dog and Cat'}
+    {id:'123', name: 'Abc'},
+    {id:'456',name: 'Def 123'},
+    {id:'789',name: 'Another K'},
+    {id:'D',name: 'Xyz Elephant'},
+    {id:'E',name: 'Dog and Cat'}
 ];
 
 /**
@@ -71,5 +71,5 @@ React.render(
     document.getElementById("cont2"));
 
 React.render(
-    <AutoComplete labelInline={true}  data={acData} labelWidth="30%" inputWidth="70%" label="Sample" labelType="inline" name="demo" />,
+    <AutoComplete searchPath={['id','name']} selectionPath='name' labelInline={true}  data={acData} labelWidth="30%" inputWidth="70%" label="Sample" labelType="inline" name="demo" />,
     document.getElementById("cont3"));

@@ -55,7 +55,9 @@ var Cell = React.createClass({
                     formattedValue: recData.formattedValue,
                     record: recData.record,
                     config: recData.config,
-                    id: recData.id
+                    id: recData.id,
+                    index: this.props.index
+
             };
             renderedData = recData.renderer(toRenderer);
         }

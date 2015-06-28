@@ -5,6 +5,17 @@ import InputMixin from './InputMixin';
 import LabelMixin from './LabelMixin';
 import assign from 'object-assign';
 
+var parseText = function(path,obj) {
+
+    if ( typeof obj === 'string' ) {
+        return obj;
+    }
+    if ( obj ) {
+        return obj[path|| 'text'];
+    }
+    return '';
+};
+
 const AutoCompleteResult = React.createClass({
 
 
@@ -13,7 +24,12 @@ const AutoCompleteResult = React.createClass({
     },
 
     createResultItem(result,index) {
-        return <div onClick={this.resultItemClicked.bind(null,index)} dataIndex={index} className="rui-form-ac-result" style={ {padding: "8px 6px"}}>{result.text}</div>;
+        var text =  parseText(this.props.selectionPath,result);
+        var rendered = text;
+        if ( this.props.selectionRenderer ) {
+            rendered = this.props.selectionRenderer(text,result);
+        }
+        return <div onClick={this.resultItemClicked.bind(null,index)} dataIndex={index} className="rui-form-ac-result" style={ {padding: "8px 6px"}}>{rendered}</div>;
 
     },
     render() {
@@ -21,7 +37,7 @@ const AutoCompleteResult = React.createClass({
         var pos = this.props.anchorPosition;
         var style = assign({border: "1px solid #D1D1D1", borderTop: "none", display: display,position: 'absolute'},pos);
 
-        return <div  style={style} >
+        return <div className="rui-form-ac-result-cont"  style={style} >
             { (this.props.data||[]).map( (res,index) => {
                 return this.createResultItem(res,index);
             }) }
@@ -32,12 +48,27 @@ const AutoCompleteResult = React.createClass({
 });
 
 const KEY_BACKSPACE = 8;
+const KEY_ESC = 27;
 
 const AutoComplete = React.createClass({
 
     propTypes: {
-        requiredName : React.PropTypes.string.isRequired
+        requiredName : React.PropTypes.string.isRequired,
+        selectionPath : React.PropTypes.string,
+        selectionRenderer: React.PropTypes.func,
+        searchPath: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.array,
+        ])
     },
+
+    getDefaultProps() {
+        return {
+            selectionRenderer: undefined,
+            selectionPath : 'text'
+        };
+    },
+
     mixins: [InputMixin,LabelMixin],
 
     contextTypes: {
@@ -75,13 +106,31 @@ const AutoComplete = React.createClass({
 
     },
 
+    _searchObjectFilter(searchStr,obj) {
+        var tosearch,str;
+        var searchFields;
+        if ( typeof this.props.searchPath === 'string' ) {
+            searchFields = [];
+            searchFields.push(this.props.searchPath);
+        } else if (Array.isArray(this.props.searchPath) ){
+            searchFields = this.props.searchPath;
+        }
+
+        if ( searchFields ) {
+            tosearch = {};
+            searchFields.forEach ( field => tosearch[field] = obj[field] );
+        } else {
+            tosearch = obj;
+        }
+
+        str = JSON.stringify(tosearch);
+        return str.includes(searchStr);
+    },
+
     showMatchingResults(query) {
-        var str;
+
         var data = this.props.data || [];
-        var results = data.filter (  datum => {
-            str = JSON.stringify(datum);
-            return ( str.includes(query) );
-        });
+        var results = data.filter ( this._searchObjectFilter.bind(this,query) );
 
         this.setState( {results: results, anchorPosition: this.determineAnchorAbsolutePos() });
     },
@@ -110,14 +159,17 @@ const AutoComplete = React.createClass({
     },
 
     onKeyUp(e) {
+
         if ( e.keyCode === KEY_BACKSPACE ) {
             React.findDOMNode(this.refs.acInput).value = '';
             this.setState({selection: undefined, });
+        } else if ( e.keyCode === KEY_ESC ) {
+            this.setState({results: undefined, });
         }
     },
     showResults() {
         if ( this.state.results ) {
-            return <AutoCompleteResult onResultItemClicked={this.resultSelected} data={this.state.results} anchorPosition={this.state.anchorPosition}/>;
+            return <AutoCompleteResult selectionPath={this.props.selectionPath} onResultItemClicked={this.resultSelected} data={this.state.results} anchorPosition={this.state.anchorPosition}/>;
         } else {
             return undefined;
         }
@@ -125,16 +177,16 @@ const AutoComplete = React.createClass({
     renderToggle() {
         return <div style={{top: 14, right: 10, position: 'absolute'}}><div className="rui-arrow-down rui-arrow-down-inactive"></div></div>;
     },
+
+    _parseValue(obj) {
+        return parseText(this.props.selectionPath|| 'text',obj);
+    },
     renderInput() {
-        var value,obj;
+        var value;
         if ( this.state.selection ) {
-            value = this.state.selection.text;
-        } else {
-            obj = this.getInputValue();
-            if ( obj ) {
-                value = obj.text;
-            }
+            value = this._parseValue(this.state.selection);
         }
+
         return <input onKeyDown={this.onKeyUp} value={value} ref="acInput" onChange={this.acInputChange} placeholder={this.props.placeholder} type="text" autoComplete="off"
             style={ { height: "100%", width: "100%" ,position: "relative", left: "0px", tabindex: "tabindex"}}   />;
 

@@ -10,6 +10,17 @@ var LabelMixin = _interopRequire(require("./LabelMixin"));
 
 var assign = _interopRequire(require("object-assign"));
 
+var parseText = function parseText(path, obj) {
+
+    if (typeof obj === "string") {
+        return obj;
+    }
+    if (obj) {
+        return obj[path || "text"];
+    }
+    return "";
+};
+
 var AutoCompleteResult = React.createClass({
     displayName: "AutoCompleteResult",
 
@@ -18,10 +29,15 @@ var AutoCompleteResult = React.createClass({
     },
 
     createResultItem: function createResultItem(result, index) {
+        var text = parseText(this.props.selectionPath, result);
+        var rendered = text;
+        if (this.props.selectionRenderer) {
+            rendered = this.props.selectionRenderer(text, result);
+        }
         return React.createElement(
             "div",
             { onClick: this.resultItemClicked.bind(null, index), dataIndex: index, className: "rui-form-ac-result", style: { padding: "8px 6px" } },
-            result.text
+            rendered
         );
     },
     render: function render() {
@@ -33,7 +49,7 @@ var AutoCompleteResult = React.createClass({
 
         return React.createElement(
             "div",
-            { style: style },
+            { className: "rui-form-ac-result-cont", style: style },
             (this.props.data || []).map(function (res, index) {
                 return _this.createResultItem(res, index);
             })
@@ -43,13 +59,25 @@ var AutoCompleteResult = React.createClass({
 });
 
 var KEY_BACKSPACE = 8;
+var KEY_ESC = 27;
 
 var AutoComplete = React.createClass({
     displayName: "AutoComplete",
 
     propTypes: {
-        requiredName: React.PropTypes.string.isRequired
+        requiredName: React.PropTypes.string.isRequired,
+        selectionPath: React.PropTypes.string,
+        selectionRenderer: React.PropTypes.func,
+        searchPath: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array])
     },
+
+    getDefaultProps: function getDefaultProps() {
+        return {
+            selectionRenderer: undefined,
+            selectionPath: "text"
+        };
+    },
+
     mixins: [InputMixin, LabelMixin],
 
     contextTypes: {
@@ -84,13 +112,33 @@ var AutoComplete = React.createClass({
         return { left: x - 1, top: y + adjustmentHeight, width: width };
     },
 
+    _searchObjectFilter: function _searchObjectFilter(searchStr, obj) {
+        var tosearch, str;
+        var searchFields;
+        if (typeof this.props.searchPath === "string") {
+            searchFields = [];
+            searchFields.push(this.props.searchPath);
+        } else if (Array.isArray(this.props.searchPath)) {
+            searchFields = this.props.searchPath;
+        }
+
+        if (searchFields) {
+            tosearch = {};
+            searchFields.forEach(function (field) {
+                return tosearch[field] = obj[field];
+            });
+        } else {
+            tosearch = obj;
+        }
+
+        str = JSON.stringify(tosearch);
+        return str.includes(searchStr);
+    },
+
     showMatchingResults: function showMatchingResults(query) {
-        var str;
+
         var data = this.props.data || [];
-        var results = data.filter(function (datum) {
-            str = JSON.stringify(datum);
-            return str.includes(query);
-        });
+        var results = data.filter(this._searchObjectFilter.bind(this, query));
 
         this.setState({ results: results, anchorPosition: this.determineAnchorAbsolutePos() });
     },
@@ -119,14 +167,17 @@ var AutoComplete = React.createClass({
     },
 
     onKeyUp: function onKeyUp(e) {
+
         if (e.keyCode === KEY_BACKSPACE) {
             React.findDOMNode(this.refs.acInput).value = "";
             this.setState({ selection: undefined });
+        } else if (e.keyCode === KEY_ESC) {
+            this.setState({ results: undefined });
         }
     },
     showResults: function showResults() {
         if (this.state.results) {
-            return React.createElement(AutoCompleteResult, { onResultItemClicked: this.resultSelected, data: this.state.results, anchorPosition: this.state.anchorPosition });
+            return React.createElement(AutoCompleteResult, { selectionPath: this.props.selectionPath, onResultItemClicked: this.resultSelected, data: this.state.results, anchorPosition: this.state.anchorPosition });
         } else {
             return undefined;
         }
@@ -138,16 +189,16 @@ var AutoComplete = React.createClass({
             React.createElement("div", { className: "rui-arrow-down rui-arrow-down-inactive" })
         );
     },
+
+    _parseValue: function _parseValue(obj) {
+        return parseText(this.props.selectionPath || "text", obj);
+    },
     renderInput: function renderInput() {
-        var value, obj;
+        var value;
         if (this.state.selection) {
-            value = this.state.selection.text;
-        } else {
-            obj = this.getInputValue();
-            if (obj) {
-                value = obj.text;
-            }
+            value = this._parseValue(this.state.selection);
         }
+
         return React.createElement("input", { onKeyDown: this.onKeyUp, value: value, ref: "acInput", onChange: this.acInputChange, placeholder: this.props.placeholder, type: "text", autoComplete: "off",
             style: { height: "100%", width: "100%", position: "relative", left: "0px", tabindex: "tabindex" } });
     },
