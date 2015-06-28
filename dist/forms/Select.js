@@ -13,6 +13,8 @@ var LabelMixin = _interopRequire(require("./LabelMixin"));
 
 var ValueChangeMixin = _interopRequire(require("./ValueChangeMixin"));
 
+var assign = _interopRequire(require("object-assign"));
+
 var mapOption = function mapOption(option) {
     var obj = option,
         value,
@@ -86,14 +88,14 @@ var Select = React.createClass({
 
     render: function render() {
         var params = this.getInputParams();
-
+        var style = assign(params.style, this.props.style || {});
         return React.createElement(
             "div",
             { className: "rui-form-cont" },
             this.getLabel(),
             React.createElement(
                 "select",
-                { style: params.style, readOnly: params.readOnly, ref: this.inputRef, onChange: this.dispatchInputChange, className: "rui-form-input " + params.className },
+                { style: style, readOnly: params.readOnly, ref: this.inputRef, onChange: this.dispatchInputChange, className: "rui-form-input " + params.className },
                 this.createOptions()
             )
         );

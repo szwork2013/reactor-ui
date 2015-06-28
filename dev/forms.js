@@ -71,5 +71,5 @@ React.render(
     document.getElementById("cont2"));
 
 React.render(
-    <AutoComplete data={acData} labelWidth="30%" inputWidth="70%" labelInline={true} label="Sample" labelType="inline" name="demo" />,
+    <AutoComplete labelInline={true}  data={acData} labelWidth="30%" inputWidth="70%" label="Sample" labelType="inline" name="demo" />,
     document.getElementById("cont3"));

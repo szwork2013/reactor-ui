@@ -1,20 +1,22 @@
-/* global module,require */
-/* jshint esnext:true, -W097, maxstatements:15, maxdepth:2, maxcomplexity:5 */
+
+/* jshint  -W097 */
 
 'use strict';
-
-import React from 'react';
 
 var ValueChangeMixin = {
 
 
     dispatchInputChange : function() {
-
-        this._getContext().changeListener();
-        if ( this._getContext().changeListener ) {
-            var elNode = this.__input.getDOMNode();
-            this._getContext().changeListener(this.props.name,elNode.value);
+        var elNode = this.__input.getDOMNode();
+        if ( this.hasContext() ) {
+            if ( this._getContext().changeListener  ) {                
+                this._getContext().changeListener(this.props.name,elNode.value);
+            }
         }
+        if ( this.props.changeListener ) {
+            this.props.changeListener(this.props.name,elNode.value);
+        }
+
     }
 
 };

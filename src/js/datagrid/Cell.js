@@ -46,7 +46,7 @@ var Cell = React.createClass({
     _getCellValue() {
         //FIXME use the mixin here
         var recData = this.getRecordData(this.props.index,this.props.config);
-        var renderedData = recData.value;
+        var renderedData = recData.formattedValue;
         var toRenderer;
 
         if ( recData.renderer ) {

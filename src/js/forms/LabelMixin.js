@@ -9,7 +9,7 @@ var LabelMixin = {
 
 
 
-    getLabel : function() {
+    getLabel() {
         var hasLabel = this.props.label ? true : false;
         var labelText = this.props.label || this.props.name;
         var labelWidth = this.props.labelWidth || "100%";
@@ -19,7 +19,7 @@ var LabelMixin = {
             showLabel = this.props.showLabel;
         }
 
-        if ( !hasLabel ) {
+        if ( hasLabel ) {
             labelText = labelText.substring(0,1).toUpperCase() + labelText.substring(1);
         }
         if ( showLabel ) {

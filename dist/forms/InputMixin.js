@@ -26,7 +26,7 @@ var InputMixin = {
         } else {
             readOnly = "readonly";
         }
-        if (this.props.labelInline) {
+        if (this.props.labelInline && this.props.showLabel) {
             className = "rui-input-inline";
         }
 
@@ -41,14 +41,18 @@ var InputMixin = {
 
         if (this.hasContext()) {
             context = this._getContext();
+            if (context.model) {
+                return context.model[this.props.name];
+            }
         }
-        if (context && context.model) {
-            return context.model[this.props.name];
-        }
-        return "";
+        return this.props.value;
     },
     inputRef: function inputRef(el) {
+
         this.__input = el;
+        if (this.__input) {
+            this.__input.getDOMNode().focus();
+        }
     }
 
 };

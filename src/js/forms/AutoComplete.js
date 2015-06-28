@@ -62,16 +62,16 @@ const AutoComplete = React.createClass({
         var computedWidth = computedStyle.getPropertyValue("width");
 
         var adjustmentHeight = parseInt(computedHeight,10);
-        var width = parseInt(computedWidth, 10) - 1;
+        var width = parseInt(computedWidth, 10);
         var x = 0;
         var y = 0;
 
-        while(anchorEl) {
+
             x += (anchorEl.offsetLeft - anchorEl.scrollLeft + anchorEl.clientLeft);
             y += (anchorEl.offsetTop - anchorEl.scrollTop + anchorEl.clientTop);
-            anchorEl = anchorEl.offsetParent;
-        }
-        return { left: x, top: y  + adjustmentHeight, width:width };
+
+
+        return { left: x - 1, top: y  + adjustmentHeight, width:width };
 
     },
 
@@ -140,12 +140,13 @@ const AutoComplete = React.createClass({
 
     },
     render : function() {
+        const params = this.getInputParams();
+        const style = assign({position: 'relative'},params.style);
 
-        //var inputActive = false;
         return (
             <div className="rui-form-cont">
                 {this.getLabel()}
-                <div style={{position: 'relative'}} ref="acCont" className="rui-form-ac-cont rui-form-input" onClick={this.containerClick}>
+                <div style={style} ref="acCont" className={"rui-form-ac-cont rui-form-input " + params.className} onClick={this.containerClick}>
                     {this.renderInput()}
                     {this.renderToggle()}
                 </div>

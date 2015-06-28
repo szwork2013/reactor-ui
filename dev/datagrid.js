@@ -16,8 +16,18 @@ var data1 = [
         "productId": 0,
         "productName": "e29f0d5e-0e8c-4a15-a89a-292da90f0096",
         "quantity": 820071,
-        "price": "$3,842.26",
+        "pricePerItem" : 5,
+        "price": "$6,842.26",
         "customer": "Moss Adkins"
+    },
+    {
+        "shipmentNo": 987531,
+        "productId": 1,
+        "productName": "429f1d5e-0e8c-6a25-a89a-232da40f0096",
+        "quantity": 834072,
+        "price": "$2,832.26",
+        "pricePerItem" : 5,
+        "customer": "Jeff Rollins"
     }
 
 ];
@@ -27,6 +37,7 @@ var data2 = [
     {
         "shipmentNo": 4444,
         "productId": 1,
+        "pricePerItem" : 5,
         "productName": "cf35124b-0e41-45d2-a7de-b41008b780c6",
         "quantity": 993157,
         "price": "$2,763.16",
@@ -63,16 +74,38 @@ Reaction.run(routes,
 var idRenderer = function(recdata) {
     return <Pill scheme="blue">{recdata.formattedValue}</Pill>; //<span style={{color: 'red', fontWeight: 'bold'}}>{recdata.formattedValue}</span>;
 };
+const onEdit = function(editData) {
+
+    var field = editData.config.id;
+    var index = editData.index;
+
+    data[index][field]= editData.value;
+};
+
+const totalFormatter = function(value) {
+    return "$" + value;
+
+};
+const totalSetter = function(record,id) {
+
+    return record.quantity * record.pricePerItem;
+
+};
+
+const totalRenderer = function(data) {
+    return "tots renderer";
+};
 
 function renderGrid() {
 
     React.render(
-        <Datatable  data={data}>
-            <Column cellAlign={"center"} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
+        <Datatable  onEdit={onEdit}  data={data}>
+            <Column cellAlign={"center"} id='shipmentNo' renderer={idRenderer}/>
             <Column id='productId' title='Product Id'/>
             <Column id='productName' title='Product Name'/>
-            <Column id='quantity' title='Quantity'/>
-            <Column id='price' title='Price'/>
+            <Column editable={true}  id='quantity' title='Quantity'/>
+            <Column id='pricePerItem' title='Price Per Item' />
+            <Column id='total' title='Total' setter={totalSetter} formatter={totalFormatter}  />
         </Datatable>,
         document.getElementById('cont1'));
 }
@@ -85,6 +118,7 @@ document.getElementById('btn1').addEventListener('click',function() {
 });
 
 renderGrid();
+
 
 
 

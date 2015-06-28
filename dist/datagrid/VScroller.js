@@ -1,5 +1,5 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
+
+/* jshint -W097 */
 
 "use strict";
 

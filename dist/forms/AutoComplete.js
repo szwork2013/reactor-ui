@@ -74,16 +74,14 @@ var AutoComplete = React.createClass({
         var computedWidth = computedStyle.getPropertyValue("width");
 
         var adjustmentHeight = parseInt(computedHeight, 10);
-        var width = parseInt(computedWidth, 10) - 1;
+        var width = parseInt(computedWidth, 10);
         var x = 0;
         var y = 0;
 
-        while (anchorEl) {
-            x += anchorEl.offsetLeft - anchorEl.scrollLeft + anchorEl.clientLeft;
-            y += anchorEl.offsetTop - anchorEl.scrollTop + anchorEl.clientTop;
-            anchorEl = anchorEl.offsetParent;
-        }
-        return { left: x, top: y + adjustmentHeight, width: width };
+        x += anchorEl.offsetLeft - anchorEl.scrollLeft + anchorEl.clientLeft;
+        y += anchorEl.offsetTop - anchorEl.scrollTop + anchorEl.clientTop;
+
+        return { left: x - 1, top: y + adjustmentHeight, width: width };
     },
 
     showMatchingResults: function showMatchingResults(query) {
@@ -154,15 +152,16 @@ var AutoComplete = React.createClass({
             style: { height: "100%", width: "100%", position: "relative", left: "0px", tabindex: "tabindex" } });
     },
     render: function render() {
+        var params = this.getInputParams();
+        var style = assign({ position: "relative" }, params.style);
 
-        //var inputActive = false;
         return React.createElement(
             "div",
             { className: "rui-form-cont" },
             this.getLabel(),
             React.createElement(
                 "div",
-                { style: { position: "relative" }, ref: "acCont", className: "rui-form-ac-cont rui-form-input", onClick: this.containerClick },
+                { style: style, ref: "acCont", className: "rui-form-ac-cont rui-form-input " + params.className, onClick: this.containerClick },
                 this.renderInput(),
                 this.renderToggle()
             ),

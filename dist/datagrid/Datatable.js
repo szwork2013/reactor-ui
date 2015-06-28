@@ -1,5 +1,5 @@
-/*globals require,module,document */
-/* jshint esnext:true, -W097, maxstatements:15, maxdepth:2, maxcomplexity:5 */
+
+/* jshint -W097 */
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -14,13 +14,9 @@ var Cell = _interopRequire(require("./Cell"));
 
 var arrayDataProvider = _interopRequire(require("./arrayDataProvider"));
 
-var pagerDataProvider = _interopRequire(require("./pagerDataProvider"));
-
 var RecordAccessMixin = _interopRequire(require("./RecordAccessMixin"));
 
 var DatatableMixin = _interopRequire(require("./DatatableMixin"));
-
-var VScroller = _interopRequire(require("./VScroller"));
 
 var Datatable = React.createClass({
     displayName: "Datatable",
@@ -54,7 +50,7 @@ var Datatable = React.createClass({
     _createHeader: function _createHeader() {
 
         var headerCells = this.state.colconfig.map(function (config) {
-            return React.createElement(Header, { config: config, width: config.width, title: config.title || config.id });
+            return React.createElement(Header, { config: config, width: config.width, title: config.title || "" });
         });
 
         return React.createElement(
@@ -116,6 +112,15 @@ var Datatable = React.createClass({
 
     componentDidMount: function componentDidMount() {
         document.addEventListener("click", this._onDocumentClickEvent);
+        if (this.refs.editorInput) {
+            this.refs.editorInput.getDOMNode().focus();
+        }
+    },
+
+    componentDidUpdate: function componentDidUpdate() {
+        if (this.refs.editorInput) {
+            this.refs.editorInput.getDOMNode().focus();
+        }
     },
 
     componentWillUnmount: function componentWillUnmount() {

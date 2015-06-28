@@ -1,5 +1,5 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
+
+/* jshint -W097 */
 
 'use strict';
 
@@ -9,7 +9,7 @@ import React from 'react';
  * Listen to mouse drag , mousewheel andkeyboard arrowkeys
  *
  */
-var VScroller = React.createClass({
+const VScroller = React.createClass({
 
     _onWheel(e) {
 
@@ -22,9 +22,9 @@ var VScroller = React.createClass({
     render() {
         return <div onWheel={this._onWheel} style={ { height: this.props.height , width: 16, backgroundColor : "#EEE" }}  className={"rui-dg-vscroller"}>
             <div  style={ { borderRadius: 2, margin: 3, backgroundColor : "#959595", width: 10, height: 30}}></div>
-        </div>
+        </div>;
     }
 
 });
 
-module.exports = VScroller;
+export default VScroller;

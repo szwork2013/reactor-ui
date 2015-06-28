@@ -19,7 +19,7 @@ var LabelMixin = {
             showLabel = this.props.showLabel;
         }
 
-        if (!hasLabel) {
+        if (hasLabel) {
             labelText = labelText.substring(0, 1).toUpperCase() + labelText.substring(1);
         }
         if (showLabel) {

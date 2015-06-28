@@ -9,8 +9,10 @@ var RecordAccessMixin = {
     //FIXME: we should break this up, we can't get refs all the time e.g. when we are on render
     getRecordData : function(index,config,ref) {
         var dataProvider =  this.state.dataProvider;
-        var {formatter,renderer,path,id, editor} = config;
+        var {setter,formatter,renderer,path,id, editor} = config;
+
         var pathToUse = path || id; //we use path, if not id
+
         var cellRef = (function() {
           if ( ref ) {
               var element = ref.getDOMNode();
@@ -27,8 +29,15 @@ var RecordAccessMixin = {
         var record = dataProvider.recordAt(index);
         var traversedRecord = traverse(record);
         var value = null, formattedValue;
+
         if ( typeof traversedRecord.get(pathToUse) === 'function' ) {
             value = traversedRecord.exec(pathToUse);
+        } else if ( typeof setter === 'function' ) {
+            try {
+                value = setter(record,id);
+            } catch ( e ) {
+                console.warn(e);
+            }
         } else {
             value = traversedRecord.get(pathToUse);
         }
@@ -37,7 +46,7 @@ var RecordAccessMixin = {
             try {
                 formattedValue = formatter(value,id,record);
             } catch ( e ) {
-                return e;
+                console.warn(e);
             }
         } else {
             formattedValue = value;
