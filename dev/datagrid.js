@@ -8,6 +8,11 @@ import Pill from 'reactor-ui/Pill';
 import Portlet from 'reactor-ui/portlet';
 
 import reaction from 'reactor-ui/reaction';
+
+import ActionBar from 'reactor-ui/ActionBar';
+import Btn from 'reactor-ui/button/Btn';
+
+const Action = ActionBar.Action;
 //import data from './griddata';
 
 var data1 = [
@@ -124,6 +129,11 @@ renderGrid();
 
 React.render(
     <Portlet titleIcon="fa fa-bar-chart" title="React Panel" subtitle="this is a subtitle">
+        <ActionBar>
+            <Action><Btn scheme='green' text='Action 1'/></Action>
+            <Action><Btn scheme='green' text='Action 2'/></Action>
+            <Action><Btn scheme='green' text='Action 3'/></Action>
+        </ActionBar>
         <Datatable  data={data}>
             <Column cellAlign={"center"} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
             <Column id='productId' title='Product Id'/>

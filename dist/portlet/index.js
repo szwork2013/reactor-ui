@@ -1,9 +1,13 @@
 
 "use strict";
 
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var React = require("react");
+
+var ActionBar = _interopRequire(require("../ActionBar"));
 
 var createToolboxActions = function createToolboxActions(props) {
     var toolboxDefs = props.toolbox || [];
@@ -15,6 +19,17 @@ var createToolboxActions = function createToolboxActions(props) {
             React.createElement("i", toolbox)
         );
     });
+};
+
+var findActionBar = function findActionBar(props) {
+
+    var actionBar = undefined;
+    React.Children.forEach(props.children, function (child) {
+        if (child.type === ActionBar) {
+            actionBar = child;
+        }
+    });
+    return actionBar;
 };
 
 var Header = React.createClass({
@@ -32,6 +47,11 @@ var Header = React.createClass({
 
     render: function render() {
         var icon = null;
+        var actionBar = findActionBar(this.props);
+        var style = {};
+        if (actionBar) {
+            style.lineHeight = "28px";
+        }
         if (this.props.titleIcon) {
             icon = React.createElement("i", { className: "rui-portlet-title-icon " + this.props.titleIcon });
         }
@@ -45,7 +65,7 @@ var Header = React.createClass({
             { className: "rui-portlet-header" },
             React.createElement(
                 "div",
-                { className: "rui-portlet-title-cont" },
+                { style: style, className: "rui-portlet-title-cont" },
                 icon,
                 React.createElement(
                     "span",
@@ -57,6 +77,7 @@ var Header = React.createClass({
             React.createElement(
                 "div",
                 { className: "rui-portlet-toolbox" },
+                findActionBar(this.props),
                 createToolboxActions(this.props)
             )
         );
@@ -68,24 +89,12 @@ var Body = React.createClass({
 
     render: function render() {
 
-        var reactEl = this.props.contentEl || this.props.children;
-        var htmlStr = this.props.contentStr;
-
-        var content = null;
-
-        if (reactEl && reactEl.length > 0 && htmlStr !== undefined) {
-            content = React.createElement(
-                "span",
-                null,
-                "You can't have children and htmlStr as body at the same time."
-            );
-        } else if (htmlStr !== undefined) {
-            content = React.createElement("div", { ref: "el", dangerouslySetInnerHTML: { __html: htmlStr } });
-        } else if (reactEl) {
-            content = reactEl;
-        } else {
-            content = React.createElement("div", { ref: "el" });
-        }
+        var content = React.Children.map(this.props.children, function (child) {
+            if (child.type === ActionBar) {
+                return null;
+            }
+            return child;
+        });
 
         return React.createElement(
             "div",
@@ -97,21 +106,6 @@ var Body = React.createClass({
 
 var Portlet = React.createClass({
     displayName: "Portlet",
-
-    _clickListener: function _clickListener(e) {
-        if (this.props.clickListener) {
-            this.props.clickListener(e);
-        }
-    },
-    componentWillUnmount: function componentWillUnmount() {
-        //this.state.delegate.destroy();
-        this.getDOMNode().removeEventListener("click", this._clickListener);
-    },
-
-    componentDidMount: function componentDidMount() {
-        //this.setState({delegate :new  Delegate(this.getDOMNode())});
-        this.getDOMNode().addEventListener("click", this._clickListener);
-    },
 
     render: function render() {
 

@@ -67,7 +67,7 @@ var renderForm = function() {
 
 renderForm();
 React.render(
-    <Input labelWidth="30%" inputWidth="70%" labelInline={true} label="Sample" labelType="inline" name="demo" />,
+    <Select labelWidth="30%" labelInline={true} label="Sample" name="demo" />,
     document.getElementById("cont2"));
 
 React.render(

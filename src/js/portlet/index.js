@@ -4,6 +4,7 @@
 
 var React = require("react");
 
+import ActionBar from '../ActionBar';
 
 var createToolboxActions = function(props) {
     var toolboxDefs =props.toolbox || [];
@@ -11,6 +12,18 @@ var createToolboxActions = function(props) {
     return toolboxDefs.map( (toolbox)  => {
         return (<a key={toolbox["data-action-name"]}><i {...toolbox}></i></a>);
     });
+};
+
+const findActionBar = function(props) {
+
+    let actionBar;
+    React.Children.forEach ( props.children, ( child ) => {
+        if ( child.type === ActionBar ) {
+            actionBar= child;
+        }
+    });
+    return actionBar;
+
 };
 
 var Header = React.createClass({
@@ -23,6 +36,11 @@ var Header = React.createClass({
 
     render : function() {
         var icon = null;
+        var actionBar = findActionBar(this.props);
+        var style = {};
+        if ( actionBar ) {
+            style.lineHeight = "28px";
+        }
         if ( this.props.titleIcon ) {
             icon = (<i className={"rui-portlet-title-icon " + this.props.titleIcon} />);
         }
@@ -32,12 +50,13 @@ var Header = React.createClass({
             toolbox = this.props.toolbox;
         }
         return (<div className="rui-portlet-header">
-            <div className="rui-portlet-title-cont">
+            <div  style={style}  className="rui-portlet-title-cont">
                 {icon}
                 <span className="rui-portlet-title">{this.props.title}</span>
                 {this.subtitle()}
             </div>
             <div className="rui-portlet-toolbox">
+                {findActionBar(this.props)}
                 {createToolboxActions(this.props)}
             </div>
         </div>);
@@ -51,20 +70,13 @@ var Body = React.createClass({
 
     render : function() {
 
-        var reactEl = this.props.contentEl || this.props.children;
-        var htmlStr = this.props.contentStr;
+        var content = React.Children.map(this.props.children, child => {
+            if ( child.type === ActionBar ) {
+                return null;
+            }
+            return child;
+        });
 
-        var content = null;
-
-        if ( reactEl && reactEl.length > 0  && (htmlStr !== undefined) ) {
-            content =  (<span>{"You can't have children and htmlStr as body at the same time."}</span>);
-        } else if ( htmlStr !== undefined  ) {
-            content = <div ref="el" dangerouslySetInnerHTML={{__html: htmlStr}} />;
-        } else if (  reactEl  ) {
-            content = reactEl;
-        } else {
-            content = <div ref={"el"}></div>;
-        }
 
         return (<div style={this.props.style} className="rui-portlet-body">
             {content}
@@ -75,20 +87,7 @@ var Body = React.createClass({
 
 var Portlet = React.createClass({
 
-    _clickListener : function(e) {
-        if ( this.props.clickListener ) {
-            this.props.clickListener(e);
-        }
-    },
-    componentWillUnmount : function() {
-        //this.state.delegate.destroy();
-        this.getDOMNode().removeEventListener("click",this._clickListener);
-    },
 
-    componentDidMount : function() {
-        //this.setState({delegate :new  Delegate(this.getDOMNode())});
-        this.getDOMNode().addEventListener("click",this._clickListener);
-    },
 
     render : function() {
 

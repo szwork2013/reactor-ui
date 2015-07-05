@@ -1,11 +1,10 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
+/* jshint -W097*/
 'use strict';
 
-var React = require("react");
-var cn = require("classnames");
+import React from 'react';
+import cn from 'classnames';
 
-var Pill = React.createClass({
+const Pill = React.createClass({
 
     render() {
         var scheme = this.props.scheme;
@@ -25,4 +24,4 @@ var Pill = React.createClass({
 
 });
 
-module.exports = Pill;
+export default Pill;

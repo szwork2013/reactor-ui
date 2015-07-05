@@ -49,7 +49,7 @@ var Select = React.createClass({
 
     propTypes: {
         name: React.PropTypes.string.isRequired,
-        labelInline: React.PropTypes.boolean,
+        labelInline: React.PropTypes.bool,
         labelWidth: React.PropTypes.any,
         inputWidth: React.PropTypes.any },
     mixins: [InputMixin, LabelMixin, ValueChangeMixin],
@@ -89,6 +89,7 @@ var Select = React.createClass({
     render: function render() {
         var params = this.getInputParams();
         var style = assign(params.style, this.props.style || {});
+        console.log(params);
         return React.createElement(
             "div",
             { className: "rui-form-cont" },

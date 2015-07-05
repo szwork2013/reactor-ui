@@ -37,7 +37,7 @@ var mapOption = function(option) {
 var Select = React.createClass({
     propTypes: {
         name : React.PropTypes.string.isRequired,
-        labelInline: React.PropTypes.boolean,
+        labelInline: React.PropTypes.bool,
         labelWidth : React.PropTypes.any,
         inputWidth : React.PropTypes.any,
     },
@@ -76,6 +76,7 @@ var Select = React.createClass({
     render : function() {
         const params = this.getInputParams();
         const style = assign(params.style,this.props.style || {});
+        console.log(params);
         return (
             <div className={"rui-form-cont"}>
                 {this.getLabel()}

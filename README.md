@@ -7,11 +7,13 @@ Note that this is very much on its initial development phase, a work in progress
 
 #ChangeLog
 
+* 0.0.17
+      * Portlet : added functionality to add ActionBars on headers
 * 0.0.15
       * Datatable : added, setter,renderer,formatter support
       * Datatable : initial Forms integration added
       * Forms/Datatable : various cleanup and fixes
-      
+
 * 0.0.12
       * Portlet: Added Portlet Component
 * 0.0.10

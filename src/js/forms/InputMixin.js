@@ -19,6 +19,7 @@ var InputMixin = {
         var readOnly = null;
         var className = "rui-input-block";
         var inputWidth = this.props.inputWidth || "100%";
+        
         var style = { width: inputWidth };
 
         if ( !this.props.readOnly ) {//if falsy
@@ -26,7 +27,7 @@ var InputMixin = {
         } else {
             readOnly = "readonly";
         }
-        if ( this.props.labelInline && this.props.showLabel ) {
+        if ( this.props.labelInline  ) {
             className = "rui-input-inline";
         }
 

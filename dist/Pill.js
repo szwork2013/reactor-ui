@@ -1,9 +1,11 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
+/* jshint -W097*/
 "use strict";
 
-var React = require("react");
-var cn = require("classnames");
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+var React = _interopRequire(require("react"));
+
+var cn = _interopRequire(require("classnames"));
 
 var Pill = React.createClass({
     displayName: "Pill",
