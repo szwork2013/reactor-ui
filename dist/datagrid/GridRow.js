@@ -1,25 +1,29 @@
 /*globals require,module */
 /* jshint -W097, esnext: true */
 
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var React = _interopRequire(require("react"));
+var _react = require('react');
 
-var cx = _interopRequire(require("classnames"));
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
 
 /**
  * This is a grid row.. duh!
  *
  */
-var GridRow = React.createClass({
-    displayName: "GridRow",
+var GridRow = _react2['default'].createClass({
+    displayName: 'GridRow',
 
     render: function render() {
-        var clsName = cx({ "rui-dt-colcont": this.props.header === true }, { "rui-dt-rowcont": !this.props.header });
-        return React.createElement(
-            "div",
+        var clsName = (0, _classnames2['default'])({ 'rui-dt-colcont': this.props.header === true }, { 'rui-dt-rowcont': !this.props.header });
+        return _react2['default'].createElement(
+            'div',
             { className: clsName },
             this.props.children
         );

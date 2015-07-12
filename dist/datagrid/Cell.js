@@ -1,23 +1,29 @@
 
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var React = _interopRequire(require("react"));
+var _react = require('react');
 
-var RecordAccessMixin = _interopRequire(require("./RecordAccessMixin"));
+var _react2 = _interopRequireDefault(_react);
 
-var assign = _interopRequire(require("object-assign"));
+var _RecordAccessMixin = require('./RecordAccessMixin');
 
-var Cell = React.createClass({
-    displayName: "Cell",
+var _RecordAccessMixin2 = _interopRequireDefault(_RecordAccessMixin);
 
-    mixins: [RecordAccessMixin],
+var _objectAssign = require('object-assign');
+
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
+var Cell = _react2['default'].createClass({
+    displayName: 'Cell',
+
+    mixins: [_RecordAccessMixin2['default']],
 
     propTypes: {
-        index: React.PropTypes.number.isRequired,
-        dataProvider: React.PropTypes.object.isRequired,
-        config: React.PropTypes.object.isRequired
+        index: _react2['default'].PropTypes.number.isRequired,
+        dataProvider: _react2['default'].PropTypes.object.isRequired,
+        config: _react2['default'].PropTypes.object.isRequired
     },
 
     getInitialState: function getInitialState() {
@@ -66,8 +72,8 @@ var Cell = React.createClass({
             renderedData = recData.renderer(toRenderer);
         }
 
-        return React.createElement(
-            "div",
+        return _react2['default'].createElement(
+            'div',
             null,
             renderedData
         );
@@ -83,18 +89,18 @@ var Cell = React.createClass({
         }
 
         if (width) {
-            flex = "0 0 " + width;
+            flex = '0 0 ' + width;
         } else {
-            flexInt = this.props.config.flex ? this.props.config.flex : "1";
-            flex = flexInt + " 1 10px";
+            flexInt = this.props.config.flex ? this.props.config.flex : '1';
+            flex = flexInt + ' 1 10px';
         }
-        style = assign({ flex: flex }, this.props.config.style);
-        return React.createElement(
-            "div",
-            { style: { flex: flex }, ref: "cell", onClick: this._onClick, className: "rui-dt-cell-cont" },
-            React.createElement(
-                "div",
-                { style: cellStyle, className: "rui-dt-cell" },
+        style = (0, _objectAssign2['default'])({ flex: flex }, this.props.config.style);
+        return _react2['default'].createElement(
+            'div',
+            { style: { flex: flex }, ref: 'cell', onClick: this._onClick, className: 'rui-dt-cell-cont' },
+            _react2['default'].createElement(
+                'div',
+                { style: cellStyle, className: 'rui-dt-cell' },
                 this._getCellValue()
             )
         );

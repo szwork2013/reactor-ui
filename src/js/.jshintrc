@@ -6,6 +6,7 @@
     "maxstatements": 15,
     "maxdepth":2,
     "maxcomplexity": 5,
+    "node" : true,
     "globals": {
         "module" : false,
         "require": false,

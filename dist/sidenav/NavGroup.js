@@ -68,9 +68,9 @@ var NavGroup = React.createClass({
 
         var style = {};
         if (this.state.collapsed) {
-            style.height = this.__computedHeight;
+            style["height"] = this.__computedHeight;
         } else {
-            style.height = 0;
+            style["height"] = 0;
         }
 
         return React.createElement(

@@ -11,7 +11,7 @@ var Col = React.createClass({
 
         var style = {};
         if (this.props.width) {
-            style.width = this.props.width;
+            style["width"] = this.props.width;
         }
         return React.createElement(
             "div",

@@ -10,7 +10,6 @@ import LabelMixin from './LabelMixin';
 import ValueChangeMixin from './ValueChangeMixin';
 
 
-
 const Input = React.createClass({
     getDefaultProps() {
         return {
@@ -28,7 +27,7 @@ const Input = React.createClass({
     mixins: [InputMixin,LabelMixin,ValueChangeMixin],
 
     contextTypes: {
-        //model: React.PropTypes.object.isRequired,
+        model: React.PropTypes.object,
         changeListener : React.PropTypes.any,
         inputRegistry: React.PropTypes.any
     },

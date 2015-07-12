@@ -4,15 +4,20 @@
 
 import React from 'react';
 import {Datatable, Column} from   'reactor-ui/datagrid';
-import Pill from 'reactor-ui/Pill';
+import {Pill,View} from 'reactor-ui';
 import Portlet from 'reactor-ui/portlet';
 
 import reaction from 'reactor-ui/reaction';
 
-import ActionBar from 'reactor-ui/ActionBar';
+import TabActionBar from 'reactor-ui/portlet/TabActionBar';
 import Btn from 'reactor-ui/button/Btn';
 
-const Action = ActionBar.Action;
+import {ActionBar,Action} from 'reactor-ui/actionbar';
+
+console.log("ACTIONBAR");
+console.log(ActionBar);
+const TAction = TabActionBar.Action;
+
 //import data from './griddata';
 
 var data1 = [
@@ -125,20 +130,61 @@ document.getElementById('btn1').addEventListener('click',function() {
 renderGrid();
 
 
+var active1 = "shipment";
 
+var onTabClick = function(name) {
+    active1 = name;
+    renderPortlet1();
+};
+var renderPortlet1 = function() {
 
+    React.render(
+        <Portlet titleIcon="fa fa-bar-chart" title="React Panel" subtitle="this is a subtitle">
+            <TabActionBar active='shipment' onTabActivated={onTabClick}>
+                <TAction name='shipment' text=" Shipment "></TAction>
+                <TAction name='settlement' text=" Settlement "></TAction>
+                <TAction name='empties' text=" Empties "></TAction>
+            </TabActionBar>
+            <View name="shipment" visible={active1}>
+                <Datatable  data={data}>
+                    <Column cellAlign={"center"} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
+                    <Column id='productId' title='Product Id'/>
+                    <Column id='price' title='Price'/>
+                </Datatable>
+            </View>
+            <View name="settlement" visible={active1}>
+                <span>Settlement</span>
+            </View>
+            <View name="empties" visible={active1}>
+                <span>Empties</span>
+            </View>
+        </Portlet>,
+        document.getElementById('p1')
+    );
+};
+renderPortlet1();
 React.render(
     <Portlet titleIcon="fa fa-bar-chart" title="React Panel" subtitle="this is a subtitle">
         <ActionBar>
-            <Action><Btn scheme='green' text='Action 1'/></Action>
-            <Action><Btn scheme='green' text='Action 2'/></Action>
-            <Action><Btn scheme='green' text='Action 3'/></Action>
+            <Action><Btn scheme="green" text=" Btn 1 "/></Action>
+            <Action><Btn scheme="green" text=" Btn 2 "/></Action>
+            <Action><Btn scheme="green" text=" Btn 3 "/></Action>
         </ActionBar>
-        <Datatable  data={data}>
-            <Column cellAlign={"center"} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
-            <Column id='productId' title='Product Id'/>
-            <Column id='price' title='Price'/>
-        </Datatable>
+
+        <View name="datagrid" visible="datagrid2">
+            <Datatable  data={data}>
+                <Column cellAlign={"center"} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
+                <Column id='productId' title='Product Id'/>
+                <Column id='price' title='Price'/>
+            </Datatable>
+        </View>
+        <View name="datagrid2" visible="datagrid2">
+            <Datatable  data={data}>
+                <Column cellAlign={"center"} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
+                <Column id='productId' title='Product Id2'/>
+                <Column id='price' title='Price'/>
+            </Datatable>
+        </View>
     </Portlet>,
-    document.getElementById('p1')
+    document.getElementById('p2')
 );

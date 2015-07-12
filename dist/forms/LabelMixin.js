@@ -1,18 +1,20 @@
 /* jshint esnext: true, -W097 */
 /* global module */
 
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var React = _interopRequire(require("react"));
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
 
 var LabelMixin = {
 
     getLabel: function getLabel() {
         var hasLabel = this.props.label ? true : false;
         var labelText = this.props.label || this.props.name;
-        var labelWidth = this.props.labelWidth || "100%";
+        var labelWidth = this.props.labelWidth || '100%';
         var labelStyle = { width: labelWidth };
         var showLabel = true;
         if (this.props.showLabel !== undefined) {
@@ -23,8 +25,8 @@ var LabelMixin = {
             labelText = labelText.substring(0, 1).toUpperCase() + labelText.substring(1);
         }
         if (showLabel) {
-            return React.createElement(
-                "label",
+            return _react2['default'].createElement(
+                'label',
                 { style: labelStyle },
                 labelText
             );

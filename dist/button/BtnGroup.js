@@ -1,23 +1,27 @@
 
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var React = _interopRequire(require("react/addons"));
+var _reactAddons = require('react/addons');
 
-var Btn = _interopRequire(require("./Btn"));
+var _reactAddons2 = _interopRequireDefault(_reactAddons);
 
-var PureRenderMixin = React.addons.PureRenderMixin;
+var _Btn = require('./Btn');
 
-var BtnGroup = React.createClass({
-    displayName: "BtnGroup",
+var _Btn2 = _interopRequireDefault(_Btn);
+
+var PureRenderMixin = _reactAddons2['default'].addons.PureRenderMixin;
+
+var BtnGroup = _reactAddons2['default'].createClass({
+    displayName: 'BtnGroup',
 
     mixins: [PureRenderMixin],
     propTypes: {
         /** theme */
-        scheme: React.PropTypes.string,
+        scheme: _reactAddons2['default'].PropTypes.string,
         /** text of the  button */
-        active: React.PropTypes.string
+        active: _reactAddons2['default'].PropTypes.string
         /** if this button group is disabled */
 
     },
@@ -29,12 +33,12 @@ var BtnGroup = React.createClass({
     processBtnGroup: function processBtnGroup() {
         var _this = this;
 
-        return React.Children.map(this.props.children, function (child) {
+        return _reactAddons2['default'].Children.map(this.props.children, function (child) {
 
-            if (child.type !== Btn) {
-                throw new Error("Only Btn type is allowed");
+            if (child.type !== _Btn2['default']) {
+                throw new Error('Only Btn type is allowed');
             }
-            return React.cloneElement(child, { style: { marginLeft: 2 }, disabled: _this.props.disabled, scheme: _this.props.scheme, active: _this.state.active, onClick: _this.buttonClicked });
+            return _reactAddons2['default'].cloneElement(child, { style: { marginLeft: 2 }, disabled: _this.props.disabled, scheme: _this.props.scheme, active: _this.state.active, onClick: _this.buttonClicked });
         });
     },
 
@@ -46,9 +50,9 @@ var BtnGroup = React.createClass({
     },
 
     render: function render() {
-        return React.createElement(
-            "div",
-            { className: "rui-btn-group" },
+        return _reactAddons2['default'].createElement(
+            'div',
+            { className: 'rui-btn-group' },
             this.processBtnGroup()
         );
     }

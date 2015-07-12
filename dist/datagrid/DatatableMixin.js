@@ -1,25 +1,31 @@
 /* jshint -W097 */
 
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var assign = _interopRequire(require("object-assign"));
+var _objectAssign = require('object-assign');
 
-var React = _interopRequire(require("react"));
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var Input = _interopRequire(require("../forms/Input"));
+var _react = require('react');
 
-var Children = React.Children;
+var _react2 = _interopRequireDefault(_react);
+
+var _formsInput = require('../forms/Input');
+
+var _formsInput2 = _interopRequireDefault(_formsInput);
+
+var Children = _react2['default'].Children;
 
 var ENTER_KEY = 13;
 var ESC_KEY = 27;
 
 var DatatableMixin = {
 
-    _createColumnConfig: function _createColumnConfig() {
-
-        var children = this.props.children;
+    _createColumnConfig: function _createColumnConfig(propsToUse) {
+        var props = propsToUse || this.props;
+        var children = props.children;
         var cellConfig = [];
 
         Children.forEach(children, function (child) {
@@ -31,7 +37,7 @@ var DatatableMixin = {
 
     _onCellClick: function _onCellClick(event, ref, index, config, id) {
         var recordData = this.getRecordData(index, config, ref);
-        var editorData = assign(recordData, { oldValue: recordData.value });
+        var editorData = (0, _objectAssign2['default'])(recordData, { oldValue: recordData.value });
 
         this.setState({ editorData: editorData });
     },
@@ -49,7 +55,7 @@ var DatatableMixin = {
     },
 
     _editorInputChange: function _editorInputChange(k, v) {
-        var editorData = assign(this.state.editorData, {});
+        var editorData = (0, _objectAssign2['default'])(this.state.editorData, {});
         editorData.value = v;
         this.setState({ editorData: editorData });
     },
@@ -57,16 +63,17 @@ var DatatableMixin = {
     _createEditor: function _createEditor() {
         if (this.state.editorData && this.state.editorData.config.editable) {
             var editorData = this.state.editorData;
-            return React.createElement(
-                "div",
-                { ref: "editorContainer", style: { left: editorData.cellRef.left, top: editorData.cellRef.top + editorData.cellRef.height, position: "absolute" } },
-                React.createElement(Input, { onKeyDown: this._onEditorKeyDown, changeListener: this._editorInputChange,
-                    showLabel: false, value: editorData.value, style: { position: "relative", width: editorData.cellRef.width, height: editorData.cellRef.height } })
+            return _react2['default'].createElement(
+                'div',
+                { ref: 'editorContainer', style: { left: editorData.cellRef.left, top: editorData.cellRef.top + editorData.cellRef.height, position: 'absolute' } },
+                _react2['default'].createElement(_formsInput2['default'], { onKeyDown: this._onEditorKeyDown, changeListener: this._editorInputChange,
+                    showLabel: false, value: editorData.value, style: { position: 'relative', width: editorData.cellRef.width, height: editorData.cellRef.height } })
             );
         }
         return null;
-    } };
+    }
+
+};
 
 module.exports = DatatableMixin;
-
 ////<input ref="editorInput" onChange={this._editorInputChange} value={editorData.value} style={{width: editorData.cellRef.width, height: editorData.cellRef.height}} />

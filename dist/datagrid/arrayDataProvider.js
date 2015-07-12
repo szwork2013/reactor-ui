@@ -40,7 +40,7 @@ module.exports = function (array) {
 
     }, {
         length: {
-            get: function () {
+            get: function get() {
                 return array.length;
             },
             configurable: true,

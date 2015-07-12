@@ -1,30 +1,44 @@
 
 /* jshint esnext: true, -W097 */
 
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
 
-var React = _interopRequire(require("react"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var InputMixin = _interopRequire(require("./InputMixin"));
+var _react = require('react');
 
-var LabelMixin = _interopRequire(require("./LabelMixin"));
+var _react2 = _interopRequireDefault(_react);
 
-var ValueChangeMixin = _interopRequire(require("./ValueChangeMixin"));
+var _InputMixin = require('./InputMixin');
 
-var assign = _interopRequire(require("object-assign"));
+var _InputMixin2 = _interopRequireDefault(_InputMixin);
+
+var _LabelMixin = require('./LabelMixin');
+
+var _LabelMixin2 = _interopRequireDefault(_LabelMixin);
+
+var _ValueChangeMixin = require('./ValueChangeMixin');
+
+var _ValueChangeMixin2 = _interopRequireDefault(_ValueChangeMixin);
+
+var _objectAssign = require('object-assign');
+
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
 var mapOption = function mapOption(option) {
     var obj = option,
         value,
         text;
-    var selectionValueKey = this.props.valueKey || "value";
-    var selectionTextKey = this.props.textKey || "text";
+    var selectionValueKey = this.props.valueKey || 'value';
+    var selectionTextKey = this.props.textKey || 'text';
     var isSelection;
     var selected = this._getContext().model[this.props.name];
 
-    if (typeof obj === "string") {
+    if (typeof obj === 'string') {
         value = obj;
         text = obj;
     } else {
@@ -37,27 +51,28 @@ var mapOption = function mapOption(option) {
         isSelection = false; //make sure to reset
     }
 
-    return React.createElement(
-        "option",
+    return _react2['default'].createElement(
+        'option',
         { value: value, selected: isSelection },
         text
     );
 };
 
-var Select = React.createClass({
-    displayName: "Select",
+var Select = _react2['default'].createClass({
+    displayName: 'Select',
 
     propTypes: {
-        name: React.PropTypes.string.isRequired,
-        labelInline: React.PropTypes.bool,
-        labelWidth: React.PropTypes.any,
-        inputWidth: React.PropTypes.any },
-    mixins: [InputMixin, LabelMixin, ValueChangeMixin],
+        name: _react2['default'].PropTypes.string.isRequired,
+        labelInline: _react2['default'].PropTypes.bool,
+        labelWidth: _react2['default'].PropTypes.any,
+        inputWidth: _react2['default'].PropTypes.any
+    },
+    mixins: [_InputMixin2['default'], _LabelMixin2['default'], _ValueChangeMixin2['default']],
 
     contextTypes: {
-        model: React.PropTypes.object.isRequired,
-        changeListener: React.PropTypes.any,
-        inputRegistry: React.PropTypes.any
+        model: _react2['default'].PropTypes.object.isRequired,
+        changeListener: _react2['default'].PropTypes.any,
+        inputRegistry: _react2['default'].PropTypes.any
     },
 
     _getOptions: function _getOptions() {
@@ -67,14 +82,14 @@ var Select = React.createClass({
     createOptions: function createOptions() {
 
         var optional = this.props.optional === false ? this.props.optional : true;
-        var optionalText = this.props.optionalText || "";
+        var optionalText = this.props.optionalText || '';
         var options = this._getOptions();
 
         var optionsEls = options.map(mapOption.bind(this));
         if (optional) {
-            optionsEls.unshift(React.createElement(
-                "option",
-                { value: "" },
+            optionsEls.unshift(_react2['default'].createElement(
+                'option',
+                { value: '' },
                 optionalText
             ));
         }
@@ -88,15 +103,14 @@ var Select = React.createClass({
 
     render: function render() {
         var params = this.getInputParams();
-        var style = assign(params.style, this.props.style || {});
-        console.log(params);
-        return React.createElement(
-            "div",
-            { className: "rui-form-cont" },
+        var style = (0, _objectAssign2['default'])(params.style, this.props.style || {});
+        return _react2['default'].createElement(
+            'div',
+            { className: 'rui-form-cont' },
             this.getLabel(),
-            React.createElement(
-                "select",
-                { style: style, readOnly: params.readOnly, ref: this.inputRef, onChange: this.dispatchInputChange, className: "rui-form-input " + params.className },
+            _react2['default'].createElement(
+                'select',
+                { style: style, disabled: this.props.readOnly, ref: this.inputRef, onChange: this.dispatchInputChange, className: 'rui-form-input ' + params.className },
                 this.createOptions()
             )
         );
@@ -104,4 +118,5 @@ var Select = React.createClass({
 
 });
 
-module.exports = Select;
+exports['default'] = Select;
+module.exports = exports['default'];

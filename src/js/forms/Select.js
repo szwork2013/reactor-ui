@@ -4,11 +4,15 @@
 
 'use strict';
 
-import React from "react";
+import React from 'react';
+
+
+
 import InputMixin from "./InputMixin";
 import LabelMixin from "./LabelMixin";
 import ValueChangeMixin from "./ValueChangeMixin";
 import assign from 'object-assign';
+
 
 var mapOption = function(option) {
     var obj = option, value, text;
@@ -76,11 +80,10 @@ var Select = React.createClass({
     render : function() {
         const params = this.getInputParams();
         const style = assign(params.style,this.props.style || {});
-        console.log(params);
         return (
             <div className={"rui-form-cont"}>
                 {this.getLabel()}
-                <select style={style} readOnly={params.readOnly} ref={this.inputRef} onChange={this.dispatchInputChange} className={"rui-form-input " + params.className}>
+                <select style={style} disabled={this.props.readOnly} ref={this.inputRef} onChange={this.dispatchInputChange} className={"rui-form-input " + params.className}>
                     {this.createOptions()}
                 </select>
             </div>

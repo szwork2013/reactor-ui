@@ -1,6 +1,6 @@
 {
   "name": "reactor-ui",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Reactor UI Kit",
   "main": "lib",
   "scripts": {
@@ -31,18 +31,18 @@
     "object-traverse": "^1.1.1"
   },
   "devDependencies": {
-    "babel": "^4.7.16",
-    "babel-core": "^4.7.16",
-    "babel-loader": "^4.3.0",
-    "chai": "^2.2.0",
-    "karma": "^0.12.31",
-    "karma-chrome-launcher": "^0.1.7",
+    "babel": "*",
+    "babel-core": "^5.6.17",
+    "babel-loader": "^5.3.1",
+    "chai": "^2.3.0",
+    "karma": "^0.12.37",
+    "karma-chrome-launcher": "^0.1.12",
     "karma-mocha": "^0.1.10",
-    "karma-webpack": "^1.5.0",
-    "mocha": "^2.2.1",
-    "object-assign": "^2.0.0",
-    "sinon": "^1.14.1",
-    "webpack": "^1.7.3",
-    "react": "*"
+    "karma-webpack": "^1.5.1",
+    "mocha": "^2.2.5",
+    "node-libs-browser": "^0.5.2",
+    "react": "^0.13.3",
+    "sinon": "^1.15.4",
+    "webpack": "^1.10.1"
   }
 }

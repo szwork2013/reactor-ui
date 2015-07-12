@@ -1,6 +1,6 @@
 /*globals require,module */
 /* jshint -W097, esnext: true */
-"use strict";
+'use strict';
 
 /**
  *
@@ -32,7 +32,7 @@ module.exports = function pagerDataProvider(arrayDataProvider, rowsPerPage, curr
 
     }, {
         length: {
-            get: function () {
+            get: function get() {
                 return arrayDataProvider.length;
             },
             configurable: true,

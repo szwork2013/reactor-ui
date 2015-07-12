@@ -1,13 +1,15 @@
 /*globals require,module */
 /* jshint -W097, esnext: true */
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var React = _interopRequire(require("react"));
+var _react = require('react');
 
-var Column = React.createClass({
-    displayName: "Column",
+var _react2 = _interopRequireDefault(_react);
+
+var Column = _react2['default'].createClass({
+    displayName: 'Column',
 
     /**
      *

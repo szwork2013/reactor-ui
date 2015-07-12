@@ -1,6 +1,6 @@
 /* jshint esnext: true */
 
-import React from 'react';
+import React from 'react/addons';
 import Input from './Input';
 import AutoComplete from './AutoComplete';
 import Select from './Select';
@@ -22,7 +22,7 @@ var Form = React.createClass({
      */
     _inputRegistry(input) {
 
-        
+
     },
     /**
      * Render a form

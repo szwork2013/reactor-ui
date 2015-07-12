@@ -1,23 +1,37 @@
 /* jshint -W097 */
 
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var React = _interopRequire(require("react"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var assign = _interopRequire(require("object-assign"));
+var _react = require('react');
 
-var InputMixin = _interopRequire(require("./InputMixin"));
+var _react2 = _interopRequireDefault(_react);
 
-var LabelMixin = _interopRequire(require("./LabelMixin"));
+var _objectAssign = require('object-assign');
 
-var ValueChangeMixin = _interopRequire(require("./ValueChangeMixin"));
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var Input = React.createClass({
-    displayName: "Input",
+var _InputMixin = require('./InputMixin');
+
+var _InputMixin2 = _interopRequireDefault(_InputMixin);
+
+var _LabelMixin = require('./LabelMixin');
+
+var _LabelMixin2 = _interopRequireDefault(_LabelMixin);
+
+var _ValueChangeMixin = require('./ValueChangeMixin');
+
+var _ValueChangeMixin2 = _interopRequireDefault(_ValueChangeMixin);
+
+var Input = _react2['default'].createClass({
+    displayName: 'Input',
 
     getDefaultProps: function getDefaultProps() {
         return {
@@ -26,17 +40,18 @@ var Input = React.createClass({
         };
     },
     propTypes: {
-        name: React.PropTypes.string.isRequired,
-        labelInline: React.PropTypes.bool,
-        labelWidth: React.PropTypes.any,
-        inputWidth: React.PropTypes.any },
+        name: _react2['default'].PropTypes.string.isRequired,
+        labelInline: _react2['default'].PropTypes.bool,
+        labelWidth: _react2['default'].PropTypes.any,
+        inputWidth: _react2['default'].PropTypes.any
+    },
 
-    mixins: [InputMixin, LabelMixin, ValueChangeMixin],
+    mixins: [_InputMixin2['default'], _LabelMixin2['default'], _ValueChangeMixin2['default']],
 
     contextTypes: {
-        //model: React.PropTypes.object.isRequired,
-        changeListener: React.PropTypes.any,
-        inputRegistry: React.PropTypes.any
+        model: _react2['default'].PropTypes.object,
+        changeListener: _react2['default'].PropTypes.any,
+        inputRegistry: _react2['default'].PropTypes.any
     },
 
     componentDidMount: function componentDidMount() {
@@ -49,18 +64,19 @@ var Input = React.createClass({
     render: function render() {
         var value = this.getInputValue(); //this._getContext().model[this.props.name] || "";
         var params = this.getInputParams();
-        var style = assign(params.style, this.props.style || {});
+        var style = (0, _objectAssign2['default'])(params.style, this.props.style || {});
 
-        return React.createElement(
-            "div",
-            { className: "rui-form-cont" },
+        return _react2['default'].createElement(
+            'div',
+            { className: 'rui-form-cont' },
             this.getLabel(),
-            React.createElement("input", _extends({ onKeyDown: this.props.onKeyDown, onKeyUp: this.props.onKeyUp, onKeyPress: this.props.onKeyPress,
+            _react2['default'].createElement('input', _extends({ onKeyDown: this.props.onKeyDown, onKeyUp: this.props.onKeyUp, onKeyPress: this.props.onKeyPress,
                 style: style, value: value, readOnly: params.readOnly, onChange: this.dispatchInputChange,
-                ref: this.inputRef, className: "rui-form-input " + params.className, placeholder: this.props.placeholder }, this.props))
+                ref: this.inputRef, className: 'rui-form-input ' + params.className, placeholder: this.props.placeholder }, this.props))
         );
     }
 
 });
 
-module.exports = Input;
+exports['default'] = Input;
+module.exports = exports['default'];

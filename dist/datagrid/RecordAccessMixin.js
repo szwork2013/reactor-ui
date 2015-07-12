@@ -1,8 +1,8 @@
 /*globals require,module */
 /* jshint -W097, esnext: true */
-"use strict";
+'use strict';
 
-var traverse = require("object-traverse");
+var traverse = require('object-traverse');
 
 var RecordAccessMixin = {
 
@@ -36,9 +36,9 @@ var RecordAccessMixin = {
         var value = null,
             formattedValue;
 
-        if (typeof traversedRecord.get(pathToUse) === "function") {
+        if (typeof traversedRecord.get(pathToUse) === 'function') {
             value = traversedRecord.exec(pathToUse);
-        } else if (typeof setter === "function") {
+        } else if (typeof setter === 'function') {
             try {
                 value = setter(record, id);
             } catch (e) {
@@ -48,7 +48,7 @@ var RecordAccessMixin = {
             value = traversedRecord.get(pathToUse);
         }
 
-        if (typeof formatter === "function") {
+        if (typeof formatter === 'function') {
             try {
                 formattedValue = formatter(value, id, record);
             } catch (e) {

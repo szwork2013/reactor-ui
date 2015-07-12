@@ -1,28 +1,36 @@
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var React = _interopRequire(require("react"));
+var _react = require('react');
 
-var InputMixin = _interopRequire(require("./InputMixin"));
+var _react2 = _interopRequireDefault(_react);
 
-var LabelMixin = _interopRequire(require("./LabelMixin"));
+var _InputMixin = require('./InputMixin');
 
-var assign = _interopRequire(require("object-assign"));
+var _InputMixin2 = _interopRequireDefault(_InputMixin);
+
+var _LabelMixin = require('./LabelMixin');
+
+var _LabelMixin2 = _interopRequireDefault(_LabelMixin);
+
+var _objectAssign = require('object-assign');
+
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
 var parseText = function parseText(path, obj) {
 
-    if (typeof obj === "string") {
+    if (typeof obj === 'string') {
         return obj;
     }
     if (obj) {
-        return obj[path || "text"];
+        return obj[path || 'text'];
     }
-    return "";
+    return '';
 };
 
-var AutoCompleteResult = React.createClass({
-    displayName: "AutoCompleteResult",
+var AutoCompleteResult = _react2['default'].createClass({
+    displayName: 'AutoCompleteResult',
 
     resultItemClicked: function resultItemClicked(index) {
         this.props.onResultItemClicked(this.props.data[index]);
@@ -34,22 +42,22 @@ var AutoCompleteResult = React.createClass({
         if (this.props.selectionRenderer) {
             rendered = this.props.selectionRenderer(text, result);
         }
-        return React.createElement(
-            "div",
-            { onClick: this.resultItemClicked.bind(null, index), dataIndex: index, className: "rui-form-ac-result", style: { padding: "8px 6px" } },
+        return _react2['default'].createElement(
+            'div',
+            { onClick: this.resultItemClicked.bind(null, index), dataIndex: index, className: 'rui-form-ac-result', style: { padding: '8px 6px' } },
             rendered
         );
     },
     render: function render() {
         var _this = this;
 
-        var display = this.props.data ? "block" : "none";
+        var display = this.props.data ? 'block' : 'none';
         var pos = this.props.anchorPosition;
-        var style = assign({ border: "1px solid #D1D1D1", borderTop: "none", display: display, position: "absolute" }, pos);
+        var style = (0, _objectAssign2['default'])({ border: '1px solid #D1D1D1', borderTop: 'none', display: display, position: 'absolute' }, pos);
 
-        return React.createElement(
-            "div",
-            { className: "rui-form-ac-result-cont", style: style },
+        return _react2['default'].createElement(
+            'div',
+            { className: 'rui-form-ac-result-cont', style: style },
             (this.props.data || []).map(function (res, index) {
                 return _this.createResultItem(res, index);
             })
@@ -61,29 +69,29 @@ var AutoCompleteResult = React.createClass({
 var KEY_BACKSPACE = 8;
 var KEY_ESC = 27;
 
-var AutoComplete = React.createClass({
-    displayName: "AutoComplete",
+var AutoComplete = _react2['default'].createClass({
+    displayName: 'AutoComplete',
 
     propTypes: {
-        requiredName: React.PropTypes.string.isRequired,
-        selectionPath: React.PropTypes.string,
-        selectionRenderer: React.PropTypes.func,
-        searchPath: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array])
+        requiredName: _react2['default'].PropTypes.string.isRequired,
+        selectionPath: _react2['default'].PropTypes.string,
+        selectionRenderer: _react2['default'].PropTypes.func,
+        searchPath: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.array])
     },
 
     getDefaultProps: function getDefaultProps() {
         return {
             selectionRenderer: undefined,
-            selectionPath: "text"
+            selectionPath: 'text'
         };
     },
 
-    mixins: [InputMixin, LabelMixin],
+    mixins: [_InputMixin2['default'], _LabelMixin2['default']],
 
     contextTypes: {
-        model: React.PropTypes.object.isRequired,
-        changeListener: React.PropTypes.any,
-        inputRegistry: React.PropTypes.any
+        model: _react2['default'].PropTypes.object.isRequired,
+        changeListener: _react2['default'].PropTypes.any,
+        inputRegistry: _react2['default'].PropTypes.any
     },
 
     getInitialState: function getInitialState() {
@@ -91,15 +99,15 @@ var AutoComplete = React.createClass({
     },
 
     getValue: function getValue() {
-        return this.getInputValue(); // this.props.model[this.props.name] || "";
+        return this.getInputValue();
     },
 
     determineAnchorAbsolutePos: function determineAnchorAbsolutePos() {
 
-        var anchorEl = React.findDOMNode(this.refs.acCont);
+        var anchorEl = _react2['default'].findDOMNode(this.refs.acCont);
         var computedStyle = window.getComputedStyle(anchorEl);
-        var computedHeight = computedStyle.getPropertyValue("height");
-        var computedWidth = computedStyle.getPropertyValue("width");
+        var computedHeight = computedStyle.getPropertyValue('height');
+        var computedWidth = computedStyle.getPropertyValue('width');
 
         var adjustmentHeight = parseInt(computedHeight, 10);
         var width = parseInt(computedWidth, 10);
@@ -115,7 +123,7 @@ var AutoComplete = React.createClass({
     _searchObjectFilter: function _searchObjectFilter(searchStr, obj) {
         var tosearch, str;
         var searchFields;
-        if (typeof this.props.searchPath === "string") {
+        if (typeof this.props.searchPath === 'string') {
             searchFields = [];
             searchFields.push(this.props.searchPath);
         } else if (Array.isArray(this.props.searchPath)) {
@@ -144,15 +152,15 @@ var AutoComplete = React.createClass({
     },
 
     acInputChange: function acInputChange() {
-        var _this = this;
+        var _this2 = this;
 
         if (this._acqueryRunner) {
             clearTimeout(this._acqueryRunner);
         }
-        var inputVal = React.findDOMNode(this.refs.acInput).value;
+        var inputVal = _react2['default'].findDOMNode(this.refs.acInput).value;
 
-        var run = function () {
-            _this.showMatchingResults(inputVal);
+        var run = function run() {
+            _this2.showMatchingResults(inputVal);
         };
         this._acqueryRunner = setTimeout(run, 500);
     },
@@ -169,7 +177,7 @@ var AutoComplete = React.createClass({
     onKeyUp: function onKeyUp(e) {
 
         if (e.keyCode === KEY_BACKSPACE) {
-            React.findDOMNode(this.refs.acInput).value = "";
+            _react2['default'].findDOMNode(this.refs.acInput).value = '';
             this.setState({ selection: undefined });
         } else if (e.keyCode === KEY_ESC) {
             this.setState({ results: undefined });
@@ -177,21 +185,21 @@ var AutoComplete = React.createClass({
     },
     showResults: function showResults() {
         if (this.state.results) {
-            return React.createElement(AutoCompleteResult, { selectionPath: this.props.selectionPath, onResultItemClicked: this.resultSelected, data: this.state.results, anchorPosition: this.state.anchorPosition });
+            return _react2['default'].createElement(AutoCompleteResult, { selectionPath: this.props.selectionPath, onResultItemClicked: this.resultSelected, data: this.state.results, anchorPosition: this.state.anchorPosition });
         } else {
             return undefined;
         }
     },
     renderToggle: function renderToggle() {
-        return React.createElement(
-            "div",
-            { style: { top: 14, right: 10, position: "absolute" } },
-            React.createElement("div", { className: "rui-arrow-down rui-arrow-down-inactive" })
+        return _react2['default'].createElement(
+            'div',
+            { style: { top: 14, right: 10, position: 'absolute' } },
+            _react2['default'].createElement('div', { className: 'rui-arrow-down rui-arrow-down-inactive' })
         );
     },
 
     _parseValue: function _parseValue(obj) {
-        return parseText(this.props.selectionPath || "text", obj);
+        return parseText(this.props.selectionPath || 'text', obj);
     },
     renderInput: function renderInput() {
         var value;
@@ -199,20 +207,20 @@ var AutoComplete = React.createClass({
             value = this._parseValue(this.state.selection);
         }
 
-        return React.createElement("input", { onKeyDown: this.onKeyUp, value: value, ref: "acInput", onChange: this.acInputChange, placeholder: this.props.placeholder, type: "text", autoComplete: "off",
-            style: { height: "100%", width: "100%", position: "relative", left: "0px", tabindex: "tabindex" } });
+        return _react2['default'].createElement('input', { onKeyDown: this.onKeyUp, value: value, ref: 'acInput', onChange: this.acInputChange, placeholder: this.props.placeholder, type: 'text', autoComplete: 'off',
+            style: { height: '100%', width: '100%', position: 'relative', left: '0px', tabindex: 'tabindex' } });
     },
     render: function render() {
         var params = this.getInputParams();
-        var style = assign({ position: "relative" }, params.style);
+        var style = (0, _objectAssign2['default'])({ position: 'relative' }, params.style);
 
-        return React.createElement(
-            "div",
-            { className: "rui-form-cont" },
+        return _react2['default'].createElement(
+            'div',
+            { className: 'rui-form-cont' },
             this.getLabel(),
-            React.createElement(
-                "div",
-                { style: style, ref: "acCont", className: "rui-form-ac-cont rui-form-input " + params.className, onClick: this.containerClick },
+            _react2['default'].createElement(
+                'div',
+                { style: style, ref: 'acCont', className: 'rui-form-ac-cont rui-form-input ' + params.className, onClick: this.containerClick },
                 this.renderInput(),
                 this.renderToggle()
             ),

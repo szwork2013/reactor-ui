@@ -15,11 +15,15 @@ var InputMixin = {
         return this._reactInternalInstance._context;
     },
 
+    shouldComponentUpdate() {
+        return true;
+    },
+
     getInputParams() {
         var readOnly = null;
         var className = "rui-input-block";
         var inputWidth = this.props.inputWidth || "100%";
-        
+
         var style = { width: inputWidth };
 
         if ( !this.props.readOnly ) {//if falsy

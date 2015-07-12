@@ -1,24 +1,32 @@
-"use strict";
-
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
-
 /* jshint esnext: true */
 
-var React = _interopRequire(require("react"));
+'use strict';
 
-var Input = _interopRequire(require("./Input"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var AutoComplete = _interopRequire(require("./AutoComplete"));
+var _reactAddons = require('react/addons');
 
-var Select = _interopRequire(require("./Select"));
+var _reactAddons2 = _interopRequireDefault(_reactAddons);
 
-var Form = React.createClass({
-    displayName: "Form",
+var _Input = require('./Input');
+
+var _Input2 = _interopRequireDefault(_Input);
+
+var _AutoComplete = require('./AutoComplete');
+
+var _AutoComplete2 = _interopRequireDefault(_AutoComplete);
+
+var _Select = require('./Select');
+
+var _Select2 = _interopRequireDefault(_Select);
+
+var Form = _reactAddons2['default'].createClass({
+    displayName: 'Form',
 
     childContextTypes: {
-        model: React.PropTypes.object.isRequired,
-        changeListener: React.PropTypes.any,
-        inputRegistry: React.PropTypes.any //so we can introspect coming
+        model: _reactAddons2['default'].PropTypes.object.isRequired,
+        changeListener: _reactAddons2['default'].PropTypes.any,
+        inputRegistry: _reactAddons2['default'].PropTypes.any //so we can introspect coming
     },
 
     getChildContext: function getChildContext() {
@@ -34,11 +42,11 @@ var Form = React.createClass({
      */
     render: function render() {
 
-        return React.createElement(
-            "div",
+        return _reactAddons2['default'].createElement(
+            'div',
             null,
-            React.Children.map(this.props.children, function (child) {
-                return React.cloneElement(child, {});
+            _reactAddons2['default'].Children.map(this.props.children, function (child) {
+                return _reactAddons2['default'].cloneElement(child, {});
             })
         );
     },
@@ -52,11 +60,11 @@ var Form = React.createClass({
 
 });
 
-var FormWrapper = React.createClass({
-    displayName: "FormWrapper",
+var FormWrapper = _reactAddons2['default'].createClass({
+    displayName: 'FormWrapper',
 
     render: function render() {
-        return React.createElement(
+        return _reactAddons2['default'].createElement(
             Form,
             { model: this.props.model, changeListener: this.props.changeListener },
             this.props.children
@@ -66,6 +74,6 @@ var FormWrapper = React.createClass({
 });
 
 exports.Forms = FormWrapper;
-exports.Input = Input;
-exports.AutoComplete = AutoComplete;
-exports.Select = Select;
+exports.Input = _Input2['default'];
+exports.AutoComplete = _AutoComplete2['default'];
+exports.Select = _Select2['default'];

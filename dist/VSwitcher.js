@@ -2,11 +2,17 @@
 /* jshint -W097 */
 "use strict";
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-var React = _interopRequire(require("react"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var View = React.createClass({
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var View = _react2["default"].createClass({
     displayName: "View",
 
     getInitialState: function getInitialState() {
@@ -30,7 +36,7 @@ var View = React.createClass({
         if (this.props.element) {
             theElement = this.props.element;
         } else {
-            theElement = React.createElement("div", { ref: "el" });
+            theElement = _react2["default"].createElement("div", { ref: "el" });
         }
         var name = null;
         if (typeof this.props.view === "string") {
@@ -39,7 +45,7 @@ var View = React.createClass({
             name = this.props.ref;
         }
 
-        return React.createElement(
+        return _react2["default"].createElement(
             "div",
             { "data-vp-name": name, style: divStyle },
             theElement
@@ -48,7 +54,7 @@ var View = React.createClass({
 
 });
 
-var ViewSwitcher = React.createClass({
+var ViewSwitcher = _react2["default"].createClass({
     displayName: "ViewSwitcher",
 
     getInitialState: function getInitialState() {
@@ -75,15 +81,15 @@ var ViewSwitcher = React.createClass({
         var views = this.state.views;
         var prefix = "rui-vs-" + this.state.viewPrefix;
 
-        return React.createElement(
+        return _react2["default"].createElement(
             "div",
             { className: prefix },
             " ",
             views.map(function (view) {
                 if (typeof view === "string") {
-                    return React.createElement(View, { ref: view, key: view, view: view, visible: _this.state.visible === view });
+                    return _react2["default"].createElement(View, { ref: view, key: view, view: view, visible: _this.state.visible === view });
                 } else {
-                    return React.createElement(View, { ref: view.ref, element: view.element, visible: _this.state.visible === view.ref });
+                    return _react2["default"].createElement(View, { ref: view.ref, element: view.element, visible: _this.state.visible === view.ref });
                 }
             })
         );
@@ -100,12 +106,13 @@ var ViewSwitcher = React.createClass({
 
     el: function el(view) {
         var refViews = this.refs[view];
-        if (refViews.refs.el) {
-            return this.refs[view].refs.el.getDOMNode();
+        if (refViews.refs["el"]) {
+            return this.refs[view].refs["el"].getDOMNode();
         }
         return null;
     }
 
 });
 
-module.exports = ViewSwitcher;
+exports["default"] = ViewSwitcher;
+module.exports = exports["default"];

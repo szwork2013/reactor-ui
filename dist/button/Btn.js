@@ -2,13 +2,15 @@
 /* jshint -W097, esnext: true */
 "use strict";
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _objectAssign = require("object-assign");
+
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
 var React = require("react/addons");
 var cn = require("classnames");
 var PureRenderMixin = React.addons.PureRenderMixin;
-
-var assign = _interopRequire(require("object-assign"));
 
 /**
  * Btn element
@@ -81,7 +83,7 @@ var Btn = React.createClass({
         if (scheme) {
             schemeTheme = "rui-btn-" + scheme;
         }
-        style = assign(style, this.props.style);
+        style = (0, _objectAssign2["default"])(style, this.props.style);
         if (this.props.width) {
             style.width = this.props.width;
         }

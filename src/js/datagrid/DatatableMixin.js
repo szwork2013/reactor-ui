@@ -14,9 +14,9 @@ const ESC_KEY = 27;
 
 const DatatableMixin = {
 
-    _createColumnConfig() {
-
-        var children = this.props.children;
+    _createColumnConfig(propsToUse) {
+        var props = propsToUse || this.props;
+        var children = props.children;
         var cellConfig = [];
 
         Children.forEach(children, (child)=> {

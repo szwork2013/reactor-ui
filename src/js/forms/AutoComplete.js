@@ -5,6 +5,8 @@ import InputMixin from './InputMixin';
 import LabelMixin from './LabelMixin';
 import assign from 'object-assign';
 
+
+
 var parseText = function(path,obj) {
 
     if ( typeof obj === 'string' ) {
@@ -82,7 +84,7 @@ const AutoComplete = React.createClass({
     },
 
     getValue() {
-        return this.getInputValue(); // this.props.model[this.props.name] || "";
+        return this.getInputValue();
     },
 
     determineAnchorAbsolutePos() {

@@ -2,7 +2,7 @@
 /* jshint -W097 */
 'use strict';
 
-import React  from 'react';
+import React  from 'react/addons';
 import Header from './Header';
 import GridRow from './GridRow';
 import Cell from './Cell';
@@ -74,7 +74,7 @@ const Datatable = React.createClass({
     },
 
     componentWillReceiveProps(nextProps) {
-        this.setState({dataProvider: arrayDataProvider(nextProps.data || [])});
+        this.setState({dataProvider: arrayDataProvider(nextProps.data || []),colconfig : this._createColumnConfig(nextProps) });
     },
 
     _createBody() {

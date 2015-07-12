@@ -1,11 +1,13 @@
-"use strict";
-
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
-
 /* jshint esnext: true, -W097,unused: vars */
 /* global module  */
 
-var React = _interopRequire(require("react"));
+"use strict";
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
 
 var htmlElement = undefined;
 
@@ -17,17 +19,7 @@ var getHashPath = function getHashPath(url) {
     return url.substring(indexOfHash);
 };
 
-var createUrlPath = (function (_createUrlPath) {
-    var _createUrlPathWrapper = function createUrlPath(_x) {
-        return _createUrlPath.apply(this, arguments);
-    };
-
-    _createUrlPathWrapper.toString = function () {
-        return _createUrlPath.toString();
-    };
-
-    return _createUrlPathWrapper;
-})(function (routePath) {
+var createUrlPath = function createUrlPath(routePath) {
 
     var pathArr = routePath.split("/").filter(function (path) {
         return path !== "";
@@ -44,27 +36,19 @@ var createUrlPath = (function (_createUrlPath) {
             for (var i = 0; i < tmpUrlPath.pathArr.length; i++) {}
 
             return true;
-        } }, {
+        }
+
+    }, {
         pathArr: {
-            get: function () {
+            get: function get() {
                 return pathArr;
             },
             configurable: true,
             enumerable: true
         }
     });
-});
-var createRoute = (function (_createRoute) {
-    var _createRouteWrapper = function createRoute(_x, _x2, _x3) {
-        return _createRoute.apply(this, arguments);
-    };
-
-    _createRouteWrapper.toString = function () {
-        return _createRoute.toString();
-    };
-
-    return _createRouteWrapper;
-})(function (routePath, routeHandler, parentRoute) {
+};
+var createRoute = function createRoute(routePath, routeHandler, parentRoute) {
 
     var defaultHandler;
     var urlPath = createUrlPath(routePath);
@@ -78,30 +62,32 @@ var createRoute = (function (_createRoute) {
 
         route: function route(routePath, routeHandler) {
             return createRoute(routePath, routeHandler, this);
-        } }, {
+        }
+
+    }, {
         parent: {
-            get: function () {
+            get: function get() {
                 return parentRoute;
             },
             configurable: true,
             enumerable: true
         },
         handler: {
-            get: function () {
+            get: function get() {
                 return routeHandler ? routeHandler : defaultHandler;
             },
             configurable: true,
             enumerable: true
         },
         urlPath: {
-            get: function () {
+            get: function get() {
                 return urlPath;
             },
             configurable: true,
             enumerable: true
         }
     });
-});
+};
 
 var api = {};
 
@@ -124,7 +110,7 @@ var defaultRoute = function defaultRoute(handler) {
 
 var renderRouteHandler = function renderRouteHandler(route) {
     if (route) {
-        React.render(route.handler, htmlElement);
+        _react2["default"].render(route.handler, htmlElement);
     }
 };
 

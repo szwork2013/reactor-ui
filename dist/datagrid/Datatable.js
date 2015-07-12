@@ -1,27 +1,41 @@
 
 /* jshint -W097 */
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var React = _interopRequire(require("react"));
+var _reactAddons = require('react/addons');
 
-var Header = _interopRequire(require("./Header"));
+var _reactAddons2 = _interopRequireDefault(_reactAddons);
 
-var GridRow = _interopRequire(require("./GridRow"));
+var _Header = require('./Header');
 
-var Cell = _interopRequire(require("./Cell"));
+var _Header2 = _interopRequireDefault(_Header);
 
-var arrayDataProvider = _interopRequire(require("./arrayDataProvider"));
+var _GridRow = require('./GridRow');
 
-var RecordAccessMixin = _interopRequire(require("./RecordAccessMixin"));
+var _GridRow2 = _interopRequireDefault(_GridRow);
 
-var DatatableMixin = _interopRequire(require("./DatatableMixin"));
+var _Cell = require('./Cell');
 
-var Datatable = React.createClass({
-    displayName: "Datatable",
+var _Cell2 = _interopRequireDefault(_Cell);
 
-    mixins: [DatatableMixin, RecordAccessMixin],
+var _arrayDataProvider = require('./arrayDataProvider');
+
+var _arrayDataProvider2 = _interopRequireDefault(_arrayDataProvider);
+
+var _RecordAccessMixin = require('./RecordAccessMixin');
+
+var _RecordAccessMixin2 = _interopRequireDefault(_RecordAccessMixin);
+
+var _DatatableMixin = require('./DatatableMixin');
+
+var _DatatableMixin2 = _interopRequireDefault(_DatatableMixin);
+
+var Datatable = _reactAddons2['default'].createClass({
+    displayName: 'Datatable',
+
+    mixins: [_DatatableMixin2['default'], _RecordAccessMixin2['default']],
 
     getInitialState: function getInitialState() {
         var data = this.props.data;
@@ -36,7 +50,7 @@ var Datatable = React.createClass({
             if (providedDataProvider) {
                 dataProvider = providedDataProvider;
             } else {
-                dataProvider = arrayDataProvider(data || []);
+                dataProvider = (0, _arrayDataProvider2['default'])(data || []);
             }
         }
         return {
@@ -50,15 +64,15 @@ var Datatable = React.createClass({
     _createHeader: function _createHeader() {
 
         var headerCells = this.state.colconfig.map(function (config) {
-            return React.createElement(Header, { config: config, width: config.width, title: config.title || "" });
+            return _reactAddons2['default'].createElement(_Header2['default'], { config: config, width: config.width, title: config.title || '' });
         });
 
-        return React.createElement(
-            "div",
-            { style: { position: "relative" }, ref: "headerCont", className: "rui-dt-colgroup" },
-            React.createElement(
-                GridRow,
-                { header: true, style: "header", ref: "headerRow" },
+        return _reactAddons2['default'].createElement(
+            'div',
+            { style: { position: 'relative' }, ref: 'headerCont', className: 'rui-dt-colgroup' },
+            _reactAddons2['default'].createElement(
+                _GridRow2['default'],
+                { header: true, style: 'header', ref: 'headerRow' },
                 headerCells
             )
         );
@@ -69,40 +83,40 @@ var Datatable = React.createClass({
 
         var cells = [];
         this.state.colconfig.map(function (config) {
-            cells.push(React.createElement(Cell, { onClick: _this._onCellClick, index: index, dataProvider: _this.state.dataProvider, config: config }));
+            cells.push(_reactAddons2['default'].createElement(_Cell2['default'], { onClick: _this._onCellClick, index: index, dataProvider: _this.state.dataProvider, config: config }));
         });
         return cells;
     },
 
     _createRecords: function _createRecords() {
-        var _this = this;
+        var _this2 = this;
 
         var dataProvider = this.state.dataProvider;
 
         return dataProvider.map(function (record, index) {
-            return React.createElement(
-                GridRow,
+            return _reactAddons2['default'].createElement(
+                _GridRow2['default'],
                 { key: index },
-                _this._createGridRow(index)
+                _this2._createGridRow(index)
             );
         }, 0);
     },
 
     componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-        this.setState({ dataProvider: arrayDataProvider(nextProps.data || []) });
+        this.setState({ dataProvider: (0, _arrayDataProvider2['default'])(nextProps.data || []), colconfig: this._createColumnConfig(nextProps) });
     },
 
     _createBody: function _createBody() {
 
-        return React.createElement(
-            "div",
-            { ref: "ruiDtBody", style: { height: this.props.height || "100%", overflowY: "hidden", position: "relative" }, className: "rui-dt-rowgroup" },
+        return _reactAddons2['default'].createElement(
+            'div',
+            { ref: 'ruiDtBody', style: { height: this.props.height || '100%', overflowY: 'hidden', position: 'relative' }, className: 'rui-dt-rowgroup' },
             this._createRecords()
         );
     },
 
     _onDocumentClickEvent: function _onDocumentClickEvent(e) {
-        var editorContainer = React.findDOMNode(this.refs.editorContainer);
+        var editorContainer = _reactAddons2['default'].findDOMNode(this.refs.editorContainer);
 
         if (editorContainer && !editorContainer.contains(e.target) && this.state.editorData) {
             //outside
@@ -111,7 +125,7 @@ var Datatable = React.createClass({
     },
 
     componentDidMount: function componentDidMount() {
-        document.addEventListener("click", this._onDocumentClickEvent);
+        document.addEventListener('click', this._onDocumentClickEvent);
         if (this.refs.editorInput) {
             this.refs.editorInput.getDOMNode().focus();
         }
@@ -124,16 +138,16 @@ var Datatable = React.createClass({
     },
 
     componentWillUnmount: function componentWillUnmount() {
-        document.removeEventListener("click", this._onDocumentClickEvent);
+        document.removeEventListener('click', this._onDocumentClickEvent);
     },
     render: function render() {
-        var width = this.props.width || "100%";
-        return React.createElement(
-            "div",
-            { className: "rui-dt" },
-            React.createElement(
-                "div",
-                { style: { width: width }, className: "rui-dt-container" },
+        var width = this.props.width || '100%';
+        return _reactAddons2['default'].createElement(
+            'div',
+            { className: 'rui-dt' },
+            _reactAddons2['default'].createElement(
+                'div',
+                { style: { width: width }, className: 'rui-dt-container' },
                 this._createHeader(),
                 this._createBody()
             ),

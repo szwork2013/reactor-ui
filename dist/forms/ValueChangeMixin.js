@@ -1,7 +1,7 @@
 
 /* jshint  -W097 */
 
-"use strict";
+'use strict';
 
 var ValueChangeMixin = {
 

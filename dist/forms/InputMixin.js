@@ -1,12 +1,15 @@
 
 /* jshint esnext: true, -W097 */
 
-"use strict";
+'use strict';
 
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
 var InputMixin = {
 
     getType: function getType() {
-        return this.props.type || "text";
+        return this.props.type || 'text';
     },
 
     //we are in deep shit
@@ -14,21 +17,25 @@ var InputMixin = {
         return this._reactInternalInstance._context;
     },
 
+    shouldComponentUpdate: function shouldComponentUpdate() {
+        return true;
+    },
+
     getInputParams: function getInputParams() {
         var readOnly = null;
-        var className = "rui-input-block";
-        var inputWidth = this.props.inputWidth || "100%";
+        var className = 'rui-input-block';
+        var inputWidth = this.props.inputWidth || '100%';
 
         var style = { width: inputWidth };
 
         if (!this.props.readOnly) {
             //if falsy
-            readOnly = "";
+            readOnly = '';
         } else {
-            readOnly = "readonly";
+            readOnly = 'readonly';
         }
         if (this.props.labelInline) {
-            className = "rui-input-inline";
+            className = 'rui-input-inline';
         }
 
         return { className: className, style: style, readOnly: readOnly };
@@ -58,4 +65,5 @@ var InputMixin = {
 
 };
 
-module.exports = InputMixin;
+exports['default'] = InputMixin;
+module.exports = exports['default'];

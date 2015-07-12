@@ -47,10 +47,10 @@ var TabSet = React.createClass({
     },
 
     createChildrenTabs: function createChildrenTabs() {
-        var _this = this;
+        var _this2 = this;
 
         return React.Children.map(this.props.children, function (child) {
-            return React.cloneElement(child, { visible: child.props.id === _this.state.visible });
+            return React.cloneElement(child, { visible: child.props.id === _this2.state.visible });
         });
     },
     render: function render() {

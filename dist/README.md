@@ -7,6 +7,9 @@ Note that this is very much on its initial development phase, a work in progress
 
 #ChangeLog
 
+* 0.0.18
+      * Portlet : Added Tab Action bars
+      * View : Added view component 
 * 0.0.17
       * Portlet : added functionality to add ActionBars on headers
 * 0.0.15

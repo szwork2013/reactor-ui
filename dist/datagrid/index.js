@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
-exports.Datatable = require("./Datatable");
-exports.Column = require("./Column");
+exports.Datatable = require('./Datatable');
+exports.Column = require('./Column');
