@@ -1,28 +1,31 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
-'use strict';
 
-var React = require("react/addons");
-var cn = require("classnames");
-var PureRenderMixin = React.addons.PureRenderMixin;
-import assign from 'object-assign';
 
-/**
- * Btn element
- *
- * @type {*|Function}
- */
-var Btn = React.createClass({
+import React from 'react/addons';
+import Radium from 'radium';
+import baseStyle from '../baseStyle';
+import btnStyle from './style';
+
+const baseStyleSheet = baseStyle;
+const PureRenderMixin = React.addons.PureRenderMixin;
+
+const Btn = Radium(React.createClass({
+
     mixins: [PureRenderMixin],
-    propTypes : {
+
+    propTypes:  {
         /** theme */
         scheme : React.PropTypes.string,
-        /** text of the  button */
         text : React.PropTypes.string,
-        /** if button is in disabled mode */
+        /** the value assigned to this button, used by button groups */
+        value : React.PropTypes.string,
+        /** if active === value then then it will be activated via a css */
+        active : React.PropTypes.string,
+        disabled: React.PropTypes.bool
 
-        /** value of this button */
-        value : React.PropTypes.string
+    },
+
+    getInitialState() {
+        return {hovered: false};
     },
 
     createText : function() {
@@ -39,12 +42,18 @@ var Btn = React.createClass({
         return null;
     },
 
-    __onClickHandler : function(e) {
+    __onClickHandler(e) {
         if ( this.props.onClick ) {
             this.props.onClick(e,this.props.value);
         }
     },
 
+    onMouseOver() {
+        this.setState({hovered:true});
+    },
+    onMouseOut() {
+        this.setState({hovered:false});
+    },
     createContent : function() {
         var contentEls = [],
             icon, text;
@@ -64,36 +73,38 @@ var Btn = React.createClass({
         }
     },
 
+    getUserStyles() {
+        const props = this.props;
+        if ( props.styles && Array.isArray(props.styles) ) {
+            return props.styles;
+        }
+        return [{}];
+    },
+    createStyles() {
+        const scheme =this.props.scheme || "";
+        const userStyles = this.getUserStyles();
+        console.log(">>");
+        console.log( (this.props.value === this.props.active && this.props.value !== undefined ) ? btnStyle[scheme+"Active"] : {});
+        return [btnStyle.Btn,baseStyleSheet[scheme],
+                        btnStyle[scheme],
+                        this.props.style, this.state.hovered ? btnStyle[scheme+"Hovered"] : {},
+                        this.props.disabled ? btnStyle.BtnDisabled :{},
+                        (this.props.value === this.props.active && this.props.value !== undefined ) ? btnStyle[scheme+"Active"] : {}
+        ].concat(userStyles);
+
+    },
     render: function() {
-        var style = {},
-            classNames;
-        var disabled = ( this.props.disabled === true  );
-        var scheme = this.props.scheme;
-        var active = this.props.active;
 
-        var schemeTheme = null;
-        if ( scheme ) {
-            schemeTheme = `rui-btn-${scheme}`;
-        }
-        style = assign(style,this.props.style);
-        if ( this.props.width ) {
-            style.width = this.props.width;
-        }
+        const styles = this.createStyles();
 
-        //TODO: the active here is a bit nasty, redo this
-        classNames =  cn(
-            "rui-btn",
-            schemeTheme,
-            {"rui-btn-group-active-violet" : ( this.props.value === active && scheme === "violet" && this.props.value !== undefined ) },
-            {"rui-btn-group-active-green" : ( this.props.value === active && scheme === "green" && this.props.value !== undefined ) },
-            {"rui-btn-group-active-red" : ( this.props.value === active && scheme === "red" && this.props.value !== undefined ) },
-            {"rui-btn-group-active-blue" : ( this.props.value === active && scheme === "blue" && this.props.value !== undefined ) },
-            {"rui-btn-group-active-orange" : ( this.props.value === active && scheme === "orange" && this.props.value !== undefined ) }
-        );
-        return (<button ref="btn" onBlur={this.props.onBlur} style={style} value={this.props.value} className={classNames} disabled={disabled} onClick={this.__onClickHandler}>
+        return (<button ref="btn" style={styles}
+                    onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}
+                    onBlur={this.props.onBlur} value={this.props.value}
+                    disabled={this.props.disabled === true} onClick={this.__onClickHandler}>
             { this.createContent() }
         </button>);
     }
-});
+}));
 
-module.exports = Btn;
+
+export default Btn;

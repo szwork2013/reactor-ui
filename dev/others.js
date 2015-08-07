@@ -4,9 +4,7 @@
 
 var React = require("react");
 var Pill = require("reactor-ui/Pill");
-var Btn = require("reactor-ui/button/Btn");
-var BtnGroup = require("reactor-ui/button/BtnGroup");
-var BtnDrpDown = require("reactor-ui/button/BtnDrpDown");
+import {Btn,BtnGroup,BtnDrpDown} from 'reactor-ui/button';
 
 var Grid = require("reactor-ui/grid/Grid");
 var Col = require("reactor-ui/grid/Col");
@@ -55,6 +53,9 @@ React.render(
         <Btn scheme="violet" text="Click Me"/><span style={{marginRight: "4px"}}/>
         <Btn scheme="red" text="Click Me"/><span style={{marginRight: "4px"}}/>
         <Btn scheme="orange" text="Click Me"/><span style={{marginRight: "4px"}}/>
+        <Btn scheme="orange" disabled={true} text="Click Me"/><span style={{marginRight: "4px"}}/>
+        <Btn scheme="orange" active="ok" value="ok" text="Click Me"/><span style={{marginRight: "4px"}}/>
+        <Btn scheme="green" styles={[{color: 'red'}]} active="ok" value="ok" text="Click Me"/><span style={{marginRight: "4px"}}/>
     </span>,
 document.getElementById("cont3"));
 

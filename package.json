@@ -6,7 +6,8 @@
   "scripts": {
     "build-npm": "babel -d dist/ ./src/js && cp README.md dist/ && cp package.json dist/",
     "watch-dev-tabs": "webpack --config webpack.dev.config.js dev/tab.js dev/out/tab.js --watch",
-    "less-compile": "lessc src/css/rui.less > dev/out/rui-styles.css"
+    "less-compile": "lessc src/css/rui.less > dev/out/rui-styles.css",
+    "test": "mocha --compilers js:babel/register -w"
   },
   "repository": {
     "type": "git",
@@ -25,24 +26,23 @@
   ],
   "author": "Warren Mira warrenmira@gmail.com",
   "license": "MIT",
-  "dependencies": {
-    "classnames": "^1.2.0",
-    "object-assign": "^2.0.0",
-    "object-traverse": "^1.1.1"
-  },
   "devDependencies": {
     "babel": "*",
     "babel-core": "^5.6.17",
     "babel-loader": "^5.3.1",
     "chai": "^2.3.0",
-    "karma": "^0.12.37",
-    "karma-chrome-launcher": "^0.1.12",
-    "karma-mocha": "^0.1.10",
-    "karma-webpack": "^1.5.1",
+    "classnames": "^1.2.0",
+    "color": "^0.10.1",
+    "jsdom": "^6.0.0",
+    "json-loader": "^0.5.2",
     "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.2",
+    "object-assign": "^2.0.0",
+    "object-traverse": "^1.1.1",
+    "radium": "^0.13.7",
     "react": "^0.13.3",
+    "should": "^7.0.2",
     "sinon": "^1.15.4",
-    "webpack": "^1.10.1"
+    "webpack": "^1.11.0"
   }
 }

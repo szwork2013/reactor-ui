@@ -1,9 +1,9 @@
 
+import Btn from './Btn';
+import BtnDrpDown from './BtnDrpDown';
+import BtnGroup from './BtnGroup';
 
-
-
-module.exports = {
-    Btn : require("./Btn"),
-    BtnDrpDown : require("./BtnDrpDown"),
-    BtnGroup: require("./BtnGroup")
-};
+export {Btn};
+export {BtnDrpDown};
+export {BtnGroup};
+export default { Btn, BtnDrpDown, BtnGroup };

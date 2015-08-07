@@ -1,21 +1,17 @@
-/*globals require,describe,it */
-/* jshint -W097, esnext: true */
-'use strict';
 
-var assert = require("assert");
-var React = require("react/addons");
+import React from 'react/addons';
+import Btn from 'reactor-ui/button/Btn';
+import chai from 'chai';
+import {colors} from 'reactor-ui/baseStyle';
 
-var Btn = require("reactor-ui/button/Btn");
+const expect = chai.expect;
+const TestUtils = React.addons.TestUtils;
+const Simulate = TestUtils.Simulate;
 
-var TestUtils = React.addons.TestUtils;
-var Simulate = TestUtils.Simulate;
-
-var expect = require("chai").expect;
 
 describe("Button Tests" ,function() {
 
-    it('Single Button Test', function(){
-
+    it('properly calls onClick Listener', () => {
         var val = "old val";
         var click = function() {
             val = "new val";
@@ -26,22 +22,41 @@ describe("Button Tests" ,function() {
         Simulate.click(btn1.refs.btn);
         expect(val).to.equal('new val');
 
-        //disabled
-        btn1 = TestUtils.renderIntoDocument(
-            <Btn disabled={true} onClick={click} text="Click Me"></Btn>
+    });
+
+    it('properly disables button', () => {
+
+        const btn1 = TestUtils.renderIntoDocument(
+            <Btn disabled={true}></Btn>
+        );
+        const btnEl = btn1.getDOMNode();
+        expect(btnEl.disabled).to.equal(true);
+
+        const wrongArgBtn = TestUtils.renderIntoDocument(
+            <Btn disabled={"ss"}></Btn>
         );
 
-        var btnNode = TestUtils.findRenderedDOMComponentWithTag(btn1,"button");
-
-        expect(btnNode.getDOMNode().getAttribute("disabled")).to.equal('');
-
-        //enabled
-        btn1 = TestUtils.renderIntoDocument(
-            <Btn disabled={false} onClick={click} text="Click Me"></Btn>
-        );
-        btnNode = TestUtils.findRenderedDOMComponentWithTag(btn1,"button");
-        expect(btnNode.getDOMNode().getAttribute("disabled")).to.equal(null);
-
+        const wrongBtnEl = wrongArgBtn.getDOMNode();
+        expect(wrongBtnEl.disabled).to.equal(false);
 
     });
+
+    it('properly handles active and value attribute', () => {
+
+        const btn1 = TestUtils.renderIntoDocument(
+            <Btn scheme="green" active="x" value="x"></Btn>
+        );
+
+        const btnEl = React.findDOMNode(btn1.refs.btn);
+        expect(btnEl.style.backgroundColor).to.equal(colors.green.clone().darken(0.15).rgbString());
+
+        const btn2 = TestUtils.renderIntoDocument(
+            <Btn scheme="green" active="x" value="y"></Btn>
+        );
+
+        const btnElNotActive = React.findDOMNode(btn2.refs.btn);
+        expect(btnElNotActive.style.backgroundColor).to.equal(colors.green.rgbString());
+
+    });
+
 });

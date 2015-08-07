@@ -20,7 +20,7 @@ if (process.env.COMPRESS) {
 }
 
 module.exports = {
-
+    devtool: "source-map",
     node: {
         buffer: false
     },
@@ -29,6 +29,7 @@ module.exports = {
 
     module: {
         loaders: [
+            { test: /\.json$/, loader: "json-loader" },
             { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"}
         ]
     }
