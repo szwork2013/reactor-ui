@@ -83,8 +83,7 @@ const Btn = Radium(React.createClass({
     createStyles() {
         const scheme =this.props.scheme || "";
         const userStyles = this.getUserStyles();
-        console.log(">>");
-        console.log( (this.props.value === this.props.active && this.props.value !== undefined ) ? btnStyle[scheme+"Active"] : {});
+        
         return [btnStyle.Btn,baseStyleSheet[scheme],
                         btnStyle[scheme],
                         this.props.style, this.state.hovered ? btnStyle[scheme+"Hovered"] : {},
