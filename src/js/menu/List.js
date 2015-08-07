@@ -1,16 +1,9 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
-'use strict';
 
-var React = require("react/addons");
-var ListItem = require("./ListItem");
 
-/**
- * Create a list manually or from a configuration
- *
- * @type {*|Function}
- */
-var List =  React.createClass({
+const React = require("react/addons");
+const ListItem = require("./ListItem");
+
+const List =  React.createClass({
 
 
     createItems : function() {
@@ -33,9 +26,9 @@ var List =  React.createClass({
     },
 
     render : function() {
-        var style = {};
+        let style = {};
         if ( this.props.minWidth ) {
-            style["min-width"] = this.props.minWidth;
+            style.minWidth = this.props.minWidth;
         }
         if ( this.props.width ) {
             style.width = this.props.width;
@@ -51,4 +44,3 @@ var List =  React.createClass({
 });
 
 module.exports = List;
-

@@ -66,7 +66,6 @@ var BtnGroupDemo = React.createClass({
         return {disabled:  this.props.disabled ? true : false };
     },
     onClick : function() {
-
         this.setState({disabled : !this.state.disabled })
     },
 

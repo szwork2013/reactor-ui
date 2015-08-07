@@ -7,11 +7,7 @@ var cn = require("classnames");
 var PureRenderMixin = React.addons.PureRenderMixin;
 var Btn = require("./Btn");
 var List = require("../menu/List");
-/**
- * Btn element
- *
- * @type {*|Function}
- */
+
 var BtnDropDown = React.createClass({
     mixins: [PureRenderMixin],
 

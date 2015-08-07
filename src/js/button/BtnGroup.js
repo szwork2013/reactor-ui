@@ -1,21 +1,16 @@
 
-'use strict';
-
 
 import React from 'react/addons';
 import Btn from './Btn';
 
 const PureRenderMixin = React.addons.PureRenderMixin;
 
-var BtnGroup = React.createClass({
+const BtnGroup = React.createClass({
     mixins: [PureRenderMixin],
-    propTypes : {
-        /** theme */
-        scheme : React.PropTypes.string,
-        /** text of the  button */
-        active : React.PropTypes.string
-        /** if this button group is disabled */
 
+    propTypes : {
+        scheme : React.PropTypes.string,
+        active : React.PropTypes.string
     },
 
     getInitialState: function() {
@@ -43,7 +38,7 @@ var BtnGroup = React.createClass({
 
     render() {
         return (
-            <div className="rui-btn-group">
+            <div style={{display: "inline-block"}}>
                 {this.processBtnGroup()}
             </div>
         );
@@ -51,4 +46,4 @@ var BtnGroup = React.createClass({
 
 });
 
-module.exports = BtnGroup;
+export default BtnGroup;
