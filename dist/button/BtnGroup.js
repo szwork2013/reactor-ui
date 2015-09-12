@@ -1,5 +1,8 @@
-
 'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -17,13 +20,10 @@ var BtnGroup = _reactAddons2['default'].createClass({
     displayName: 'BtnGroup',
 
     mixins: [PureRenderMixin],
-    propTypes: {
-        /** theme */
-        scheme: _reactAddons2['default'].PropTypes.string,
-        /** text of the  button */
-        active: _reactAddons2['default'].PropTypes.string
-        /** if this button group is disabled */
 
+    propTypes: {
+        scheme: _reactAddons2['default'].PropTypes.string,
+        active: _reactAddons2['default'].PropTypes.string
     },
 
     getInitialState: function getInitialState() {
@@ -38,7 +38,7 @@ var BtnGroup = _reactAddons2['default'].createClass({
             if (child.type !== _Btn2['default']) {
                 throw new Error('Only Btn type is allowed');
             }
-            return _reactAddons2['default'].cloneElement(child, { style: { marginLeft: 2 }, disabled: _this.props.disabled, scheme: _this.props.scheme, active: _this.state.active, onClick: _this.buttonClicked });
+            return _reactAddons2['default'].cloneElement(child, { style: { marginLeft: 1 }, disabled: _this.props.disabled, scheme: _this.props.scheme, active: _this.state.active, onClick: _this.buttonClicked });
         });
     },
 
@@ -52,11 +52,12 @@ var BtnGroup = _reactAddons2['default'].createClass({
     render: function render() {
         return _reactAddons2['default'].createElement(
             'div',
-            { className: 'rui-btn-group' },
+            { style: { display: 'inline-block' } },
             this.processBtnGroup()
         );
     }
 
 });
 
-module.exports = BtnGroup;
+exports['default'] = BtnGroup;
+module.exports = exports['default'];

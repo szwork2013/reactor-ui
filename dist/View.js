@@ -1,4 +1,3 @@
-
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -13,14 +12,20 @@ var _react2 = _interopRequireDefault(_react);
 
 var PureRenderMixin = _react2['default'].addons.PureRenderMixin;
 
+/**
+ * A simple view container
+ */
 var View = _react2['default'].createClass({
     displayName: 'View',
 
     mixins: [PureRenderMixin],
 
     propTypes: {
+        /** the visible view */
         visible: _react2['default'].PropTypes.string,
+        /** the name of this view */
         name: _react2['default'].PropTypes.string.isRequired,
+        /** style this view */
         style: _react2['default'].PropTypes.object
     },
     render: function render() {

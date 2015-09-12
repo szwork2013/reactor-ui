@@ -1,14 +1,12 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
-'use strict';
 
-var React = require("react/addons");
-var cn = require("classnames");
-var PureRenderMixin = React.addons.PureRenderMixin;
-var Btn = require("./Btn");
-var List = require("../menu/List");
+import React from 'react/addons';
+import cn from 'classnames';
+import Btn from './Btn';
+import List from '../menu/List';
 
-var BtnDropDown = React.createClass({
+const PureRenderMixin = React.addons.PureRenderMixin;
+
+const BtnDropDown = React.createClass({
     mixins: [PureRenderMixin],
 
     getInitialState : function() {
@@ -18,7 +16,7 @@ var BtnDropDown = React.createClass({
     createItems : function() {
         if ( this.state.listVisible ) {
             if (this.props.items) {
-                return <List onClick={this.onItemClick}  scheme={this.props.scheme} items={this.props.items} minWidth={this.state.listMinWidth}/>
+                return <List onClick={this.onItemClick}  {...this.props} minWidth={this.state.listMinWidth}/>;
             } else {
                 //FIXME, we should listener here
                 return this.props.children;
@@ -39,7 +37,7 @@ var BtnDropDown = React.createClass({
     },
     buttonClicked : function() {
         var element = this.refs.btn.getDOMNode();
-        var width = element.offsetWidth - 2; //border
+        var width = element.offsetWidth;
         this.setState({listVisible: !this.state.listVisible,listMinWidth: width +"px"});
     },
 

@@ -1,35 +1,48 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
-"use strict";
+'use strict';
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
 
-var _objectAssign = require("object-assign");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
+var _reactAddons = require('react/addons');
 
-var React = require("react/addons");
-var cn = require("classnames");
-var PureRenderMixin = React.addons.PureRenderMixin;
+var _reactAddons2 = _interopRequireDefault(_reactAddons);
 
-/**
- * Btn element
- *
- * @type {*|Function}
- */
-var Btn = React.createClass({
-    displayName: "Btn",
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
+var _baseStyle = require('../baseStyle');
+
+var _baseStyle2 = _interopRequireDefault(_baseStyle);
+
+var _style = require('./style');
+
+var _style2 = _interopRequireDefault(_style);
+
+var baseStyleSheet = _baseStyle2['default'];
+var PureRenderMixin = _reactAddons2['default'].addons.PureRenderMixin;
+
+var Btn = (0, _radium2['default'])(_reactAddons2['default'].createClass({
 
     mixins: [PureRenderMixin],
+
     propTypes: {
         /** theme */
-        scheme: React.PropTypes.string,
-        /** text of the  button */
-        text: React.PropTypes.string,
-        /** if button is in disabled mode */
+        scheme: _reactAddons2['default'].PropTypes.string,
+        text: _reactAddons2['default'].PropTypes.string,
+        /** the value assigned to this button, used by button groups */
+        value: _reactAddons2['default'].PropTypes.string,
+        /** if active === value then then it will be activated via a css */
+        active: _reactAddons2['default'].PropTypes.string,
+        disabled: _reactAddons2['default'].PropTypes.bool
 
-        /** value of this button */
-        value: React.PropTypes.string
+    },
+
+    getInitialState: function getInitialState() {
+        return { hovered: false };
     },
 
     createText: function createText() {
@@ -41,7 +54,7 @@ var Btn = React.createClass({
 
     createIcon: function createIcon() {
         if (this.props.iconCls) {
-            return React.createElement("span", { className: this.props.iconCls });
+            return _reactAddons2['default'].createElement('span', { className: this.props.iconCls });
         }
         return null;
     },
@@ -52,12 +65,18 @@ var Btn = React.createClass({
         }
     },
 
+    onMouseOver: function onMouseOver() {
+        this.setState({ hovered: true });
+    },
+    onMouseOut: function onMouseOut() {
+        this.setState({ hovered: false });
+    },
     createContent: function createContent() {
         var contentEls = [],
             icon,
             text;
 
-        if (React.Children.count(this.props.children) === 0) {
+        if (_reactAddons2['default'].Children.count(this.props.children) === 0) {
             icon = this.createIcon();
             text = this.createText();
             if (icon) {
@@ -72,30 +91,30 @@ var Btn = React.createClass({
         }
     },
 
+    getUserStyles: function getUserStyles() {
+        var props = this.props;
+        return props.styles || {};
+    },
+    createStyles: function createStyles() {
+        var scheme = this.props.scheme || '';
+        var userStyles = this.getUserStyles();
+
+        return [_style2['default'].Btn, baseStyleSheet[scheme], _style2['default'][scheme], this.props.style, this.state.hovered ? _style2['default'][scheme + 'Hovered'] : {}, this.props.disabled ? _style2['default'].BtnDisabled : {}, this.props.value === this.props.active && this.props.value !== undefined ? _style2['default'][scheme + 'Active'] : {}].concat(userStyles);
+    },
     render: function render() {
-        var style = {},
-            classNames;
-        var disabled = this.props.disabled === true;
-        var scheme = this.props.scheme;
-        var active = this.props.active;
 
-        var schemeTheme = null;
-        if (scheme) {
-            schemeTheme = "rui-btn-" + scheme;
-        }
-        style = (0, _objectAssign2["default"])(style, this.props.style);
-        if (this.props.width) {
-            style.width = this.props.width;
-        }
+        var styles = this.createStyles();
 
-        //TODO: the active here is a bit nasty, redo this
-        classNames = cn("rui-btn", schemeTheme, { "rui-btn-group-active-violet": this.props.value === active && scheme === "violet" && this.props.value !== undefined }, { "rui-btn-group-active-green": this.props.value === active && scheme === "green" && this.props.value !== undefined }, { "rui-btn-group-active-red": this.props.value === active && scheme === "red" && this.props.value !== undefined }, { "rui-btn-group-active-blue": this.props.value === active && scheme === "blue" && this.props.value !== undefined }, { "rui-btn-group-active-orange": this.props.value === active && scheme === "orange" && this.props.value !== undefined });
-        return React.createElement(
-            "button",
-            { ref: "btn", onBlur: this.props.onBlur, style: style, value: this.props.value, className: classNames, disabled: disabled, onClick: this.__onClickHandler },
+        return _reactAddons2['default'].createElement(
+            'button',
+            { ref: 'btn', style: styles,
+                onMouseOver: this.onMouseOver, onMouseOut: this.onMouseOut,
+                onBlur: this.props.onBlur, value: this.props.value,
+                disabled: this.props.disabled === true, onClick: this.__onClickHandler },
             this.createContent()
         );
     }
-});
+}));
 
-module.exports = Btn;
+exports['default'] = Btn;
+module.exports = exports['default'];

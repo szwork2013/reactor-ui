@@ -1,18 +1,15 @@
-/*globals require,module */
-/* jshint -W097 */
-"use strict";
 
 import React from 'react';
 
-var View = React.createClass({
+const View = React.createClass({
 
     getInitialState : function() {
-        return { visible : this.props.visible, view: this.props.view }
+        return { visible : this.props.visible, view: this.props.view };
     },
 
     componentWillReceiveProps : function(newProps) {
         if ( this.state.visible !== newProps.visible ) {
-            this.setState({visible : newProps.visible} )
+            this.setState({visible : newProps.visible} );
         }
     },
 
@@ -39,7 +36,7 @@ var View = React.createClass({
 
         return (<div data-vp-name={name} style={divStyle}>
             {theElement}
-        </div>)
+        </div>);
     }
 
 
@@ -74,13 +71,13 @@ var ViewSwitcher = React.createClass({
         return (<div className={prefix}> {
             views.map(view => {
                 if ( typeof view === 'string' ) {
-                    return <View ref={view} key={view} view={view} visible={( this.state.visible === view ) }/>
+                    return <View ref={view} key={view} view={view} visible={( this.state.visible === view ) }/>;
                 } else {
                     return <View ref={view.ref} element={view.element} visible={( this.state.visible === view.ref ) } />;
                 }
             })
         }
-        </div>)
+        </div>);
     },
 
     show : function(view) {
@@ -94,8 +91,8 @@ var ViewSwitcher = React.createClass({
 
     el : function(view) {
         var refViews = this.refs[view];
-        if ( refViews.refs["el"] ) {
-            return this.refs[view].refs["el"].getDOMNode()
+        if ( refViews.refs.el) {
+            return this.refs[view].refs.el.getDOMNode();
         }
         return null;
     }

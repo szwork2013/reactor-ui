@@ -33,52 +33,6 @@ body {
 }
 
 
-
-/** Pills */
-
-.rui-pill {
-
-  color: inherit;
-  display: inline;
-  padding: 1px 5px;
-  border-radius: 2px;
-  border: 1px solid #EEE;
-  margin: 2px;
-
-}
-
-.rui-pill-theme-base(@color) {
-  color: #FFF;
-  background-color: lighten(@color,8%);
-  border-color: lighten(@color,8%);
-}
-
-.rui-pill-green {
-  .rui-pill-theme-base(@color-green);
-}
-
-.rui-pill-blue {
-  .rui-pill-theme-base(@color-blue);
-}
-
-.rui-pill-violet {
-  .rui-pill-theme-base(@color-violet);
-}
-.rui-pill-orange {
-  .rui-pill-theme-base(@color-orange);
-}
-
-.rui-pill-red {
-  .rui-pill-theme-base(@color-red);
-}
-
-.rui-pill-large {
-  font-size: 14px;
-  padding: 2px 8px;
-}
-
-/** End Pills */
-
 /** Panels */
 .rui-panel-c {
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
@@ -127,91 +81,7 @@ body {
 /** End panels */
 
 
-/** Buttons */
 
-.rui-btn {
-    color: inherit;
-    border: 1px solid @color-border-neutral;
-    background: #FFF;
-    display: inline-block;
-    padding: 5px 10px;
-    font-size: 12px;
-    line-height: 1.5;
-    white-space: nowrap;
-    vertical-align: middle;
-    cursor: pointer;
-    font-weight: 700;
-}
-
-.rui-btn.disabled,.rui-btn[disabled] {
-    pointer-events: none;
-    cursor: not-allowed;
-    filter: alpha(opacity=65);
-    box-shadow: none;
-    opacity: .65;
-}
-
-.rui-btn:hover {
-    background: darken(#FFF,5%);
-}
-
-.rui-btn-theme(@color) {
-    color: #FFF;
-
-    background: @color;
-    border-color: darken(@color,2%);
-}
-.rui-btn-theme-hover(@color) {
-    background: darken(@color,2%);
-}
-.rui-btn-green {
-    .rui-btn-theme(@color-green);
-}
-
-.rui-btn-green:hover {
-    .rui-btn-theme-hover(@color-green)
-}
-
-.rui-btn-blue {
-    .rui-btn-theme(@color-blue);
-}
-
-.rui-btn-blue:hover {
-    .rui-btn-theme-hover(@color-blue)
-}
-
-.rui-btn-violet {
-    .rui-btn-theme(@color-violet);
-}
-
-.rui-btn-violet:hover {
-    .rui-btn-theme-hover(@color-violet)
-}
-
-.rui-btn-orange {
-    .rui-btn-theme(@color-orange);
-}
-
-.rui-btn-orange:hover {
-    .rui-btn-theme-hover(@color-orange)
-}
-
-
-.rui-btn-red {
-    .rui-btn-theme(@color-red);
-}
-
-.rui-btn-red:hover {
-    .rui-btn-theme-hover(@color-red)
-}
-
-.rui-btn-group {
-    display: inline-block;
-}
-
-.rui-btn-group-active-violet {
-    .rui-btn-theme(@color-violet-dark);
-}
 
 /** End Buttons */
 

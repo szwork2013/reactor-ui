@@ -14,8 +14,6 @@ import Btn from 'reactor-ui/button/Btn';
 
 import {ActionBar,Action} from 'reactor-ui/actionbar';
 
-console.log("ACTIONBAR");
-console.log(ActionBar);
 const TAction = TabActionBar.Action;
 
 //import data from './griddata';

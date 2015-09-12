@@ -66,7 +66,7 @@ var DatatableMixin = {
             return _react2['default'].createElement(
                 'div',
                 { ref: 'editorContainer', style: { left: editorData.cellRef.left, top: editorData.cellRef.top + editorData.cellRef.height, position: 'absolute' } },
-                _react2['default'].createElement(_formsInput2['default'], { onKeyDown: this._onEditorKeyDown, changeListener: this._editorInputChange,
+                _react2['default'].createElement(_formsInput2['default'], { onKeyDown: this._onEditorKeyDown, onInputChange: this._editorInputChange,
                     showLabel: false, value: editorData.value, style: { position: 'relative', width: editorData.cellRef.width, height: editorData.cellRef.height } })
             );
         }

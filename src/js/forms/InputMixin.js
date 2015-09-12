@@ -1,9 +1,6 @@
 
-/* jshint esnext: true, -W097 */
 
-'use strict';
-
-var InputMixin = {
+const InputMixin = {
 
 
     getType : function() {
@@ -37,6 +34,7 @@ var InputMixin = {
 
         return {className,style,readOnly};
     },
+    //FIXME: this is buggy, always seems to be true
     hasContext() {
         return this._reactInternalInstance && this._reactInternalInstance._context;
     },

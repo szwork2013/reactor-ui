@@ -51,4 +51,5 @@ const colors = {
 };
 export {schemes};
 export {colors};
+export {styles};
 export default styles;

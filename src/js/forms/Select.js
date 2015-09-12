@@ -1,27 +1,29 @@
 
-/* jshint esnext: true, -W097 */
-
-
-'use strict';
-
 import React from 'react';
-
+import radium from 'radium';
 
 
 import InputMixin from "./InputMixin";
 import LabelMixin from "./LabelMixin";
 import ValueChangeMixin from "./ValueChangeMixin";
-import assign from 'object-assign';
+import defaultProps from './defaultProps';
+import style from './style';
 
-
-var mapOption = function(option) {
+const mapOption = function(option) {
     var obj = option, value, text;
     var selectionValueKey = this.props.valueKey || "value";
     var selectionTextKey = this.props.textKey || "text";
     var isSelection;
-    var selected = this._getContext().model[this.props.name];
+    var selected =  null;
+    if ( this._getContext().model ) {
+        selected =  this._getContext().model[this.props.name];
+    } else if ( this.props.model ) {
+        selected = this.props.model[this.props.name];
+    } else {
+        selected = this.props.selected;
+    }
 
-    if ( typeof obj === 'string' ) {
+    if ( typeof obj === 'string' ) {        
         value = obj;
         text = obj;
     } else {
@@ -38,12 +40,18 @@ var mapOption = function(option) {
 
 };
 
-var Select = React.createClass({
+const Select = radium(React.createClass({
     propTypes: {
+        selected: React.PropTypes.string,
         name : React.PropTypes.string.isRequired,
         labelInline: React.PropTypes.bool,
         labelWidth : React.PropTypes.any,
         inputWidth : React.PropTypes.any,
+        onChange: React.PropTypes.func,
+        model: React.PropTypes.object
+    },
+    getDefaultProps() {
+        return defaultProps.input;
     },
     mixins: [InputMixin,LabelMixin,ValueChangeMixin],
 
@@ -67,23 +75,25 @@ var Select = React.createClass({
         if ( optional ) {
             optionsEls.unshift(<option value="">{optionalText}</option>);
         }
-
         return optionsEls;
 
     },
 
-    /**
-     * We need to set the state here because we have selected something ( if we ever )
-     */
-
-
     render : function() {
-        const params = this.getInputParams();
-        const style = assign(params.style,this.props.style || {});
+        // const params = this.getInputParams();
+        const styleArr = [style.inputStyle];
+
+        if ( this.props.labelInline === true ) {
+            styleArr.push(style.inputStyleInline);
+            styleArr.push({width: this.props.inputWidth});
+        } else {
+            styleArr.push(style.inputStyleBlock);
+        }
+
         return (
-            <div className={"rui-form-cont"}>
+            <div >
                 {this.getLabel()}
-                <select style={style} disabled={this.props.readOnly} ref={this.inputRef} onChange={this.dispatchInputChange} className={"rui-form-input " + params.className}>
+                <select style={styleArr} disabled={this.props.readOnly} ref={this.inputRef} onChange={this.dispatchInputChange} >
                     {this.createOptions()}
                 </select>
             </div>
@@ -93,6 +103,6 @@ var Select = React.createClass({
 
 
 
-});
+}));
 
 export default Select;

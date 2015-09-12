@@ -49,7 +49,7 @@ const DatatableMixin = {
 
     },
 
-    _editorInputChange: function(k,v) {
+    _editorInputChange: function(k,v) {    
         var editorData = assign(this.state.editorData,{});
         editorData.value = v;
         this.setState({editorData});
@@ -59,7 +59,7 @@ const DatatableMixin = {
         if ( this.state.editorData && this.state.editorData.config.editable  ) {
             var editorData = this.state.editorData;
             return <div  ref="editorContainer" style={{ left: editorData.cellRef.left, top: editorData.cellRef.top + editorData.cellRef.height,position: 'absolute'}}>
-                <Input onKeyDown={this._onEditorKeyDown} changeListener={this._editorInputChange}
+                <Input onKeyDown={this._onEditorKeyDown} onInputChange={this._editorInputChange}
                     showLabel={false} value={editorData.value} style={{position: 'relative', width: editorData.cellRef.width, height: editorData.cellRef.height}} />
             </div>;
 

@@ -1,5 +1,3 @@
-/*globals require,module */
-/* jshint -W097 */
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -106,8 +104,8 @@ var ViewSwitcher = _react2["default"].createClass({
 
     el: function el(view) {
         var refViews = this.refs[view];
-        if (refViews.refs["el"]) {
-            return this.refs[view].refs["el"].getDOMNode();
+        if (refViews.refs.el) {
+            return this.refs[view].refs.el.getDOMNode();
         }
         return null;
     }

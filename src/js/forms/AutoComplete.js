@@ -1,11 +1,15 @@
-'use strict';
 
 import React from 'react';
+import radium from 'radium';
+
 import InputMixin from './InputMixin';
 import LabelMixin from './LabelMixin';
 import assign from 'object-assign';
+import style from './style';
+import defaultProps from './defaultProps';
 
-
+const KEY_BACKSPACE = 8;
+const KEY_ESC = 27;
 
 var parseText = function(path,obj) {
 
@@ -18,7 +22,7 @@ var parseText = function(path,obj) {
     return '';
 };
 
-const AutoCompleteResult = React.createClass({
+const AutoCompleteResult = radium(React.createClass({
 
 
     resultItemClicked(index) {
@@ -35,11 +39,12 @@ const AutoCompleteResult = React.createClass({
 
     },
     render() {
-        var display = this.props.data ? 'block' : 'none';
-        var pos = this.props.anchorPosition;
-        var style = assign({border: "1px solid #D1D1D1", borderTop: "none", display: display,position: 'absolute'},pos);
+        const display = this.props.data ? 'block' : 'none';
+        const pos = this.props.anchorPosition;
+        const styleArr = [style.autocompleteResultContainer,display,pos];
+        //var style = assign({border: "1px solid #D1D1D1", borderTop: "none", display: display,position: 'absolute'},pos);
 
-        return <div className="rui-form-ac-result-cont"  style={style} >
+        return <div style={styleArr} >
             { (this.props.data||[]).map( (res,index) => {
                 return this.createResultItem(res,index);
             }) }
@@ -47,12 +52,10 @@ const AutoCompleteResult = React.createClass({
 
     }
 
-});
+}));
 
-const KEY_BACKSPACE = 8;
-const KEY_ESC = 27;
 
-const AutoComplete = React.createClass({
+const AutoComplete = radium(React.createClass({
 
     propTypes: {
         requiredName : React.PropTypes.string.isRequired,
@@ -65,10 +68,10 @@ const AutoComplete = React.createClass({
     },
 
     getDefaultProps() {
-        return {
-            selectionRenderer: undefined,
-            selectionPath : 'text'
-        };
+        return assign(
+            {selectionRenderer: undefined,selectionPath : 'text'},
+              defaultProps.input
+        );
     },
 
     mixins: [InputMixin,LabelMixin],
@@ -188,19 +191,32 @@ const AutoComplete = React.createClass({
         if ( this.state.selection ) {
             value = this._parseValue(this.state.selection);
         }
+        const inputStyle = [style.autocompleteInputStyle,{ height: "100%", width: "100%" ,position: "relative", left: "0px", tabindex: "tabindex"}];
 
         return <input onKeyDown={this.onKeyUp} value={value} ref="acInput" onChange={this.acInputChange} placeholder={this.props.placeholder} type="text" autoComplete="off"
-            style={ { height: "100%", width: "100%" ,position: "relative", left: "0px", tabindex: "tabindex"}}   />;
+            style={ inputStyle }   />;
 
     },
+    getUserInputOverrideStyles(name) {
+        const props = this.props;
+        return props[name] || {};
+    },
     render : function() {
-        const params = this.getInputParams();
-        const style = assign({position: 'relative'},params.style);
+        //const params = this.getInputParams();
+        //const style = assign({position: 'relative'},params.style);
+        const styleArr = [style.inputStyle];
 
+        if ( this.props.labelInline === true ) {
+            styleArr.push(style.inputStyleInline);
+            styleArr.push({width: this.props.inputWidth});
+        } else {
+            styleArr.push(style.inputStyleBlock);
+        }
+        styleArr.push(this.getUserInputOverrideStyles("containerStyleOverride"));
         return (
-            <div className="rui-form-cont">
+            <div style={[style.containerStyle]}>
                 {this.getLabel()}
-                <div style={style} ref="acCont" className={"rui-form-ac-cont rui-form-input " + params.className} onClick={this.containerClick}>
+                <div style={styleArr} ref="acCont" onClick={this.containerClick}>
                     {this.renderInput()}
                     {this.renderToggle()}
                 </div>
@@ -209,6 +225,6 @@ const AutoComplete = React.createClass({
         );
     }
 
-});
+}));
 
 module.exports = AutoComplete;

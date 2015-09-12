@@ -24,7 +24,7 @@ const BtnGroup = React.createClass({
             if ( child.type !== Btn ) {
                 throw new Error("Only Btn type is allowed");
             }
-            return React.cloneElement(child,{ style: { marginLeft: 2} , disabled: this.props.disabled , scheme: this.props.scheme, active: this.state.active,onClick : this.buttonClicked});
+            return React.cloneElement(child,{ style: { marginLeft: 1 } , disabled: this.props.disabled , scheme: this.props.scheme, active: this.state.active,onClick : this.buttonClicked});
         });
 
     },

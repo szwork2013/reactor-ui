@@ -2,21 +2,22 @@
 
 'use strict';
 
+import radium from 'radium';
 import React from 'react';
-import assign from 'object-assign';
+
 
 import InputMixin from './InputMixin';
 import LabelMixin from './LabelMixin';
 import ValueChangeMixin from './ValueChangeMixin';
+import style from './style';
+import defaultProps from './defaultProps';
 
-
-const Input = React.createClass({
+/** FIXME: wait for .14 and fix context handling */
+const Input = radium(React.createClass({
     getDefaultProps() {
-        return {
-            labelInline: false,
-            showLabel: true
-        };
+        return defaultProps.input;
     },
+
     propTypes: {
         name : React.PropTypes.string.isRequired,
         labelInline: React.PropTypes.bool,
@@ -40,20 +41,28 @@ const Input = React.createClass({
     },
 
     render : function() {
-        const value=  this.getInputValue(); //this._getContext().model[this.props.name] || "";
+        const value=  this.getInputValue();
         const params = this.getInputParams();
-        const style = assign(params.style,this.props.style || {});
+        const styleArr = [style.inputStyle];
+
+        if ( this.props.labelInline === true ) {
+            styleArr.push(style.inputStyleInline);
+            styleArr.push({width: this.props.inputWidth});
+        } else {
+            styleArr.push(style.inputStyleBlock);
+        }
+
 
         return (
-            <div className={"rui-form-cont"}>
+            <div style={[style.containerStyle]}>
                 {this.getLabel()}
                 <input onKeyDown={this.props.onKeyDown} onKeyUp={this.props.onKeyUp} onKeyPress={this.props.onKeyPress}
-                    style={style} value={value} readOnly={params.readOnly} onChange={this.dispatchInputChange}
-                    ref={this.inputRef} className={"rui-form-input " + params.className} placeholder={this.props.placeholder} {...this.props}/>
+                    style={styleArr} value={value} readOnly={params.readOnly} onChange={this.dispatchInputChange} onBlur={this.dispatchInputChange}
+                    ref={this.inputRef}  placeholder={this.props.placeholder} {...this.props}/>
             </div>
         );
     }
 
-});
+}));
 
 export default Input;

@@ -6,6 +6,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
 var _InputMixin = require('./InputMixin');
 
 var _InputMixin2 = _interopRequireDefault(_InputMixin);
@@ -18,6 +22,17 @@ var _objectAssign = require('object-assign');
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
+var _style = require('./style');
+
+var _style2 = _interopRequireDefault(_style);
+
+var _defaultProps = require('./defaultProps');
+
+var _defaultProps2 = _interopRequireDefault(_defaultProps);
+
+var KEY_BACKSPACE = 8;
+var KEY_ESC = 27;
+
 var parseText = function parseText(path, obj) {
 
     if (typeof obj === 'string') {
@@ -29,8 +44,7 @@ var parseText = function parseText(path, obj) {
     return '';
 };
 
-var AutoCompleteResult = _react2['default'].createClass({
-    displayName: 'AutoCompleteResult',
+var AutoCompleteResult = (0, _radium2['default'])(_react2['default'].createClass({
 
     resultItemClicked: function resultItemClicked(index) {
         this.props.onResultItemClicked(this.props.data[index]);
@@ -53,24 +67,21 @@ var AutoCompleteResult = _react2['default'].createClass({
 
         var display = this.props.data ? 'block' : 'none';
         var pos = this.props.anchorPosition;
-        var style = (0, _objectAssign2['default'])({ border: '1px solid #D1D1D1', borderTop: 'none', display: display, position: 'absolute' }, pos);
+        var styleArr = [_style2['default'].autocompleteResultContainer, display, pos];
+        //var style = assign({border: "1px solid #D1D1D1", borderTop: "none", display: display,position: 'absolute'},pos);
 
         return _react2['default'].createElement(
             'div',
-            { className: 'rui-form-ac-result-cont', style: style },
+            { style: styleArr },
             (this.props.data || []).map(function (res, index) {
                 return _this.createResultItem(res, index);
             })
         );
     }
 
-});
+}));
 
-var KEY_BACKSPACE = 8;
-var KEY_ESC = 27;
-
-var AutoComplete = _react2['default'].createClass({
-    displayName: 'AutoComplete',
+var AutoComplete = (0, _radium2['default'])(_react2['default'].createClass({
 
     propTypes: {
         requiredName: _react2['default'].PropTypes.string.isRequired,
@@ -80,10 +91,7 @@ var AutoComplete = _react2['default'].createClass({
     },
 
     getDefaultProps: function getDefaultProps() {
-        return {
-            selectionRenderer: undefined,
-            selectionPath: 'text'
-        };
+        return (0, _objectAssign2['default'])({ selectionRenderer: undefined, selectionPath: 'text' }, _defaultProps2['default'].input);
     },
 
     mixins: [_InputMixin2['default'], _LabelMixin2['default']],
@@ -206,21 +214,34 @@ var AutoComplete = _react2['default'].createClass({
         if (this.state.selection) {
             value = this._parseValue(this.state.selection);
         }
+        var inputStyle = [_style2['default'].autocompleteInputStyle, { height: '100%', width: '100%', position: 'relative', left: '0px', tabindex: 'tabindex' }];
 
         return _react2['default'].createElement('input', { onKeyDown: this.onKeyUp, value: value, ref: 'acInput', onChange: this.acInputChange, placeholder: this.props.placeholder, type: 'text', autoComplete: 'off',
-            style: { height: '100%', width: '100%', position: 'relative', left: '0px', tabindex: 'tabindex' } });
+            style: inputStyle });
+    },
+    getUserInputOverrideStyles: function getUserInputOverrideStyles(name) {
+        var props = this.props;
+        return props[name] || {};
     },
     render: function render() {
-        var params = this.getInputParams();
-        var style = (0, _objectAssign2['default'])({ position: 'relative' }, params.style);
+        //const params = this.getInputParams();
+        //const style = assign({position: 'relative'},params.style);
+        var styleArr = [_style2['default'].inputStyle];
 
+        if (this.props.labelInline === true) {
+            styleArr.push(_style2['default'].inputStyleInline);
+            styleArr.push({ width: this.props.inputWidth });
+        } else {
+            styleArr.push(_style2['default'].inputStyleBlock);
+        }
+        styleArr.push(this.getUserInputOverrideStyles('containerStyleOverride'));
         return _react2['default'].createElement(
             'div',
-            { className: 'rui-form-cont' },
+            { style: [_style2['default'].containerStyle] },
             this.getLabel(),
             _react2['default'].createElement(
                 'div',
-                { style: style, ref: 'acCont', className: 'rui-form-ac-cont rui-form-input ' + params.className, onClick: this.containerClick },
+                { style: styleArr, ref: 'acCont', onClick: this.containerClick },
                 this.renderInput(),
                 this.renderToggle()
             ),
@@ -228,6 +249,6 @@ var AutoComplete = _react2['default'].createClass({
         );
     }
 
-});
+}));
 
 module.exports = AutoComplete;

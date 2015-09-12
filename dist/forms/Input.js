@@ -10,13 +10,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _objectAssign = require('object-assign');
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
 var _InputMixin = require('./InputMixin');
 
@@ -30,15 +30,20 @@ var _ValueChangeMixin = require('./ValueChangeMixin');
 
 var _ValueChangeMixin2 = _interopRequireDefault(_ValueChangeMixin);
 
-var Input = _react2['default'].createClass({
-    displayName: 'Input',
+var _style = require('./style');
 
+var _style2 = _interopRequireDefault(_style);
+
+var _defaultProps = require('./defaultProps');
+
+var _defaultProps2 = _interopRequireDefault(_defaultProps);
+
+/** FIXME: wait for .14 and fix context handling */
+var Input = (0, _radium2['default'])(_react2['default'].createClass({
     getDefaultProps: function getDefaultProps() {
-        return {
-            labelInline: false,
-            showLabel: true
-        };
+        return _defaultProps2['default'].input;
     },
+
     propTypes: {
         name: _react2['default'].PropTypes.string.isRequired,
         labelInline: _react2['default'].PropTypes.bool,
@@ -62,21 +67,28 @@ var Input = _react2['default'].createClass({
     },
 
     render: function render() {
-        var value = this.getInputValue(); //this._getContext().model[this.props.name] || "";
+        var value = this.getInputValue();
         var params = this.getInputParams();
-        var style = (0, _objectAssign2['default'])(params.style, this.props.style || {});
+        var styleArr = [_style2['default'].inputStyle];
+
+        if (this.props.labelInline === true) {
+            styleArr.push(_style2['default'].inputStyleInline);
+            styleArr.push({ width: this.props.inputWidth });
+        } else {
+            styleArr.push(_style2['default'].inputStyleBlock);
+        }
 
         return _react2['default'].createElement(
             'div',
-            { className: 'rui-form-cont' },
+            { style: [_style2['default'].containerStyle] },
             this.getLabel(),
             _react2['default'].createElement('input', _extends({ onKeyDown: this.props.onKeyDown, onKeyUp: this.props.onKeyUp, onKeyPress: this.props.onKeyPress,
-                style: style, value: value, readOnly: params.readOnly, onChange: this.dispatchInputChange,
-                ref: this.inputRef, className: 'rui-form-input ' + params.className, placeholder: this.props.placeholder }, this.props))
+                style: styleArr, value: value, readOnly: params.readOnly, onChange: this.dispatchInputChange, onBlur: this.dispatchInputChange,
+                ref: this.inputRef, placeholder: this.props.placeholder }, this.props))
         );
     }
 
-});
+}));
 
 exports['default'] = Input;
 module.exports = exports['default'];

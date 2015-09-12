@@ -34,7 +34,6 @@ const List =  React.createClass({
             style.width = this.props.width;
         }
 
-
         return ( <div style={style} className="rui-list-c rui-list-float">
             {this.createItems()}
         </div>);

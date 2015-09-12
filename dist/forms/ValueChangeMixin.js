@@ -1,7 +1,4 @@
-
-/* jshint  -W097 */
-
-'use strict';
+"use strict";
 
 var ValueChangeMixin = {
 
@@ -12,8 +9,8 @@ var ValueChangeMixin = {
                 this._getContext().changeListener(this.props.name, elNode.value);
             }
         }
-        if (this.props.changeListener) {
-            this.props.changeListener(this.props.name, elNode.value);
+        if (this.props.onInputChange) {
+            this.props.onInputChange(this.props.name, elNode.value);
         }
     }
 

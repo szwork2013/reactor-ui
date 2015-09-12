@@ -5,42 +5,39 @@
 var React = require("react");
 var Pill = require("reactor-ui/Pill");
 import {Btn,BtnGroup,BtnDrpDown} from 'reactor-ui/button';
-
-var Grid = require("reactor-ui/grid/Grid");
-var Col = require("reactor-ui/grid/Col");
-var Row = require("reactor-ui/grid/Row");
+import Toast from 'reactor-ui/alert/Toast';
 
 React.render(
-    <Grid>
-        <Row>
-            <Col unit="6">
+    <div className="container">
+        <div className="row">
+            <div className="col-lg-6">
                 <span>
                     <Pill ><span className="fa fa-heart"></span> Love</Pill>
                     <Pill scheme="green"><span className="fa fa-heart"></span> Love</Pill>
                     <Pill scheme="blue"><span className="fa fa-heart"></span> Love</Pill>
                 </span>
-            </Col>
-            <Col unit="6">
+            </div>
+            <div className="col-lg-6">
                 <span>
                     <Pill scheme="violet"><span className="fa fa-heart"></span> Love</Pill>
                     <Pill scheme="red"><span className="fa fa-heart"></span> Love</Pill>
                     <Pill scheme="orange"><span className="fa fa-heart"></span> Love</Pill>
                 </span>
-            </Col>
-        </Row>
-    </Grid>,
+            </div>
+        </div>
+    </div>,
 
     document.getElementById("cont1"));
 
 
 React.render(
     <span>
-        <Pill size="lg"><span className="fa fa-thumbs-o-up"></span> Thumbs Up</Pill>
-        <Pill size="lg" scheme="green"><span className="fa fa-thumbs-o-up"></span> Thumbs Up</Pill>
-        <Pill size="lg" scheme="blue"><span className="fa fa-thumbs-o-up"></span> Thumbs Up</Pill>
-        <Pill size="lg" scheme="violet"><span className="fa fa-thumbs-o-up"></span> Thumbs Up</Pill>
-        <Pill size="lg" scheme="red"><span className="fa fa-thumbs-o-up"></span> Thumbs Up</Pill>
-        <Pill size="lg" scheme="orange"><span className="fa fa-thumbs-o-up"></span> Thumbs Up</Pill>
+        <Pill size="large"><span className="fa fa-thumbs-o-up"></span> Thumbs Up</Pill>
+        <Pill size="large" scheme="green"><span className="fa fa-thumbs-o-up"></span> Thumbs Up</Pill>
+        <Pill size="large" scheme="blue"><span className="fa fa-thumbs-o-up"></span> Thumbs Up</Pill>
+        <Pill size="large" scheme="violet"><span className="fa fa-thumbs-o-up"></span> Thumbs Up</Pill>
+        <Pill size="large" scheme="red"><span className="fa fa-thumbs-o-up"></span> Thumbs Up</Pill>
+        <Pill size="large" scheme="orange"><span className="fa fa-thumbs-o-up"></span> Thumbs Up</Pill>
     </span>,
 document.getElementById("cont2"));
 
@@ -66,24 +63,46 @@ var BtnGroupDemo = React.createClass({
         return {disabled:  this.props.disabled ? true : false };
     },
     onClick : function() {
-        this.setState({disabled : !this.state.disabled })
+        this.setState({disabled : !this.state.disabled });
     },
 
     render: function() {
         return <div>
             <Btn width="120px" text={ this.state.disabled ? "Enable" : "Disable"} onClick={this.onClick} /><span> </span>
-            <BtnGroup disabled={this.state.disabled} scheme="violet" active="clock">
+            <BtnGroup disabled={this.state.disabled} scheme="green" active="clock">
                 <Btn iconCls="fa fa-clock-o" value="clock"/>
                 <Btn iconCls="fa fa-heart" value="heart"/>
                 <Btn iconCls="fa fa-adjust" value="adjust"/>
             </BtnGroup>
-        </div>
+        </div>;
     }
 
 });
 
-React.render(<BtnGroupDemo/>,
-document.getElementById("cont4"));
+
+var ToastDemo = React.createClass({
+
+    getInitialState: function() {
+        return {showError: false };
+    },
+    onClick : function() {
+        this.setState({showError : !this.state.showError });
+    },
+    onToastCompleted() {
+        this.setState({showError: false});
+    },
+    render: function() {
+        return <div>
+            <Btn width="120px" text={ "Toast It"} onClick={this.onClick} /><span> </span>
+            {this.state.showError === true ? <Toast onToastCompleted={this.onToastCompleted}><span>{"Im toasted"}</span> </Toast> : null }
+        </div>;
+    }
+
+});
+
+
+React.render(<BtnGroupDemo/>,document.getElementById("cont4"));
+React.render(<ToastDemo/>,document.getElementById("cont7"));
 
 var dropdownList = ["Action 1", "Action 2", "Action 3"];
 

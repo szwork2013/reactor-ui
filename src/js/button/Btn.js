@@ -1,14 +1,14 @@
 
 
 import React from 'react/addons';
-import Radium from 'radium';
+import radium from 'radium';
 import baseStyle from '../baseStyle';
 import btnStyle from './style';
 
 const baseStyleSheet = baseStyle;
 const PureRenderMixin = React.addons.PureRenderMixin;
 
-const Btn = Radium(React.createClass({
+const Btn = radium(React.createClass({
 
     mixins: [PureRenderMixin],
 
@@ -75,15 +75,12 @@ const Btn = Radium(React.createClass({
 
     getUserStyles() {
         const props = this.props;
-        if ( props.styles && Array.isArray(props.styles) ) {
-            return props.styles;
-        }
-        return [{}];
+        return props.styles || {};
     },
     createStyles() {
         const scheme =this.props.scheme || "";
         const userStyles = this.getUserStyles();
-        
+
         return [btnStyle.Btn,baseStyleSheet[scheme],
                         btnStyle[scheme],
                         this.props.style, this.state.hovered ? btnStyle[scheme+"Hovered"] : {},
