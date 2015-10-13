@@ -1,10 +1,12 @@
 
-import React from 'react/addons';
+import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import cn from 'classnames';
 import Btn from './Btn';
 import List from '../menu/List';
 
-const PureRenderMixin = React.addons.PureRenderMixin;
+
 
 const BtnDropDown = React.createClass({
     mixins: [PureRenderMixin],

@@ -1,6 +1,5 @@
-/* jshint esnext: true */
 
-import React from 'react/addons';
+import React from 'react';
 import Input from './Input';
 import AutoComplete from './AutoComplete';
 import Select from './Select';

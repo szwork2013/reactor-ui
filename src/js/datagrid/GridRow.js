@@ -1,7 +1,4 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
 
-'use strict';
 
 import React from 'react';
 import cx from 'classnames';

@@ -1,7 +1,3 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
-'use strict';
-
 
 /**
  *
@@ -35,7 +31,7 @@ module.exports = function pagerDataProvider(arrayDataProvider,rowsPerPage,curren
          */
         map(mapper) {
 
-            
+
 
         }
 

@@ -41,6 +41,8 @@
     "object-traverse": "^1.1.1",
     "radium": "^0.13.7",
     "react": "^0.14.0",
+    "react-addons-pure-render-mixin": "^0.14.0",
+    "react-dom": "^0.14.0",
     "should": "^7.0.2",
     "sinon": "^1.15.4",
     "webpack": "^1.11.0"

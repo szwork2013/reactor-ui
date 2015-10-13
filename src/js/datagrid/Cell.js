@@ -1,11 +1,9 @@
 
-'use strict';
-
 import React from 'react';
 import RecordAccessMixin from './RecordAccessMixin';
 import assign from 'object-assign';
 
-var Cell = React.createClass({
+const Cell = React.createClass({
 
     mixins: [RecordAccessMixin],
 
@@ -93,4 +91,4 @@ var Cell = React.createClass({
 });
 
 
-module.exports = Cell;
+export default Cell;

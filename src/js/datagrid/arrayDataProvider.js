@@ -1,6 +1,4 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
-'use strict';
+
 
 
 module.exports = function(array) {
@@ -8,7 +6,7 @@ module.exports = function(array) {
     if ( !Array.isArray(array) ) {
         throw new Error("argument must be an array");
     }
-    
+
     return {
         get length() {
             return array.length;

@@ -1,12 +1,14 @@
 
 
-import React from 'react/addons';
+import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import radium from 'radium';
 import baseStyle from '../baseStyle';
 import btnStyle from './style';
 
 const baseStyleSheet = baseStyle;
-const PureRenderMixin = React.addons.PureRenderMixin;
+
 
 const Btn = radium(React.createClass({
 

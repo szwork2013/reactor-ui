@@ -1,13 +1,13 @@
-/*globals require,module,document */
-/* jshint -W097, esnext: true */
-'use strict';
+
 
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 import {Datatable, Column} from   'reactor-ui/datagrid';
 import {Pill,View} from 'reactor-ui';
 import Portlet from 'reactor-ui/portlet';
 
-import reaction from 'reactor-ui/reaction';
+
 
 import TabActionBar from 'reactor-ui/portlet/TabActionBar';
 import Btn from 'reactor-ui/button/Btn';
@@ -106,7 +106,7 @@ const totalRenderer = function(data) {
 
 function renderGrid() {
 
-    React.render(
+    ReactDOM.render(
         <Datatable  onEdit={onEdit}  data={data}>
             <Column cellAlign={"center"} id='shipmentNo' renderer={idRenderer}/>
             <Column id='productId' title='Product Id'/>
@@ -136,7 +136,7 @@ var onTabClick = function(name) {
 };
 var renderPortlet1 = function() {
 
-    React.render(
+    ReactDOM.render(
         <Portlet titleIcon="fa fa-bar-chart" title="React Panel" subtitle="this is a subtitle">
             <TabActionBar active='shipment' onTabActivated={onTabClick}>
                 <TAction name='shipment' text=" Shipment "></TAction>
@@ -161,7 +161,7 @@ var renderPortlet1 = function() {
     );
 };
 renderPortlet1();
-React.render(
+ReactDOM.render(
     <Portlet titleIcon="fa fa-bar-chart" title="React Panel" subtitle="this is a subtitle">
         <ActionBar>
             <Action><Btn scheme="green" text=" Btn 1 "/></Action>

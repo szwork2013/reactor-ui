@@ -1,15 +1,10 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
-'use strict';
 
-var React = require("react/addons");
-var cn = require("classnames");
-/**
- * Create a list manually or from a configuration
- *
- * @type {*|Function}
- */
-var ListItem =  React.createClass({
+
+import React from "react";
+import cn from "classnames";
+
+
+const ListItem =  React.createClass({
 
     dispatchOnclick : function() {
         if ( this.props.onClick) {
@@ -39,4 +34,4 @@ var ListItem =  React.createClass({
 
 });
 
-module.exports = ListItem;
+export default ListItem;

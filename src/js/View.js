@@ -1,5 +1,5 @@
 import React from 'react';
-const PureRenderMixin = React.addons.PureRenderMixin;
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 /**
  * A simple view container

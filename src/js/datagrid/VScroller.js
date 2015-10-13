@@ -1,8 +1,4 @@
 
-/* jshint -W097 */
-
-'use strict';
-
 import React from 'react';
 
 /**

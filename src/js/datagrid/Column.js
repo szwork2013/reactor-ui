@@ -1,11 +1,8 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
-'use strict';
 
 import React from 'react';
 
 
-var Column = React.createClass({
+const Column = React.createClass({
 
 
     /**
@@ -20,4 +17,4 @@ var Column = React.createClass({
 
 });
 
-module.exports = Column;
+export default Column;

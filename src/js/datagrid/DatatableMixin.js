@@ -1,6 +1,3 @@
-/* jshint -W097 */
-
-'use strict';
 
 import assign from 'object-assign';
 import React  from 'react';
@@ -49,7 +46,7 @@ const DatatableMixin = {
 
     },
 
-    _editorInputChange: function(k,v) {    
+    _editorInputChange: function(k,v) {
         var editorData = assign(this.state.editorData,{});
         editorData.value = v;
         this.setState({editorData});
