@@ -1,14 +1,14 @@
 
+"use strict";
 
-import React from "react";
-import PureRenderMixin from 'react-addons-pure-render-mixin';
-
+const React = require("react");
 const IconTextSchemeMixin = require("./IconTextSchemeMixin");
-
+const PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 const cn = require("classnames");
 
 var isActive = function(props) {
-    return   ( props.selected.id === props.id && props.selected.group === props.group);
+    return   ( props.selected.id === props.id
+    && props.selected.group === props.group)
 };
 
 /**
@@ -51,7 +51,7 @@ const Nav = React.createClass({
         );
         return <div onClick={this.itemClicked} className={classNames}>
             {this.createIconTextContent()}
-        </div>;
+        </div>
     }
 
 });

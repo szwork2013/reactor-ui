@@ -1,7 +1,7 @@
 
 
-import React from "react";
-import ListItem from "./ListItem";
+const React = require("react/addons");
+const ListItem = require("./ListItem");
 
 const List =  React.createClass({
 

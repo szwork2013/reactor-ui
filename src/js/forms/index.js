@@ -1,5 +1,6 @@
 
-import React from 'react';
+
+import React from 'react/addons';
 import Input from './Input';
 import AutoComplete from './AutoComplete';
 import Select from './Select';

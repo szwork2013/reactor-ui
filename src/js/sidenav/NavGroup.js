@@ -1,13 +1,13 @@
+/*globals require,module */
+/* jshint -W097,esnext: true */
 
+"use strict";
 
-import React from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
-
-
-import Nav from './Nav';
+const React = require("react");
+const Nav = require("./Nav");
 const IconTextSchemeMixin = require("./IconTextSchemeMixin");
 const cn = require("classnames");
-
+const PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 const NavGroup = React.createClass({
 
@@ -44,7 +44,7 @@ const NavGroup = React.createClass({
     },
 
     onClick: function() {
-         this.setState({collapsed: !this.state.collapsed});
+         this.setState({collapsed: !this.state.collapsed})
     },
 
     componentDidMount() {
@@ -68,9 +68,9 @@ const NavGroup = React.createClass({
 
         var style = {};
         if ( this.state.collapsed ) {
-            style.height = this.__computedHeight;
+            style['height'] = this.__computedHeight;
         } else {
-            style.height = 0;
+            style['height'] = 0;
         }
 
 
@@ -81,7 +81,7 @@ const NavGroup = React.createClass({
                     {this.buildChildren() }
                 </div>
             </div>
-        );
+        )
 
     }
 });

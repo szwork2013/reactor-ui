@@ -1,11 +1,8 @@
 
 import React  from 'react';
-//import PureRenderMixin from 'react-addons-pure-render-mixin';
-
 import Header from './Header';
 import GridRow from './GridRow';
 import Cell from './Cell';
-
 
 import arrayDataProvider from './arrayDataProvider';
 
@@ -46,7 +43,7 @@ const Datatable = React.createClass({
     _createHeader() {
 
         var headerCells = this.state.colconfig.map( config => {
-            return (<Header key={config.key} config={config} width={config.width} title={config.title || ''} />);
+            return (<Header config={config} width={config.width} title={config.title || ''} />);
         });
 
         return <div style={{position: 'relative'}} ref="headerCont" className={"rui-dt-colgroup"}>

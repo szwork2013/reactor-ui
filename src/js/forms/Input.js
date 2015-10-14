@@ -1,6 +1,4 @@
-/* jshint -W097 */
 
-'use strict';
 
 import radium from 'radium';
 import React from 'react';

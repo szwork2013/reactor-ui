@@ -1,5 +1,4 @@
 
-
 var traverse = require('object-traverse');
 
 var RecordAccessMixin = {

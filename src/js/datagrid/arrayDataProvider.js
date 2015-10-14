@@ -1,6 +1,5 @@
 
 
-
 module.exports = function(array) {
 
     if ( !Array.isArray(array) ) {

@@ -1,5 +1,4 @@
 
-'use strict';
 
 import Pill from './Pill';
 import View from './View';

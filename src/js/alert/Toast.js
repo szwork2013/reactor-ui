@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React from 'react/addons';
 import radium from 'radium';
 import {styles} from '../baseStyle';
 

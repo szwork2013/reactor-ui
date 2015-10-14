@@ -1,6 +1,9 @@
+/*globals require,module */
+/* jshint -W097,esnext: true */
 
+'use strict';
 
-import React from "react";
+const React = require("react");
 
 const IconTextSchemeMixin = {
 
@@ -43,4 +46,4 @@ const IconTextSchemeMixin = {
 
 };
 
-export default IconTextSchemeMixin;
+module.exports = IconTextSchemeMixin;

@@ -1,8 +1,12 @@
+/*globals require,module */
+/* jshint -W097,esnext: true */
 
-import React from 'react'
+"use strict";
 
-import NavGroup from './NavGroup';
-import Nav from './Nav';
+var React = require("react");
+
+var NavGroup = require("./NavGroup");
+var Nav = require("./Nav");
 
 /**
  * The SideNav is a Side Navigation component duH!
@@ -15,7 +19,7 @@ import Nav from './Nav';
  * ]
  * @type {*|Function}
  */
-const SideNav = React.createClass({
+var SideNav = React.createClass({
 
 
 
@@ -71,4 +75,4 @@ const SideNav = React.createClass({
 
 });
 
-export default SideNav;
+module.exports = SideNav;

@@ -1,5 +1,5 @@
 
 
-
-exports.Datatable = require('./Datatable');
-exports.Column = require('./Column');
+export { Datatable } from './Datatable';
+export { Column } from './Column';
+export { Datagrid } from './Datagrid';

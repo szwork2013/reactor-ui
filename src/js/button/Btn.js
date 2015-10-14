@@ -1,7 +1,8 @@
 
 
-import React from 'react';
+import React from 'react/addons';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 
 import radium from 'radium';
 import baseStyle from '../baseStyle';

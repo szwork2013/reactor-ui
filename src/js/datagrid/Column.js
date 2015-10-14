@@ -2,14 +2,8 @@
 import React from 'react';
 
 
-const Column = React.createClass({
+var Column = React.createClass({
 
-
-    /**
-     *
-     *
-     * @returns {null}
-     */
     render: function() {
         return null;
     }
@@ -17,4 +11,5 @@ const Column = React.createClass({
 
 });
 
+export {Column};
 export default Column;
