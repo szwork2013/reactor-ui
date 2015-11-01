@@ -1,4 +1,3 @@
-'use strict';
 
 import Action from './Action';
 import ActionBar from './ActionBar';

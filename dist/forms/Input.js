@@ -1,5 +1,3 @@
-/* jshint -W097 */
-
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {

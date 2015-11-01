@@ -1,9 +1,9 @@
 
 
-import React from 'react/addons';
+import React from 'react';
 import Btn from './Btn';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
-const PureRenderMixin = React.addons.PureRenderMixin;
 
 const BtnGroup = React.createClass({
     mixins: [PureRenderMixin],

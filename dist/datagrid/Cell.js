@@ -1,4 +1,3 @@
-
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -89,10 +88,10 @@ var Cell = _react2['default'].createClass({
         }
 
         if (width) {
-            flex = '0 0 ' + width;
+            flex = "0 0 " + width;
         } else {
-            flexInt = this.props.config.flex ? this.props.config.flex : '1';
-            flex = flexInt + ' 1 10px';
+            flexInt = this.props.config.flex ? this.props.config.flex : "1";
+            flex = flexInt + " 1 10px";
         }
         style = (0, _objectAssign2['default'])({ flex: flex }, this.props.config.style);
         return _react2['default'].createElement(

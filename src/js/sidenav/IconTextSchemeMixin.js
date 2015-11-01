@@ -1,7 +1,4 @@
-/*globals require,module */
-/* jshint -W097,esnext: true */
 
-'use strict';
 
 const React = require("react");
 
@@ -28,7 +25,7 @@ const IconTextSchemeMixin = {
             icon = (<span style={{paddingRight: 10}} className={propsIcon}></span>);
         }
         if ( propsText ) {
-            text = (<span>{propsText}</span>);
+            text = (<span >{propsText}</span>);
         }
 
         if ( style === "it" ) {

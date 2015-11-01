@@ -1,7 +1,4 @@
-/*globals require,module */
-/* jshint -W097,esnext: true */
 
-"use strict";
 
 var React = require("react");
 
@@ -32,9 +29,9 @@ var SideNav = React.createClass({
         return this.props.navs.map( navkind => {
             //nav kind could have a navlist, which we assume it contains a group of navs link
             if ( navkind.navlist ) {
-                return <NavGroup selected={this.state.selected} onClick={this.onSubNavClick} nav={navkind}/>;
+                return <NavGroup key={navkind.id} selected={this.state.selected} onClick={this.onSubNavClick} nav={navkind}/>;
             } else {
-                return (<Nav selected={this.state.selected} {...navkind} onClick={this.onClick}/>);
+                return (<Nav key={navkind.id} selected={this.state.selected} {...navkind} onClick={this.onClick}/>);
             }
         });
 

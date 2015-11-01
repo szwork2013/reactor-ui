@@ -1,6 +1,3 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
-'use strict';
 
 var React = require("react/addons");
 var cn = require("classnames");

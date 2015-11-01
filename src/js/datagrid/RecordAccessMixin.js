@@ -12,7 +12,7 @@ var RecordAccessMixin = {
 
         var cellRef = (function() {
           if ( ref ) {
-              var element = ref.getDOMNode();
+              var element = ref;
               return {
                   width : element.offsetWidth,
                   height : element.offsetHeight,

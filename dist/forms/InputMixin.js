@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 var InputMixin = {
 
     getType: function getType() {
-        return this.props.type || "text";
+        return this.props.type || 'text';
     },
 
     //we are in deep shit
@@ -58,7 +58,7 @@ var InputMixin = {
 
         this.__input = el;
         if (this.__input) {
-            this.__input.getDOMNode().focus();
+            this.__input.focus();
         }
     }
 

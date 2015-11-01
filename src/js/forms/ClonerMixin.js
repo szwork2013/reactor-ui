@@ -1,12 +1,12 @@
 
-var React = require("react");
+import React from "react";
 
 var ClonerMixin = {
 
     cloneChildren : function() {
         return React.Children.map(this.props.children, child => {
-            return React.cloneElement(child,{ model: this.props.model,changeListener : this.props.changeListener })
-        })
+            return React.cloneElement(child,{ model: this.props.model,changeListener : this.props.changeListener });
+        });
     }
 };
 

@@ -6,24 +6,26 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _reactAddons = require('react/addons');
+var _react = require('react');
 
-var _reactAddons2 = _interopRequireDefault(_reactAddons);
+var _react2 = _interopRequireDefault(_react);
 
 var _Btn = require('./Btn');
 
 var _Btn2 = _interopRequireDefault(_Btn);
 
-var PureRenderMixin = _reactAddons2['default'].addons.PureRenderMixin;
+var _reactAddonsPureRenderMixin = require('react-addons-pure-render-mixin');
 
-var BtnGroup = _reactAddons2['default'].createClass({
+var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+var BtnGroup = _react2['default'].createClass({
     displayName: 'BtnGroup',
 
-    mixins: [PureRenderMixin],
+    mixins: [_reactAddonsPureRenderMixin2['default']],
 
     propTypes: {
-        scheme: _reactAddons2['default'].PropTypes.string,
-        active: _reactAddons2['default'].PropTypes.string
+        scheme: _react2['default'].PropTypes.string,
+        active: _react2['default'].PropTypes.string
     },
 
     getInitialState: function getInitialState() {
@@ -33,12 +35,12 @@ var BtnGroup = _reactAddons2['default'].createClass({
     processBtnGroup: function processBtnGroup() {
         var _this = this;
 
-        return _reactAddons2['default'].Children.map(this.props.children, function (child) {
+        return _react2['default'].Children.map(this.props.children, function (child) {
 
             if (child.type !== _Btn2['default']) {
-                throw new Error('Only Btn type is allowed');
+                throw new Error("Only Btn type is allowed");
             }
-            return _reactAddons2['default'].cloneElement(child, { style: { marginLeft: 1 }, disabled: _this.props.disabled, scheme: _this.props.scheme, active: _this.state.active, onClick: _this.buttonClicked });
+            return _react2['default'].cloneElement(child, { style: { marginLeft: 1 }, disabled: _this.props.disabled, scheme: _this.props.scheme, active: _this.state.active, onClick: _this.buttonClicked });
         });
     },
 
@@ -50,9 +52,9 @@ var BtnGroup = _reactAddons2['default'].createClass({
     },
 
     render: function render() {
-        return _reactAddons2['default'].createElement(
+        return _react2['default'].createElement(
             'div',
-            { style: { display: 'inline-block' } },
+            { style: { display: "inline-block" } },
             this.processBtnGroup()
         );
     }

@@ -92,7 +92,7 @@ var ViewSwitcher = React.createClass({
     el : function(view) {
         var refViews = this.refs[view];
         if ( refViews.refs.el) {
-            return this.refs[view].refs.el.getDOMNode();
+            return this.refs[view].refs.el;
         }
         return null;
     }

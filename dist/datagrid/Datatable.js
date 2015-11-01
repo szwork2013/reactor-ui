@@ -1,12 +1,14 @@
-
-/* jshint -W097 */
 'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _reactAddons = require('react/addons');
+var _react = require('react');
 
-var _reactAddons2 = _interopRequireDefault(_reactAddons);
+var _react2 = _interopRequireDefault(_react);
 
 var _Header = require('./Header');
 
@@ -32,7 +34,7 @@ var _DatatableMixin = require('./DatatableMixin');
 
 var _DatatableMixin2 = _interopRequireDefault(_DatatableMixin);
 
-var Datatable = _reactAddons2['default'].createClass({
+var Datatable = _react2['default'].createClass({
     displayName: 'Datatable',
 
     mixins: [_DatatableMixin2['default'], _RecordAccessMixin2['default']],
@@ -64,13 +66,13 @@ var Datatable = _reactAddons2['default'].createClass({
     _createHeader: function _createHeader() {
 
         var headerCells = this.state.colconfig.map(function (config) {
-            return _reactAddons2['default'].createElement(_Header2['default'], { config: config, width: config.width, title: config.title || '' });
+            return _react2['default'].createElement(_Header2['default'], { config: config, width: config.width, title: config.title || '' });
         });
 
-        return _reactAddons2['default'].createElement(
+        return _react2['default'].createElement(
             'div',
-            { style: { position: 'relative' }, ref: 'headerCont', className: 'rui-dt-colgroup' },
-            _reactAddons2['default'].createElement(
+            { style: { position: 'relative' }, ref: 'headerCont', className: "rui-dt-colgroup" },
+            _react2['default'].createElement(
                 _GridRow2['default'],
                 { header: true, style: 'header', ref: 'headerRow' },
                 headerCells
@@ -83,7 +85,7 @@ var Datatable = _reactAddons2['default'].createClass({
 
         var cells = [];
         this.state.colconfig.map(function (config) {
-            cells.push(_reactAddons2['default'].createElement(_Cell2['default'], { onClick: _this._onCellClick, index: index, dataProvider: _this.state.dataProvider, config: config }));
+            cells.push(_react2['default'].createElement(_Cell2['default'], { onClick: _this._onCellClick, index: index, dataProvider: _this.state.dataProvider, config: config }));
         });
         return cells;
     },
@@ -94,7 +96,7 @@ var Datatable = _reactAddons2['default'].createClass({
         var dataProvider = this.state.dataProvider;
 
         return dataProvider.map(function (record, index) {
-            return _reactAddons2['default'].createElement(
+            return _react2['default'].createElement(
                 _GridRow2['default'],
                 { key: index },
                 _this2._createGridRow(index)
@@ -108,15 +110,15 @@ var Datatable = _reactAddons2['default'].createClass({
 
     _createBody: function _createBody() {
 
-        return _reactAddons2['default'].createElement(
+        return _react2['default'].createElement(
             'div',
-            { ref: 'ruiDtBody', style: { height: this.props.height || '100%', overflowY: 'hidden', position: 'relative' }, className: 'rui-dt-rowgroup' },
+            { ref: 'ruiDtBody', style: { height: this.props.height || "100%", overflowY: "hidden", position: 'relative' }, className: "rui-dt-rowgroup" },
             this._createRecords()
         );
     },
 
     _onDocumentClickEvent: function _onDocumentClickEvent(e) {
-        var editorContainer = _reactAddons2['default'].findDOMNode(this.refs.editorContainer);
+        var editorContainer = _react2['default'].findDOMNode(this.refs.editorContainer);
 
         if (editorContainer && !editorContainer.contains(e.target) && this.state.editorData) {
             //outside
@@ -127,13 +129,13 @@ var Datatable = _reactAddons2['default'].createClass({
     componentDidMount: function componentDidMount() {
         document.addEventListener('click', this._onDocumentClickEvent);
         if (this.refs.editorInput) {
-            this.refs.editorInput.getDOMNode().focus();
+            this.refs.editorInput.focus();
         }
     },
 
     componentDidUpdate: function componentDidUpdate() {
         if (this.refs.editorInput) {
-            this.refs.editorInput.getDOMNode().focus();
+            this.refs.editorInput.focus();
         }
     },
 
@@ -141,13 +143,13 @@ var Datatable = _reactAddons2['default'].createClass({
         document.removeEventListener('click', this._onDocumentClickEvent);
     },
     render: function render() {
-        var width = this.props.width || '100%';
-        return _reactAddons2['default'].createElement(
+        var width = this.props.width || "100%";
+        return _react2['default'].createElement(
             'div',
             { className: 'rui-dt' },
-            _reactAddons2['default'].createElement(
+            _react2['default'].createElement(
                 'div',
-                { style: { width: width }, className: 'rui-dt-container' },
+                { style: { width: width }, className: "rui-dt-container" },
                 this._createHeader(),
                 this._createBody()
             ),
@@ -156,4 +158,5 @@ var Datatable = _reactAddons2['default'].createClass({
     }
 });
 
-module.exports = Datatable;
+exports.Datatable = Datatable;
+exports['default'] = Datatable;

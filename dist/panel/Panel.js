@@ -1,12 +1,12 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
 "use strict";
 
-var React = require("react");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var cs = require("classnames");
+var _react = require('react');
 
-var Panel = React.createClass({
+var _react2 = _interopRequireDefault(_react);
+
+var Panel = _react2["default"].createClass({
     displayName: "Panel",
 
     getInitialState: function getInitialState() {
@@ -20,14 +20,14 @@ var Panel = React.createClass({
     closeComponent: function closeComponent() {
 
         if (this.props.closeable === true) {
-            return React.createElement("span", { className: "rui-panel-control rui-panel-close fa fa-close" });
+            return _react2["default"].createElement("span", { className: "rui-panel-control rui-panel-close fa fa-close" });
         }
         return null;
     },
 
     collapseComponent: function collapseComponent() {
         if (this.props.collapsable === true) {
-            return React.createElement("span", { ref: "collapseToggle", onClick: this.collapseClicked, className: cs("rui-panel-control", "rui-panel-collapsable", "fa", { "fa-chevron-up": this.state.bodyShown }, { "fa-chevron-down": !this.state.bodyShown }) });
+            return _react2["default"].createElement("span", { ref: "collapseToggle", onClick: this.collapseClicked, className: cs("rui-panel-control", "rui-panel-collapsable", "fa", { "fa-chevron-up": this.state.bodyShown }, { "fa-chevron-down": !this.state.bodyShown }) });
         }
         return null;
     },
@@ -37,7 +37,7 @@ var Panel = React.createClass({
         var collapseComponent = this.collapseComponent();
 
         if (closeComponent || collapseComponent) {
-            return React.createElement(
+            return _react2["default"].createElement(
                 "div",
                 { className: "rui-panel-controls" },
                 collapseComponent,
@@ -46,9 +46,9 @@ var Panel = React.createClass({
             );
         }
     },
+
     render: function render() {
         var style = {};
-        var hideOnClose = this.props.hideOnClose; //by default its destroy
 
         if (this.state.bodyShown === false) {
             style.display = "none";
@@ -57,16 +57,16 @@ var Panel = React.createClass({
             style.maxHeight = this.props.maxHeight;
         }
 
-        return React.createElement(
+        return _react2["default"].createElement(
             "div",
             { className: "rui-panel-c" },
-            React.createElement(
+            _react2["default"].createElement(
                 "div",
                 { className: "rui-panel-header" },
-                React.createElement(
+                _react2["default"].createElement(
                     "div",
                     null,
-                    React.createElement(
+                    _react2["default"].createElement(
                         "span",
                         { className: "rui-panel-title" },
                         this.props.title
@@ -74,7 +74,7 @@ var Panel = React.createClass({
                 ),
                 this.headerRhsComponent()
             ),
-            React.createElement(
+            _react2["default"].createElement(
                 "div",
                 { style: style, className: "rui-panel-body" },
                 this.props.children

@@ -12,7 +12,7 @@ var upperCaseFirstLetter = function upperCaseFirstLetter(text) {
 var createLabel = function createLabel(labelText) {
 
     if (labelText) {
-        return upperCaseFirstLetter(labelText.split("").map(function (ch) {
+        return upperCaseFirstLetter(labelText.split('').map(function (ch) {
             if (ch === ch.toUpperCase()) {
                 return " " + ch;
             } else {

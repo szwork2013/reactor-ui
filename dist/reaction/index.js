@@ -5,7 +5,7 @@
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -33,7 +33,13 @@ var createUrlPath = function createUrlPath(routePath) {
 
             var tmpUrlPath = createUrlPath(urlPath);
 
-            for (var i = 0; i < tmpUrlPath.pathArr.length; i++) {}
+            for (var i = 0; i < tmpUrlPath.pathArr.length; i++) {
+
+                /*
+                if ( pathArr[i] !== tmpUrlPath.pathArr[i] ) {
+                    return false;
+                }*/
+            }
 
             return true;
         }
@@ -131,7 +137,7 @@ var dispatchRoute = function dispatchRoute() {
 
     var urlPath = location.href;
 
-    if (urlPath.indexOf("#") !== -1) {
+    if (urlPath.indexOf('#') !== -1) {
         renderRouteHandler(findMatchingRoute(getHashPath(urlPath)));
     } else {
         renderRouteHandler(routesMap[DEFAULT_PATH_KEY]);
@@ -152,8 +158,3 @@ Object.defineProperty(api, "route", { writeable: false, enumerable: true, config
 Object.defineProperty(api, "run", { writeable: false, enumerable: true, configurable: false, value: run });
 
 module.exports = api;
-
-/*
-if ( pathArr[i] !== tmpUrlPath.pathArr[i] ) {
-    return false;
-}*/

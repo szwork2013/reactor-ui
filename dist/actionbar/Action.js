@@ -16,7 +16,7 @@ var Action = _react2['default'].createClass({
     render: function render() {
         return _react2['default'].createElement(
             'div',
-            { style: { display: 'inline-block', padding: '0px 2px' } },
+            { style: { display: 'inline-block', padding: "0px 2px" } },
             this.props.children
         );
     }

@@ -58,7 +58,7 @@ var AutoCompleteResult = (0, _radium2['default'])(_react2['default'].createClass
         }
         return _react2['default'].createElement(
             'div',
-            { onClick: this.resultItemClicked.bind(null, index), dataIndex: index, className: 'rui-form-ac-result', style: { padding: '8px 6px' } },
+            { onClick: this.resultItemClicked.bind(null, index), dataIndex: index, className: 'rui-form-ac-result', style: { padding: "8px 6px" } },
             rendered
         );
     },
@@ -114,8 +114,8 @@ var AutoComplete = (0, _radium2['default'])(_react2['default'].createClass({
 
         var anchorEl = _react2['default'].findDOMNode(this.refs.acCont);
         var computedStyle = window.getComputedStyle(anchorEl);
-        var computedHeight = computedStyle.getPropertyValue('height');
-        var computedWidth = computedStyle.getPropertyValue('width');
+        var computedHeight = computedStyle.getPropertyValue("height");
+        var computedWidth = computedStyle.getPropertyValue("width");
 
         var adjustmentHeight = parseInt(computedHeight, 10);
         var width = parseInt(computedWidth, 10);
@@ -214,7 +214,7 @@ var AutoComplete = (0, _radium2['default'])(_react2['default'].createClass({
         if (this.state.selection) {
             value = this._parseValue(this.state.selection);
         }
-        var inputStyle = [_style2['default'].autocompleteInputStyle, { height: '100%', width: '100%', position: 'relative', left: '0px', tabindex: 'tabindex' }];
+        var inputStyle = [_style2['default'].autocompleteInputStyle, { height: "100%", width: "100%", position: "relative", left: "0px", tabindex: "tabindex" }];
 
         return _react2['default'].createElement('input', { onKeyDown: this.onKeyUp, value: value, ref: 'acInput', onChange: this.acInputChange, placeholder: this.props.placeholder, type: 'text', autoComplete: 'off',
             style: inputStyle });
@@ -234,7 +234,7 @@ var AutoComplete = (0, _radium2['default'])(_react2['default'].createClass({
         } else {
             styleArr.push(_style2['default'].inputStyleBlock);
         }
-        styleArr.push(this.getUserInputOverrideStyles('containerStyleOverride'));
+        styleArr.push(this.getUserInputOverrideStyles("containerStyleOverride"));
         return _react2['default'].createElement(
             'div',
             { style: [_style2['default'].containerStyle] },

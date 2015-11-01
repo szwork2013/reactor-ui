@@ -1,7 +1,4 @@
-/*globals require,module */
-/* jshint -W097,esnext: true */
 
-'use strict';
 
 module.exports = {
     SideNav : require("./SideNav"),

@@ -1,11 +1,9 @@
-/*globals require,module,document */
-/* jshint -W097, esnext: true */
-'use strict';
 
 var React = require("react");
 var Pill = require("reactor-ui/Pill");
 import {Btn,BtnGroup,BtnDrpDown} from 'reactor-ui/button';
-import Toast from 'reactor-ui/alert/Toast';
+import {toast,Toast} from 'reactor-ui/alert/Toast';
+
 
 React.render(
     <div className="container">
@@ -79,30 +77,33 @@ var BtnGroupDemo = React.createClass({
 
 });
 
-
-var ToastDemo = React.createClass({
-
-    getInitialState: function() {
-        return {showError: false };
-    },
-    onClick : function() {
-        this.setState({showError : !this.state.showError });
-    },
-    onToastCompleted() {
-        this.setState({showError: false});
-    },
-    render: function() {
-        return <div>
-            <Btn width="120px" text={ "Toast It"} onClick={this.onClick} /><span> </span>
-            {this.state.showError === true ? <Toast onToastCompleted={this.onToastCompleted}><span>{"Im toasted"}</span> </Toast> : null }
-        </div>;
-    }
-
+document.getElementById('showtoast').addEventListener('click', () => {
+    toast(<Toast ><span>{"Im toasted"}</span> </Toast>);
 });
+
+// var ToastDemo = React.createClass({
+//
+//     getInitialState: function() {
+//         return {showError: false };
+//     },
+//     onClick : function() {
+//         this.setState({showError : !this.state.showError });
+//     },
+//     onCompleted() {
+//         this.setState({showError: false});
+//     },
+//     render: function() {
+//         return <div>
+//             <Btn width="120px" text={ "Toast It"} onClick={this.onClick} /><span> </span>
+//             {this.state.showError === true ? <Toast onCompleted={this.onCompleted}><span>{"Im toasted"}</span> </Toast> : null }
+//         </div>;
+//     }
+//
+// });
 
 
 React.render(<BtnGroupDemo/>,document.getElementById("cont4"));
-React.render(<ToastDemo/>,document.getElementById("cont7"));
+//React.render(<ToastDemo/>,document.getElementById("cont7"));
 
 var dropdownList = ["Action 1", "Action 2", "Action 3"];
 

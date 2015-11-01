@@ -1,5 +1,3 @@
-/* jshint -W097 */
-
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -75,5 +73,6 @@ var DatatableMixin = {
 
 };
 
-module.exports = DatatableMixin;
 ////<input ref="editorInput" onChange={this._editorInputChange} value={editorData.value} style={{width: editorData.cellRef.width, height: editorData.cellRef.height}} />
+
+module.exports = DatatableMixin;

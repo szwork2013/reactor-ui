@@ -1,7 +1,4 @@
 
-'use strict';
-
-
 var React = require("react");
 
 import ActionBar from '../actionbar/ActionBar';
@@ -108,7 +105,7 @@ var Portlet = React.createClass({
     },
 
     bodyEl : function() {
-        return this.refs.body.refs.el.getDOMNode();
+        return this.refs.body.refs.el;
     },
 
     on : function(eventType, selector, handler, useCapture) {

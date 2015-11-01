@@ -1,4 +1,3 @@
-
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -17,7 +16,7 @@ var _TabActionBar = require('./TabActionBar');
 
 var _TabActionBar2 = _interopRequireDefault(_TabActionBar);
 
-var React = require('react');
+var React = require("react");
 
 var createToolboxActions = function createToolboxActions(props) {
     var toolboxDefs = props.toolbox || [];
@@ -25,7 +24,7 @@ var createToolboxActions = function createToolboxActions(props) {
     return toolboxDefs.map(function (toolbox) {
         return React.createElement(
             'a',
-            { key: toolbox['data-action-name'] },
+            { key: toolbox["data-action-name"] },
             React.createElement('i', toolbox)
         );
     });
@@ -62,10 +61,10 @@ var Header = React.createClass({
         var actionBar = findActionBar(this.props);
         var style = {};
         if (actionBar) {
-            style.lineHeight = '28px';
+            style.lineHeight = "28px";
         }
         if (this.props.titleIcon) {
-            icon = React.createElement('i', { className: 'rui-portlet-title-icon ' + this.props.titleIcon });
+            icon = React.createElement('i', { className: "rui-portlet-title-icon " + this.props.titleIcon });
         }
 
         var toolbox = null;
@@ -128,12 +127,12 @@ var Portlet = React.createClass({
             'div',
             { className: 'rui-portlet-container' },
             React.createElement(Header, this.props),
-            React.createElement(Body, _extends({}, this.props, { ref: 'body' }))
+            React.createElement(Body, _extends({}, this.props, { ref: "body" }))
         );
     },
 
     bodyEl: function bodyEl() {
-        return this.refs.body.refs.el.getDOMNode();
+        return this.refs.body.refs.el;
     },
 
     on: function on(eventType, selector, handler, useCapture) {

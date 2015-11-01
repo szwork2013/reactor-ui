@@ -1,4 +1,3 @@
-
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -56,6 +55,9 @@ var TabActionBar = _react2['default'].createClass({
             'div',
             { style: this.props.style },
             _react2['default'].Children.map(this.props.children, function (child) {
+                if (child == null) {
+                    return null;
+                }
                 return _react2['default'].cloneElement(child, { onClick: _this.onClick, active: _this.state.active });
             })
         );

@@ -8,10 +8,6 @@ var InputMixin = require("./InputMixin");
 var LabelMixin = require("./LabelMixin");
 var ValueChangeMixin = require("./ValueChangeMixin");
 
-/**
- *
- * @type {*|Function}
- */
 var DatePicker = React.createClass({
     displayName: "DatePicker",
 

@@ -1,20 +1,24 @@
-/*globals require,module */
-/* jshint -W097,esnext: true */
+
 
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _reactAddonsPureRenderMixin = require('react-addons-pure-render-mixin');
+
+var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
 var React = require("react");
 var Nav = require("./Nav");
 var IconTextSchemeMixin = require("./IconTextSchemeMixin");
 var cn = require("classnames");
-var PureRenderMixin = require("react/addons").addons.PureRenderMixin;
 
 var NavGroup = React.createClass({
     displayName: "NavGroup",
 
-    mixins: [IconTextSchemeMixin, PureRenderMixin],
+    mixins: [IconTextSchemeMixin, _reactAddonsPureRenderMixin2["default"]],
 
     getInitialState: function getInitialState() {
 
@@ -53,7 +57,7 @@ var NavGroup = React.createClass({
     componentDidMount: function componentDidMount() {
         //we cant transition 0 height to auto height.. so below is the result
         if (!this.__computedHeight) {
-            var cloned = this.refs.cont.getDOMNode().cloneNode(true);
+            var cloned = this.refs.cont.cloneNode(true);
             cloned.style.position = "absolute";
             cloned.style.left = "-9999px";
             cloned.style.height = "auto";
@@ -68,9 +72,9 @@ var NavGroup = React.createClass({
 
         var style = {};
         if (this.state.collapsed) {
-            style["height"] = this.__computedHeight;
+            style['height'] = this.__computedHeight;
         } else {
-            style["height"] = 0;
+            style['height'] = 0;
         }
 
         return React.createElement(

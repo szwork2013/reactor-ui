@@ -1,5 +1,4 @@
-/*globals require,module */
-/* jshint -W097,esnext: true */
+
 
 "use strict";
 
@@ -7,7 +6,7 @@ const React = require("react");
 const Nav = require("./Nav");
 const IconTextSchemeMixin = require("./IconTextSchemeMixin");
 const cn = require("classnames");
-const PureRenderMixin = require('react/addons').addons.PureRenderMixin;
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 const NavGroup = React.createClass({
 
@@ -50,7 +49,7 @@ const NavGroup = React.createClass({
     componentDidMount() {
         //we cant transition 0 height to auto height.. so below is the result
         if ( !this.__computedHeight ) {
-            var cloned = this.refs.cont.getDOMNode().cloneNode(true);
+            var cloned = this.refs.cont.cloneNode(true);
             cloned.style.position = "absolute";
             cloned.style.left = "-9999px";
             cloned.style.height = "auto";

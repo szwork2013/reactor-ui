@@ -33,10 +33,10 @@ _baseStyle.schemes.forEach(function (scheme) {
         color: '#FFF',
         border: '1px solid ' + _baseStyle.colors[scheme].clone().darken(0.1).hexString()
     };
-    BtnStyles[scheme + 'Hovered'] = {
+    BtnStyles[scheme + "Hovered"] = {
         backgroundColor: _baseStyle.colors[scheme].clone().darken(0.05).hexString()
     };
-    BtnStyles[scheme + 'Active'] = {
+    BtnStyles[scheme + "Active"] = {
         backgroundColor: _baseStyle.colors[scheme].clone().darken(0.15).hexString()
     };
 });

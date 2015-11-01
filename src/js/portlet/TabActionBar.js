@@ -1,6 +1,4 @@
 
-'use strict';
-
 import React from 'react';
 import cx from 'classnames';
 
@@ -42,6 +40,9 @@ const TabActionBar = React.createClass({
     render() {
         return <div style={this.props.style}>{
             React.Children.map(this.props.children, child => {
+                if ( child == null ) {
+                    return null;
+                }
                 return React.cloneElement(child,{onClick: this.onClick, active: this.state.active});
             })
         }</div>;

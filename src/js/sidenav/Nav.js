@@ -1,14 +1,12 @@
 
-"use strict";
 
-const React = require("react");
-const IconTextSchemeMixin = require("./IconTextSchemeMixin");
-const PureRenderMixin = require('react/addons').addons.PureRenderMixin;
-const cn = require("classnames");
+import React from 'react';
+import IconTextSchemeMixin from './IconTextSchemeMixin';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import cn from 'classnames';
 
-var isActive = function(props) {
-    return   ( props.selected.id === props.id
-    && props.selected.group === props.group)
+const isActive = (props) => {
+    return   ( props.selected.id === props.id && props.selected.group === props.group );
 };
 
 /**

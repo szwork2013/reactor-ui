@@ -14,15 +14,15 @@ var _radium = require('radium');
 
 var _radium2 = _interopRequireDefault(_radium);
 
-var _InputMixin = require('./InputMixin');
+var _InputMixin = require("./InputMixin");
 
 var _InputMixin2 = _interopRequireDefault(_InputMixin);
 
-var _LabelMixin = require('./LabelMixin');
+var _LabelMixin = require("./LabelMixin");
 
 var _LabelMixin2 = _interopRequireDefault(_LabelMixin);
 
-var _ValueChangeMixin = require('./ValueChangeMixin');
+var _ValueChangeMixin = require("./ValueChangeMixin");
 
 var _ValueChangeMixin2 = _interopRequireDefault(_ValueChangeMixin);
 
@@ -38,8 +38,8 @@ var mapOption = function mapOption(option) {
     var obj = option,
         value,
         text;
-    var selectionValueKey = this.props.valueKey || 'value';
-    var selectionTextKey = this.props.textKey || 'text';
+    var selectionValueKey = this.props.valueKey || "value";
+    var selectionTextKey = this.props.textKey || "text";
     var isSelection;
     var selected = null;
     if (this._getContext().model) {
@@ -98,7 +98,7 @@ var Select = (0, _radium2['default'])(_react2['default'].createClass({
     createOptions: function createOptions() {
 
         var optional = this.props.optional === false ? this.props.optional : true;
-        var optionalText = this.props.optionalText || '';
+        var optionalText = this.props.optionalText || "";
         var options = this._getOptions();
 
         var optionsEls = options.map(mapOption.bind(this));

@@ -4,9 +4,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _reactAddons = require('react/addons');
+var _react = require('react');
 
-var _reactAddons2 = _interopRequireDefault(_reactAddons);
+var _react2 = _interopRequireDefault(_react);
+
+var _reactAddonsPureRenderMixin = require('react-addons-pure-render-mixin');
+
+var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
 
 var _classnames = require('classnames');
 
@@ -20,12 +24,10 @@ var _menuList = require('../menu/List');
 
 var _menuList2 = _interopRequireDefault(_menuList);
 
-var PureRenderMixin = _reactAddons2['default'].addons.PureRenderMixin;
-
-var BtnDropDown = _reactAddons2['default'].createClass({
+var BtnDropDown = _react2['default'].createClass({
     displayName: 'BtnDropDown',
 
-    mixins: [PureRenderMixin],
+    mixins: [_reactAddonsPureRenderMixin2['default']],
 
     getInitialState: function getInitialState() {
         return { listVisible: false };
@@ -34,7 +36,7 @@ var BtnDropDown = _reactAddons2['default'].createClass({
     createItems: function createItems() {
         if (this.state.listVisible) {
             if (this.props.items) {
-                return _reactAddons2['default'].createElement(_menuList2['default'], _extends({ onClick: this.onItemClick }, this.props, { minWidth: this.state.listMinWidth }));
+                return _react2['default'].createElement(_menuList2['default'], _extends({ onClick: this.onItemClick }, this.props, { minWidth: this.state.listMinWidth }));
             } else {
                 //FIXME, we should listener here
                 return this.props.children;
@@ -54,25 +56,25 @@ var BtnDropDown = _reactAddons2['default'].createClass({
         this.setState({ listVisible: !this.state.listVisible });
     },
     buttonClicked: function buttonClicked() {
-        var element = this.refs.btn.getDOMNode();
+        var element = this.refs.btn;
         var width = element.offsetWidth;
-        this.setState({ listVisible: !this.state.listVisible, listMinWidth: width + 'px' });
+        this.setState({ listVisible: !this.state.listVisible, listMinWidth: width + "px" });
     },
 
     render: function render() {
         var defaultText = this.props.defaultText;
 
-        var classNames = (0, _classnames2['default'])('rui-btn-drpdown', { 'rui-btn-drpdown-green': 'green' === this.props.scheme });
+        var classNames = (0, _classnames2['default'])("rui-btn-drpdown", { "rui-btn-drpdown-green": "green" === this.props.scheme });
 
-        return _reactAddons2['default'].createElement(
+        return _react2['default'].createElement(
             'div',
             { className: classNames },
-            _reactAddons2['default'].createElement(
+            _react2['default'].createElement(
                 _Btn2['default'],
                 { scheme: this.props.scheme, ref: 'btn', onBlur: this.onBlur, disabled: this.props.disabled, onClick: this.buttonClicked },
                 defaultText,
                 ' ',
-                _reactAddons2['default'].createElement('span', { className: 'fa fa-chevron-down' })
+                _react2['default'].createElement('span', { className: 'fa fa-chevron-down' })
             ),
             this.createItems()
         );

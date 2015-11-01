@@ -50,7 +50,7 @@ const TableColumns = React.createClass({
 
     render() {
 
-        return <div style={{position: 'absolute', top: 0, left: 0}}>
+        return <div style={{position: 'absolute', zIndex: 111111, top: 0, left: 0, overflow: 'hidden'}}>
             <table style={baseTableStyle}>
                 <ColGroup {...this.props}/>
                 <Thead {...this.props} />

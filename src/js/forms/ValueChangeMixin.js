@@ -4,13 +4,13 @@ var ValueChangeMixin = {
 
 
     dispatchInputChange : function() {
-        var elNode = this.__input.getDOMNode();
+        var elNode = this.__input;
         if ( this.hasContext() ) {
             if ( this._getContext().changeListener  ) {
                 this._getContext().changeListener(this.props.name,elNode.value);
             }
         }
-        if ( this.props.onInputChange ) {            
+        if ( this.props.onInputChange ) {
             this.props.onInputChange(this.props.name,elNode.value);
         }
 

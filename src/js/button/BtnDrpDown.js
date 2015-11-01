@@ -38,7 +38,7 @@ const BtnDropDown = React.createClass({
        this.setState({listVisible: !this.state.listVisible});
     },
     buttonClicked : function() {
-        var element = this.refs.btn.getDOMNode();
+        var element = this.refs.btn;
         var width = element.offsetWidth;
         this.setState({listVisible: !this.state.listVisible,listMinWidth: width +"px"});
     },

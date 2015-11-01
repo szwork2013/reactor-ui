@@ -6,9 +6,13 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _reactAddons = require('react/addons');
+var _react = require('react');
 
-var _reactAddons2 = _interopRequireDefault(_reactAddons);
+var _react2 = _interopRequireDefault(_react);
+
+var _reactAddonsPureRenderMixin = require('react-addons-pure-render-mixin');
+
+var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
 
 var _radium = require('radium');
 
@@ -23,21 +27,20 @@ var _style = require('./style');
 var _style2 = _interopRequireDefault(_style);
 
 var baseStyleSheet = _baseStyle2['default'];
-var PureRenderMixin = _reactAddons2['default'].addons.PureRenderMixin;
 
-var Btn = (0, _radium2['default'])(_reactAddons2['default'].createClass({
+var Btn = (0, _radium2['default'])(_react2['default'].createClass({
 
-    mixins: [PureRenderMixin],
+    mixins: [_reactAddonsPureRenderMixin2['default']],
 
     propTypes: {
         /** theme */
-        scheme: _reactAddons2['default'].PropTypes.string,
-        text: _reactAddons2['default'].PropTypes.string,
+        scheme: _react2['default'].PropTypes.string,
+        text: _react2['default'].PropTypes.string,
         /** the value assigned to this button, used by button groups */
-        value: _reactAddons2['default'].PropTypes.string,
+        value: _react2['default'].PropTypes.string,
         /** if active === value then then it will be activated via a css */
-        active: _reactAddons2['default'].PropTypes.string,
-        disabled: _reactAddons2['default'].PropTypes.bool
+        active: _react2['default'].PropTypes.string,
+        disabled: _react2['default'].PropTypes.bool
 
     },
 
@@ -54,7 +57,7 @@ var Btn = (0, _radium2['default'])(_reactAddons2['default'].createClass({
 
     createIcon: function createIcon() {
         if (this.props.iconCls) {
-            return _reactAddons2['default'].createElement('span', { className: this.props.iconCls });
+            return _react2['default'].createElement('span', { className: this.props.iconCls });
         }
         return null;
     },
@@ -76,7 +79,7 @@ var Btn = (0, _radium2['default'])(_reactAddons2['default'].createClass({
             icon,
             text;
 
-        if (_reactAddons2['default'].Children.count(this.props.children) === 0) {
+        if (_react2['default'].Children.count(this.props.children) === 0) {
             icon = this.createIcon();
             text = this.createText();
             if (icon) {
@@ -96,16 +99,16 @@ var Btn = (0, _radium2['default'])(_reactAddons2['default'].createClass({
         return props.styles || {};
     },
     createStyles: function createStyles() {
-        var scheme = this.props.scheme || '';
+        var scheme = this.props.scheme || "";
         var userStyles = this.getUserStyles();
 
-        return [_style2['default'].Btn, baseStyleSheet[scheme], _style2['default'][scheme], this.props.style, this.state.hovered ? _style2['default'][scheme + 'Hovered'] : {}, this.props.disabled ? _style2['default'].BtnDisabled : {}, this.props.value === this.props.active && this.props.value !== undefined ? _style2['default'][scheme + 'Active'] : {}].concat(userStyles);
+        return [_style2['default'].Btn, baseStyleSheet[scheme], _style2['default'][scheme], this.props.style, this.state.hovered ? _style2['default'][scheme + "Hovered"] : {}, this.props.disabled ? _style2['default'].BtnDisabled : {}, this.props.value === this.props.active && this.props.value !== undefined ? _style2['default'][scheme + "Active"] : {}].concat(userStyles);
     },
     render: function render() {
 
         var styles = this.createStyles();
 
-        return _reactAddons2['default'].createElement(
+        return _react2['default'].createElement(
             'button',
             { ref: 'btn', style: styles,
                 onMouseOver: this.onMouseOver, onMouseOut: this.onMouseOut,

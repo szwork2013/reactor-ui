@@ -1,14 +1,18 @@
 "use strict";
 
-var React = require("react");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
 
 var ClonerMixin = {
 
     cloneChildren: function cloneChildren() {
         var _this = this;
 
-        return React.Children.map(this.props.children, function (child) {
-            return React.cloneElement(child, { model: _this.props.model, changeListener: _this.props.changeListener });
+        return _react2["default"].Children.map(this.props.children, function (child) {
+            return _react2["default"].cloneElement(child, { model: _this.props.model, changeListener: _this.props.changeListener });
         });
     }
 };

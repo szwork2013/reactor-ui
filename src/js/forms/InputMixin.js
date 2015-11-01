@@ -54,7 +54,7 @@ const InputMixin = {
 
         this.__input = el;
         if ( this.__input ) {
-            this.__input.getDOMNode().focus();
+            this.__input.focus();
         }
     }
 

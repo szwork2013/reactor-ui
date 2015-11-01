@@ -1,27 +1,24 @@
 
-import React from 'react/addons';
+import React from 'react';
+import {render,findDOMNode,unmountComponentAtNode} from 'react-dom';
+
+
+
 import radium from 'radium';
 import {styles} from '../baseStyle';
 
 
+const {createElement, cloneElement} = React;
+
 const style = {
     base: {
         color: '#FFF',
-        position: 'fixed',
-        zIndex: 99999,
-        right: '-220px',
-        bottom: '12px',
+        position: 'relative',
+        transition:  'right 0.16s ease-in',
         padding: 16,
-        minWidth: 220,
-        transition: 'right 0.16s ease-in',
-        fontWeight: 700,
+        minWidth: 300,
+        fontWeight: 400,
         textAlign: 'center'
-    },
-    baseVisible: {
-        right: '12px'
-    },
-    baseHidden: {
-        right: '-220px'
     }
 };
 
@@ -39,50 +36,87 @@ const TYPES_TO_SCHEME = {
     info: 'blue'
 };
 
-const WAITFOR_TIMEOUT = 500;
-
 const Toast = radium(React.createClass({
-
     propTypes: {
-        type: React.PropTypes.oneOf([TYPES.success,TYPES.error,TYPES.warning,TYPES.info]),
-        duration: React.PropTypes.number,
-        onToastCompleted: React.PropTypes.func
+            type: React.PropTypes.oneOf([TYPES.success,TYPES.error,TYPES.warning,TYPES.info])
     },
-
+    getInitialState() {
+        return { mounted: false };
+    },
     getDefaultProps: function () {
         return { type: TYPES.success, duration: 2000 };
     },
-    componentDidUpdate() {
-        if ( this.state.visible === false && this.state.goneAnimationCompleted === true  ) {
-            if ( this.props.onToastCompleted ) {
-                this.props.onToastCompleted();
-            }
+    componentWillUnmount() {
+        if ( this.props.onComponentUnmounted ) {
+            this.props.onComponentUnmounted();
         }
-        //wait till animation to show is completed
-        setTimeout( () => {
-            this.setState({goneAnimationCompleted: true});
-        },this.props.duration + WAITFOR_TIMEOUT);
     },
     componentDidMount() {
-        this._toastEl = React.findDOMNode(this.refs.toastcontainer);
-        this._toastEl.addEventListener('transitionend',this.transitionEnd);
-        setTimeout( ()=> {
-            this.setState({visible: true});
-        },0);
         setTimeout( () => {
-            this.setState({visible: false});
-        },this.props.duration);
-
-    },
-    getInitialState() {
-        return { visible : false ,goneAnimationCompleted: false };
+            this.setState({mounted: true});
+            if ( this.props.onComponentMounted ) {
+                this.props.onComponentMounted(findDOMNode(this.refs.toastcontainer),this);
+            }
+        }, 0);
     },
 
     render() {
         const type = this.props.type;
-        return <div ref="toastcontainer" style={[style.base,styles[TYPES_TO_SCHEME[type]], this.state.visible ? style.baseVisible : style.baseHidden]}>{this.props.children}</div>;
+        const rightStyle = this.state.mounted ? {right: 0 } : { right: -320 };
+        return <div style={[style.base,styles[TYPES_TO_SCHEME[type]],rightStyle]}>{this.props.children}</div>;
 
     }
 }));
 
+let toastContainer;
+
+const createContainer = function() {
+    if ( !toastContainer ) {
+        toastContainer = document.createElement("div");
+        const {style} = toastContainer;
+        style.position = 'fixed';
+        style.right = '12px';
+        style.bottom = '12px';
+        style.overflow = 'visible';
+        style.zIndex = 9999999;
+        document.body.appendChild(toastContainer);
+
+    }
+};
+
+const onComponentMounted = (mountNode,el,toastInstance) => {
+
+    setTimeout( () => {
+        toastInstance.setState({mounted:false});
+        el.addEventListener('transitionend', ()=> {
+            React.unmountComponentAtNode(mountNode);
+        });
+    }, toastInstance.props.duration );
+}
+
+const onComponentUnmounted = (mountNode) => {
+    setTimeout( () => {
+        toastContainer.removeChild(mountNode);
+    }, 0);
+};
+
+const createToastContainer = () => {
+    const element = document.createElement('div');
+    element.style.margin = '2px';
+    return element;
+};
+
+export function toast(toastElement) {
+    createContainer();
+    const toastContainerEl = createToastContainer();
+
+    toastContainer.appendChild(toastContainerEl);
+    render(cloneElement(toastElement,{
+                        onComponentUnmounted: onComponentUnmounted.bind(null, toastContainerEl),
+                        onComponentMounted: onComponentMounted.bind(null,toastContainerEl)
+                    }),
+                    toastContainerEl);
+};
+
+export {Toast};
 export default Toast;

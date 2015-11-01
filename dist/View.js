@@ -10,7 +10,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var PureRenderMixin = _react2['default'].addons.PureRenderMixin;
+var _reactAddonsPureRenderMixin = require('react-addons-pure-render-mixin');
+
+var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
 
 /**
  * A simple view container
@@ -18,7 +20,7 @@ var PureRenderMixin = _react2['default'].addons.PureRenderMixin;
 var View = _react2['default'].createClass({
     displayName: 'View',
 
-    mixins: [PureRenderMixin],
+    mixins: [_reactAddonsPureRenderMixin2['default']],
 
     propTypes: {
         /** the visible view */

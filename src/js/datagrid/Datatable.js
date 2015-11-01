@@ -94,13 +94,13 @@ const Datatable = React.createClass({
     componentDidMount() {
         document.addEventListener('click', this._onDocumentClickEvent);
         if ( this.refs.editorInput ) {
-            this.refs.editorInput.getDOMNode().focus();
+            this.refs.editorInput.focus();
         }
     },
 
     componentDidUpdate: function () {
         if ( this.refs.editorInput ) {
-            this.refs.editorInput.getDOMNode().focus();
+            this.refs.editorInput.focus();
         }
     },
 
@@ -123,5 +123,5 @@ const Datatable = React.createClass({
     }
 });
 
-
-module.exports =  Datatable;
+export {Datatable};
+export default Datatable;

@@ -1,10 +1,6 @@
-/*globals require,module */
-/* jshint -W097, esnext: true */
-'use strict';
 
-var React = require("react");
+import React from 'react';
 
-var cs = require("classnames");
 
 var Panel = React.createClass({
 
@@ -41,9 +37,9 @@ var Panel = React.createClass({
             return (<div className="rui-panel-controls">{collapseComponent} {closeComponent}</div>);
         }
     },
+
     render() {
         var style = {};
-        var hideOnClose = this.props.hideOnClose; //by default its destroy
 
         if ( this.state.bodyShown === false ) {
             style.display = "none";

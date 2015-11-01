@@ -8,7 +8,10 @@ export const baseTableStyle = {
     tableLayout: 'fixed',
     outlineWidth: 0,
     maxWidth: 'none',
-    maxHeight: 'none'
+    maxHeight: 'none',
+    background: '#FFF',
+    width: '100%'
+
 };
 
 export const columnStyle = {

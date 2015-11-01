@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -37,7 +37,7 @@ var View = _react2["default"].createClass({
             theElement = _react2["default"].createElement("div", { ref: "el" });
         }
         var name = null;
-        if (typeof this.props.view === "string") {
+        if (typeof this.props.view === 'string') {
             name = this.props.view;
         } else {
             name = this.props.ref;
@@ -61,7 +61,7 @@ var ViewSwitcher = _react2["default"].createClass({
         var viewPrefix = this.props.viewPrefix ? this.props.viewPrefix : "";
         var visible = this.props.visible;
 
-        return { views: views, viewPrefix: viewPrefix || "", visible: visible };
+        return { views: views, viewPrefix: viewPrefix || '', visible: visible };
     },
 
     componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -84,7 +84,7 @@ var ViewSwitcher = _react2["default"].createClass({
             { className: prefix },
             " ",
             views.map(function (view) {
-                if (typeof view === "string") {
+                if (typeof view === 'string') {
                     return _react2["default"].createElement(View, { ref: view, key: view, view: view, visible: _this.state.visible === view });
                 } else {
                     return _react2["default"].createElement(View, { ref: view.ref, element: view.element, visible: _this.state.visible === view.ref });
@@ -105,7 +105,7 @@ var ViewSwitcher = _react2["default"].createClass({
     el: function el(view) {
         var refViews = this.refs[view];
         if (refViews.refs.el) {
-            return this.refs[view].refs.el.getDOMNode();
+            return this.refs[view].refs.el;
         }
         return null;
     }
