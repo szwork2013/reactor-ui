@@ -1,9 +1,9 @@
 
 
-module.exports = function(array) {
+const arrayDataProvider = function(array) {
 
     if ( !Array.isArray(array) ) {
-        throw new Error("argument must be an array");
+        throw new Error('argument must be an array');
     }
 
     return {
@@ -42,3 +42,5 @@ module.exports = function(array) {
 
     };
 };
+
+export default arrayDataProvider;

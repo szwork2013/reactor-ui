@@ -1,29 +1,40 @@
 
 import React  from 'react';
+import {findDOMNode} from 'react-dom';
 import Header from './Header';
 import GridRow from './GridRow';
 import Cell from './Cell';
 
 import arrayDataProvider from './arrayDataProvider';
-
 import RecordAccessMixin from './RecordAccessMixin';
 import DatatableMixin from './DatatableMixin';
 
+
+const colConfigHeaderCellMapper = (config) => {
+    return (<Header key={config.id} config={config} width={config.width} title={config.title || ''} />);
+};
 
 const Datatable = React.createClass({
 
     mixins: [DatatableMixin,RecordAccessMixin],
 
+    propTypes: {
+        data: React.PropTypes.array.isRequired,
+        dataProvider: React.PropTypes.func,
+        pager: React.PropTypes.func,
+        height: React.PropTypes.number,
+        width: React.PropTypes.any
+    },
+
     getInitialState() {
-        var data = this.props.data;
-        var providedDataProvider = this.props.dataProvider;
+        const data = this.props.data;
+        let providedDataProvider = this.props.dataProvider;
         var dataProvider;
 
         //use pager if it exists
         if ( this.props.pager ) {
             dataProvider = null;
         } else {
-
             if ( providedDataProvider ) {
                 dataProvider = providedDataProvider;
             } else {
@@ -32,7 +43,6 @@ const Datatable = React.createClass({
         }
         return {
             pager : this.props.pager,
-            maxHeight: this.props.maxHeight,
             colconfig : this._createColumnConfig(),
             dataProvider : dataProvider
         };
@@ -42,12 +52,10 @@ const Datatable = React.createClass({
 
     _createHeader() {
 
-        var headerCells = this.state.colconfig.map( config => {
-            return (<Header config={config} width={config.width} title={config.title || ''} />);
-        });
+        const headerCells = this.state.colconfig.map(colConfigHeaderCellMapper);
 
-        return <div style={{position: 'relative'}} ref="headerCont" className={"rui-dt-colgroup"}>
-            <GridRow header={true} style="header" ref='headerRow'>{headerCells}</GridRow>
+        return <div style={{position: 'relative'}} ref='headerCont' className={'rui-dt-colgroup'}>
+            <GridRow header={true} style='header' ref='headerRow'>{headerCells}</GridRow>
         </div>;
 
     },
@@ -55,7 +63,7 @@ const Datatable = React.createClass({
     _createGridRow : function(index) {
         var cells = [];
         this.state.colconfig.map( config => {
-            cells.push(<Cell onClick={this._onCellClick} index={index} dataProvider={this.state.dataProvider} config={config} />);
+            cells.push(<Cell key={config.id} onClick={this._onCellClick} index={index} dataProvider={this.state.dataProvider} config={config} />);
         });
         return cells;
     },
@@ -76,17 +84,15 @@ const Datatable = React.createClass({
 
     _createBody() {
 
-        return <div ref="ruiDtBody" style={ { height: this.props.height || "100%", overflowY: "hidden", position: 'relative'}} className={"rui-dt-rowgroup"} >
+        return <div ref='ruiDtBody' style={ { height: this.props.height || '100%', overflowY: 'hidden', position: 'relative'}} className={'rui-dt-rowgroup'} >
                 {this._createRecords()}
             </div>;
 
     },
 
     _onDocumentClickEvent(e) {
-        var editorContainer = React.findDOMNode(this.refs.editorContainer);
-
-        if ( editorContainer && !editorContainer.contains(e.target) && this.state.editorData ) {
-            //outside
+        var editorContainer = findDOMNode(this.refs.editorContainer);
+        if ( editorContainer && !editorContainer.contains(e.target) && this.state.editorData ) { //outside
             this.setState({editorData : null}); //remove editor
         }
     },
@@ -98,20 +104,16 @@ const Datatable = React.createClass({
         }
     },
 
-    componentDidUpdate: function () {
-        if ( this.refs.editorInput ) {
-            this.refs.editorInput.focus();
-        }
-    },
+    
 
     componentWillUnmount() {
         document.removeEventListener('click', this._onDocumentClickEvent);
     },
     render : function() {
-        var width = this.props.width || "100%";
+        var width = this.props.width || '100%';
         return (
-            <div className="rui-dt">
-                <div style={{width: width}} className={"rui-dt-container"}>
+            <div className='rui-dt'>
+                <div style={{width: width}} className={'rui-dt-container'}>
                     {this._createHeader()}
                     {this._createBody()}
                 </div>

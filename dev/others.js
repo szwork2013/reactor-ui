@@ -78,7 +78,7 @@ var BtnGroupDemo = React.createClass({
 });
 
 document.getElementById('showtoast').addEventListener('click', () => {
-    toast(<Toast ><span>{"Im toasted"}</span> </Toast>);
+    toast(<Toast ><span>{"Im toastedxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxwd dewwwwwwwwwwwwww fweeeeeeeeeeeee fweeeeeeeeeeeeeee dfwefwfwe"}</span> </Toast>);
 });
 
 // var ToastDemo = React.createClass({

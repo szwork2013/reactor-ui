@@ -23,7 +23,12 @@ const Btn = radium(React.createClass({
         value : React.PropTypes.string,
         /** if active === value then then it will be activated via a css */
         active : React.PropTypes.string,
-        disabled: React.PropTypes.bool
+        disabled: React.PropTypes.bool,
+        iconCls: React.PropTypes.string,
+        onClick: React.PropTypes.function,
+        onBlur: React.PropTypes.function,
+        children: React.PropTypes.node,
+        style: React.PropTypes.object
 
     },
 
@@ -81,14 +86,14 @@ const Btn = radium(React.createClass({
         return props.styles || {};
     },
     createStyles() {
-        const scheme =this.props.scheme || "";
+        const scheme =this.props.scheme || '';
         const userStyles = this.getUserStyles();
 
         return [btnStyle.Btn,baseStyleSheet[scheme],
                         btnStyle[scheme],
-                        this.props.style, this.state.hovered ? btnStyle[scheme+"Hovered"] : {},
+                        this.props.style, this.state.hovered ? btnStyle[scheme+'Hovered'] : {},
                         this.props.disabled ? btnStyle.BtnDisabled :{},
-                        (this.props.value === this.props.active && this.props.value !== undefined ) ? btnStyle[scheme+"Active"] : {}
+                        (this.props.value === this.props.active && this.props.value !== undefined ) ? btnStyle[scheme+'Active'] : {}
         ].concat(userStyles);
 
     },
@@ -96,7 +101,7 @@ const Btn = radium(React.createClass({
 
         const styles = this.createStyles();
 
-        return (<button ref="btn" style={styles}
+        return (<button ref='btn' style={styles}
                     onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}
                     onBlur={this.props.onBlur} value={this.props.value}
                     disabled={this.props.disabled === true} onClick={this.__onClickHandler}>

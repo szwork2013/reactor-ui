@@ -1,6 +1,9 @@
+'use strict';
 
-
-export const baseTableStyle = {
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+var baseTableStyle = {
     borderCollapse: 'separate',
     borderSpacing: 0,
     margin: 0,
@@ -14,25 +17,24 @@ export const baseTableStyle = {
 
 };
 
-export const columnStyle = {
+exports.baseTableStyle = baseTableStyle;
+var columnStyle = {
     borderLeft: '1px solid #CCC'
 };
 
-
-export const baseCellContainerStyle = {
-    paddingLeft: 6,
-    paddingRight: 6,
-    borderRight: '1px solid #DDD',
-    borderBottom: '1px solid #DDD',
+exports.columnStyle = columnStyle;
+var baseCellStyle = {
+    borderLeft: '1px solid #CCC'
 };
 
-export const baseCellStyle = {
+exports.baseCellStyle = baseCellStyle;
+var cellStyle = {
     whiteSpace: 'nowrap',
+    padding: '0 4px',
     fontSize: 13,
-    lineHeight: '22px',
-
     overflow: 'hidden',
     fontFamily: 'Verdana, Helvetica, Arial, FreeSans, sans-serif'
 };
 
+exports.cellStyle = cellStyle;
 Object.freeze(baseTableStyle);

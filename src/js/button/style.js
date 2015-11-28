@@ -29,10 +29,10 @@ schemes.forEach( scheme => {
         color: '#FFF',
         border: '1px solid ' + colors[scheme].clone().darken(0.1).hexString()
     };
-    BtnStyles[scheme+"Hovered"] = {
+    BtnStyles[scheme+'Hovered'] = {
         backgroundColor:  colors[scheme].clone().darken(0.05).hexString()
     };
-    BtnStyles[scheme+"Active"] = {
+    BtnStyles[scheme+'Active'] = {
         backgroundColor:  colors[scheme].clone().darken(0.15).hexString()
     };
 

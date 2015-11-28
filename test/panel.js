@@ -1,6 +1,4 @@
-/*globals require,describe,it */
-/* jshint -W097, esnext: true */
-'use strict';
+
 
 var assert = require("assert");
 var Panel = require("reactor-ui/panel");

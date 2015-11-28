@@ -2,6 +2,7 @@
 import React from 'react';
 import RecordAccessMixin from './RecordAccessMixin';
 import assign from 'object-assign';
+import {baseCellStyle, baseCellContainerStyle} from './styles';
 
 var Cell = React.createClass({
 
@@ -10,7 +11,8 @@ var Cell = React.createClass({
     propTypes: {
         index: React.PropTypes.number.isRequired,
         dataProvider: React.PropTypes.object.isRequired,
-        config: React.PropTypes.object.isRequired
+        config: React.PropTypes.object.isRequired,
+        onClick: React.PropTypes.func
     },
 
     getInitialState() {
@@ -48,13 +50,13 @@ var Cell = React.createClass({
         var toRenderer;
 
         if ( recData.renderer ) {
-            toRenderer = { //TODO: we probably should just pass this shit
-                    value: recData.value,
-                    formattedValue: recData.formattedValue,
-                    record: recData.record,
-                    config: recData.config,
-                    id: recData.id,
-                    index: this.props.index
+            toRenderer = { 
+                value: recData.value,
+                formattedValue: recData.formattedValue,
+                record: recData.record,
+                config: recData.config,
+                id: recData.id,
+                index: this.props.index
 
             };
             renderedData = recData.renderer(toRenderer);
@@ -63,25 +65,25 @@ var Cell = React.createClass({
         return <div>{renderedData}</div>;
     },
     render() {
-        var cellStyle = {};
-        var cellAlign = this.props.config.cellAlign;
-        var width = this.props.config.width;
-        var flex,flexInt;
-        var style;
+        let cellStyle = {};
+        const cellAlign = this.props.config.cellAlign;
+        const width = this.props.config.width;
+        let flex, flexInt;
+
         if ( cellAlign ) {
             cellStyle = { textAlign: cellAlign };
         }
 
         if ( width ) {
-            flex = "0 0 " + width;
+            flex = '0 0 ' + width;
         } else {
-            flexInt = this.props.config.flex ? this.props.config.flex : "1";
-            flex = flexInt + " 1 10px";
+            flexInt = this.props.config.flex ? this.props.config.flex : '1';
+            flex = flexInt + ' 1 10px';
         }
-        style = assign({flex: flex},this.props.config.style);
+        const style = assign(baseCellContainerStyle, {flex: flex},this.props.config.style);
         return (
-            <div style={{flex : flex}}  ref="cell" onClick={this._onClick} className="rui-dt-cell-cont">
-                <div style={cellStyle} className="rui-dt-cell">{this._getCellValue()}</div>
+            <div style={style}  ref="cell" onClick={this._onClick}>
+                <div style={assign(baseCellStyle,cellStyle)} className="rui-dt-cell">{this._getCellValue()}</div>
             </div>
         );
 
@@ -91,4 +93,4 @@ var Cell = React.createClass({
 });
 
 
-module.exports = Cell;
+export default Cell;

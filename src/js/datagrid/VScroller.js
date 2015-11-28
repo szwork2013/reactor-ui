@@ -8,8 +8,8 @@ import React from 'react';
  */
 const VScroller = React.createClass({
 
-    _onWheel(e) {
-
+    propTypes: {
+        height: React.PropTypes.any
     },
 
     scrolling() {
@@ -17,8 +17,8 @@ const VScroller = React.createClass({
     },
 
     render() {
-        return <div onWheel={this._onWheel} style={ { height: this.props.height , width: 16, backgroundColor : "#EEE" }}  className={"rui-dg-vscroller"}>
-            <div  style={ { borderRadius: 2, margin: 3, backgroundColor : "#959595", width: 10, height: 30}}></div>
+        return <div onWheel={this._onWheel} style={ { height: this.props.height , width: 16, backgroundColor : '#EEE' }}  className={'rui-dg-vscroller'}>
+            <div  style={ { borderRadius: 2, margin: 3, backgroundColor : '#959595', width: 10, height: 30}}></div>
         </div>;
     }
 

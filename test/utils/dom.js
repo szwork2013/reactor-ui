@@ -6,9 +6,10 @@ var win = doc.defaultView;
 
 global.document = doc;
 global.window = win;
+global.navigator = win.navigator;
 
-Object.keys(win).forEach( key => {
-    if ( key !== 'console' ) {
-        global[key] = win[key];
-    }
-});
+// Object.keys(win).forEach( key => {
+//     if ( key !== 'console' ) {
+//         global[key] = win[key];
+//     }
+// });

@@ -9,8 +9,17 @@ import List from '../menu/List';
 
 
 const BtnDropDown = React.createClass({
+
     mixins: [PureRenderMixin],
 
+    propTypes: {
+        items: React.PropTypes.array,
+        children: React.PropTypes.node,
+        onClick: React.PropTypes.function,
+        defaultText: React.PropTypes.string,
+        scheme: React.PropTypes.string,
+        disabled: React.PropTypes.bool
+    },
     getInitialState : function() {
         return { listVisible : false };
     },
@@ -35,27 +44,27 @@ const BtnDropDown = React.createClass({
     },
 
     onBlur : function() {
-       this.setState({listVisible: !this.state.listVisible});
+        this.setState({listVisible: !this.state.listVisible});
     },
     buttonClicked : function() {
         var element = this.refs.btn;
         var width = element.offsetWidth;
-        this.setState({listVisible: !this.state.listVisible,listMinWidth: width +"px"});
+        this.setState({listVisible: !this.state.listVisible,listMinWidth: width +'px'});
     },
 
     render: function() {
         var defaultText = this.props.defaultText;
 
         var classNames = cn(
-            "rui-btn-drpdown",
-            {"rui-btn-drpdown-green" : "green" === this.props.scheme}
+            'rui-btn-drpdown',
+            {'rui-btn-drpdown-green' : 'green' === this.props.scheme}
         );
 
 
         return (
             <div  className={classNames}>
-                <Btn scheme={this.props.scheme} ref="btn" onBlur={this.onBlur} disabled={this.props.disabled} onClick={this.buttonClicked}>
-                {defaultText} <span className="fa fa-chevron-down"></span>
+                <Btn scheme={this.props.scheme} ref='btn' onBlur={this.onBlur} disabled={this.props.disabled} onClick={this.buttonClicked}>
+                {defaultText} <span className='fa fa-chevron-down'></span>
                 </Btn>
                 {this.createItems()}
             </div>

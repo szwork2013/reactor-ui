@@ -10,7 +10,10 @@ const BtnGroup = React.createClass({
 
     propTypes : {
         scheme : React.PropTypes.string,
-        active : React.PropTypes.string
+        active : React.PropTypes.string,
+        children: React.PropTypes.node,
+        disabled: React.PropTypes.bool,
+        onClick: React.PropTypes.function
     },
 
     getInitialState: function() {
@@ -22,7 +25,7 @@ const BtnGroup = React.createClass({
         return React.Children.map(this.props.children, ( child ) => {
 
             if ( child.type !== Btn ) {
-                throw new Error("Only Btn type is allowed");
+                throw new Error('Only Btn type is allowed');
             }
             return React.cloneElement(child,{ style: { marginLeft: 1 } , disabled: this.props.disabled , scheme: this.props.scheme, active: this.state.active,onClick : this.buttonClicked});
         });
@@ -31,14 +34,14 @@ const BtnGroup = React.createClass({
 
     buttonClicked : function(event,value) {
         if ( this.props.onClick ) {
-           this.props.onClick(value);
+            this.props.onClick(value);
         }
         this.setState({active : value});
     },
 
     render() {
         return (
-            <div style={{display: "inline-block"}}>
+            <div style={{display: 'inline-block'}}>
                 {this.processBtnGroup()}
             </div>
         );

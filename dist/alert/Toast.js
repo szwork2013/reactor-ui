@@ -3,8 +3,7 @@
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+exports.toast = toast;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -20,14 +19,17 @@ var _radium2 = _interopRequireDefault(_radium);
 
 var _baseStyle = require('../baseStyle');
 
+var createElement = _react2['default'].createElement;
+var cloneElement = _react2['default'].cloneElement;
+
 var style = {
     base: {
         color: '#FFF',
         position: 'relative',
-        zIndex: 99999,
+        transition: 'right 0.16s ease-in',
         padding: 16,
-        minWidth: 260,
-        fontWeight: 700,
+        width: 300,
+        fontWeight: 400,
         textAlign: 'center'
     }
 };
@@ -46,34 +48,38 @@ var TYPES_TO_SCHEME = {
     info: 'blue'
 };
 
-var Toaster = (0, _radium2['default'])(_react2['default'].createClass({
-
+var Toast = (0, _radium2['default'])(_react2['default'].createClass({
     propTypes: {
-        type: _react2['default'].PropTypes.oneOf([TYPES.success, TYPES.error, TYPES.warning, TYPES.info]),
-        duration: _react2['default'].PropTypes.number,
-        onToastCompleted: _react2['default'].PropTypes.func
+        type: _react2['default'].PropTypes.oneOf([TYPES.success, TYPES.error, TYPES.warning, TYPES.info])
     },
-
+    getInitialState: function getInitialState() {
+        return { mounted: false };
+    },
     getDefaultProps: function getDefaultProps() {
         return { type: TYPES.success, duration: 2000 };
     },
-
-    componentDidMount: function componentDidMount() {
-        this.props.onComponentMounted((0, _reactDom.findDOMNode)(this.refs.toastcontainer));
-    },
-    getInitialState: function getInitialState() {
-        return { visible: false, goneAnimationCompleted: false };
-    },
     componentWillUnmount: function componentWillUnmount() {
-        if (this.props.onCompleted) {
-            this.props.onCompleted();
+        if (this.props.onComponentUnmounted) {
+            this.props.onComponentUnmounted();
         }
     },
+    componentDidMount: function componentDidMount() {
+        var _this = this;
+
+        setTimeout(function () {
+            _this.setState({ mounted: true });
+            if (_this.props.onComponentMounted) {
+                _this.props.onComponentMounted((0, _reactDom.findDOMNode)(_this.refs.toastcontainer), _this);
+            }
+        }, 0);
+    },
+
     render: function render() {
         var type = this.props.type;
+        var rightStyle = this.state.mounted ? { right: 0 } : { right: -320 };
         return _react2['default'].createElement(
             'div',
-            { ref: 'toastcontainer', style: [style.base, _baseStyle.styles[TYPES_TO_SCHEME[type]]] },
+            { style: [style.base, _baseStyle.styles[TYPES_TO_SCHEME[type]], rightStyle] },
             this.props.children
         );
     }
@@ -88,70 +94,50 @@ var createContainer = function createContainer() {
         var _style = _toastContainer.style;
 
         _style.position = 'fixed';
-        _style.right = '10px';
-        _style.bottom = '10px';
+        _style.right = '12px';
+        _style.bottom = '12px';
         _style.overflow = 'visible';
+        _style.zIndex = 9999999;
         document.body.appendChild(toastContainer);
-        toastContainer.addEventListener('transitionend', function (e) {
-            if (e.target["data-toasted"]) {
-                (0, _reactDom.unmountComponentAtNode)(e.target);
-            }
-        });
     }
 };
-var Toast = _react2['default'].createClass({
-    displayName: 'Toast',
 
-    propTypes: {
-        type: _react2['default'].PropTypes.oneOf([TYPES.success, TYPES.error, TYPES.warning, TYPES.info]),
-        duration: _react2['default'].PropTypes.number,
-        onToastCompleted: _react2['default'].PropTypes.func
-    },
-    getDefaultProps: function getDefaultProps() {
-        return { type: TYPES.success, duration: 2000 };
-    },
+var onComponentMounted = function onComponentMounted(mountNode, el, toastInstance) {
 
-    componentDidMount: function componentDidMount() {
-        createContainer();
-        if (!this.__toastEl) {
-            this.__toastEl = document.createElement('div');
-            this.__toastEl.style.position = 'absolute';
-            this.__toastEl.style.right = '-260px';
-            this.__toastEl.style.width = '260px';
-            this.__toastEl.style.transition = 'right 0.16s ease-in';
-            this.__toastEl.style.bottom = '12px';
-            toastContainer.appendChild(this.__toastEl);
+    setTimeout(function () {
+        toastInstance.setState({ mounted: false });
+        if (el) {
+            el.addEventListener('transitionend', function () {
+                _react2['default'].unmountComponentAtNode(mountNode);
+            });
         }
-        this.componentDidUpdate();
-    },
-    componentWillUnmount: function componentWillUnmount() {
-        (0, _reactDom.unmountComponentAtNode)(this.__toastEl);
-        toastContainer.removeChild(this.__toastEl);
-    },
-    onComponentMounted: function onComponentMounted() {
-        var _this = this;
+    }, toastInstance.props.duration);
+};
 
-        setTimeout(function () {
-            _this.__toastEl.style.right = "0px";
+var onComponentUnmounted = function onComponentUnmounted(mountNode) {
+    setTimeout(function () {
+        toastContainer.removeChild(mountNode);
+    }, 0);
+};
 
-            setTimeout(function () {
-                _this.__toastEl.style.right = "-280px";
-                _this.__toastEl["data-toasted"] = 1;
-            }, _this.props.duration);
-        }, 0);
-    },
-    componentDidUpdate: function componentDidUpdate() {
-        (0, _reactDom.render)(_react2['default'].createElement(
-            Toaster,
-            _extends({}, this.props, { onComponentMounted: this.onComponentMounted }),
-            this.props.children
-        ), this.__toastEl);
-    },
-    render: function render() {
-        return _react2['default'].DOM.noscript();
-    }
+var createToastContainer = function createToastContainer() {
+    var element = document.createElement('div');
+    element.style.margin = '2px';
+    return element;
+};
 
-});
+function toast(toastElement) {
+    createContainer();
+    var toastContainerEl = createToastContainer();
 
+    toastContainer.appendChild(toastContainerEl);
+    (0, _reactDom.render)(cloneElement(toastElement, {
+        onComponentUnmounted: onComponentUnmounted.bind(null, toastContainerEl),
+        onComponentMounted: onComponentMounted.bind(null, toastContainerEl)
+    }), toastContainerEl);
+}
+
+;
+
+exports.Toast = Toast;
 exports['default'] = Toast;
-module.exports = exports['default'];

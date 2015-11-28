@@ -1,28 +1,22 @@
 
-var traverse = require('object-traverse');
+import traverse from 'object-traverse';
 
-var RecordAccessMixin = {
+const RecordAccessMixin = {
 
     //FIXME: we should break this up, we can't get refs all the time e.g. when we are on render
     getRecordData : function(index,config,ref) {
         var dataProvider =  this.state.dataProvider;
-        var {setter,formatter,renderer,path,id, editor} = config;
+        var {setter,formatter,renderer,path,id} = config;
 
         var pathToUse = path || id; //we use path, if not id
 
-        var cellRef = (function() {
-          if ( ref ) {
-              var element = ref;
-              return {
-                  width : element.offsetWidth,
-                  height : element.offsetHeight,
-                  left : element.offsetLeft,
-                  top : element.offsetTop
-              };
-          }
-          return {};
-        })();
-
+        const cellRef = {};
+        if ( ref ) {
+            cellRef.width = ref.offsetWidth;
+            cellRef.height = ref.offsetHeight;
+            cellRef.left = ref.offsetLeft;
+            cellRef.top = ref.offsetTop;
+        }
         var record = dataProvider.recordAt(index);
         var traversedRecord = traverse(record);
         var value = null, formattedValue;
@@ -64,4 +58,4 @@ var RecordAccessMixin = {
     }
 };
 
-module.exports = RecordAccessMixin;
+export default RecordAccessMixin;

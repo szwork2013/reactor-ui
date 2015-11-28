@@ -25,16 +25,9 @@ module.exports = function pagerDataProvider(arrayDataProvider,rowsPerPage,curren
             } else {
                 return null;
             }
-        },
-
-        /**
-         * Map the rows available
-         */
-        map(mapper) {
-
-
-
         }
+
+
 
     };
 };

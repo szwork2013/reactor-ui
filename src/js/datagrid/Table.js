@@ -8,7 +8,7 @@ import {baseTableStyle,cellStyle,baseCellStyle} from './styles';
 
 export const Cell = (props) => {
     const {col,data} = props;
-    const {id,path,formatter,renderer} = col;
+    const {id} = col;
     const val = data[id];
     return <div>{val}</div>;
 };
@@ -18,9 +18,9 @@ export const Tbody = (props) => {
 
     return <tbody>
         {props.data.map( (data,idx) => {
-            return <tr key={"data" + "-" + idx} >
+            return <tr key={'data' + '-' + idx} >
                 {props.cols.map( (col,idxc) => {
-                    return <td key={col.id + "-" + idx +"-" + idxc} style={cellTdStyle}><Cell {...props} data={data} col={col} /></td>;
+                    return <td key={col.id + '-' + idx +'-' + idxc} style={cellTdStyle}><Cell {...props} data={data} col={col} /></td>;
                 })}
             </tr>;
         })}

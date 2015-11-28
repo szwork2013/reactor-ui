@@ -4,22 +4,21 @@ import React from 'react';
 import cx from 'classnames';
 
 
-/**
- * This is a grid row.. duh!
- *
- */
 var GridRow = React.createClass({
-
+    propTypes: {
+        header: React.PropTypes.bool,
+        children: React.PropTypes.node
+    },
     render() {
         var clsName = cx(
-            { "rui-dt-colcont" : this.props.header === true} ,
-            { "rui-dt-rowcont" : !this.props.header}
+            { 'rui-dt-colcont' : this.props.header === true} ,
+            { 'rui-dt-rowcont' : !this.props.header }
         );
         return <div className={clsName}>
-            {this.props.children}
+            {this.props.children }
         </div>;
     }
 
 });
 
-module.exports = GridRow;
+export default GridRow;

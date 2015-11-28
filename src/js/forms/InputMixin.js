@@ -1,5 +1,13 @@
 
 
+const focusAndSelect = (inputEl) => {
+    if ( inputEl ) {
+        inputEl.focus();
+        //inputEl.select();
+    }
+};
+
+
 const InputMixin = {
 
 
@@ -18,18 +26,18 @@ const InputMixin = {
 
     getInputParams() {
         var readOnly = null;
-        var className = "rui-input-block";
-        var inputWidth = this.props.inputWidth || "100%";
+        var className = 'rui-input-block';
+        var inputWidth = this.props.inputWidth || '100%';
 
         var style = { width: inputWidth };
 
         if ( !this.props.readOnly ) {//if falsy
-            readOnly = "";
+            readOnly = '';
         } else {
-            readOnly = "readonly";
+            readOnly = 'readonly';
         }
         if ( this.props.labelInline  ) {
-            className = "rui-input-inline";
+            className = 'rui-input-inline';
         }
 
         return {className,style,readOnly};
@@ -50,12 +58,16 @@ const InputMixin = {
         }
         return this.props.value;
     },
-    inputRef : function(el) {
 
+    inputRef : function(el) {
         this.__input = el;
-        if ( this.__input ) {
-            this.__input.focus();
-        }
+        focusAndSelect(this.__input);
+    },
+
+
+
+    componentDidUpdate() {
+        focusAndSelect(this.__input);
     }
 
 };

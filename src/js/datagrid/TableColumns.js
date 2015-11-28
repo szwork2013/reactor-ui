@@ -13,7 +13,7 @@ export const ColGroup = (props) => {
                 if ( col.width ) {
                     width.width = col.width;
                 }
-                return <col key={col.id +"-col-" + idx} style={width}></col>;
+                return <col key={col.id +'-col-' + idx} style={width}></col>;
             })}
         </colgroup>;
 
@@ -30,7 +30,7 @@ export const Thead = ( props ) => {
         <tr>
         {props.cols.map( (col,idx) => {
             const title = col.title || stringUtil.createLabel   (col.id);
-            return <th key={col.id +"-" + idx} style={colStyle}>{title}</th>;
+            return <th key={col.id + '-' + idx} style={colStyle}>{title}</th>;
         })}
         </tr>
     </thead>;

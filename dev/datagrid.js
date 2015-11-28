@@ -1,34 +1,39 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Datatable, Column,Datagrid} from   'reactor-ui/datagrid';
+import {Pill} from 'reactor-ui';
+import {renderModal,Modal} from 'reactor-ui/modal/Modal';
 
-import TabActionBar from 'reactor-ui/portlet/TabActionBar';
+import {Datatable, Column} from   'reactor-ui/datagrid';
+
+//import TabActionBar from 'reactor-ui/portlet/TabActionBar';
 
 
 //import data from './griddata';
 
 var data1 = require('./griddata');
 
-
-var data2 = [
-    {
-        "shipmentNo": 4444,
-        "productId": 1,
-        "pricePerItem" : 5,
-        "productName": "cf35124b-0e41-45d2-a7de-b41008b780c6",
-        "quantity": 993157,
-        "price": "$2,763.16",
-        "customer": "Watson Cervantes"
-    }
-];
+document.getElementById('btn1').addEventListener('click', () => {
+    renderModal(<Modal modalStyle={{width: 420}} bodyStyle={{height: 110}} title='Hello World'><p>Hello World, Another Hello world data</p></Modal>);
+});
+// var data2 = [
+//     {
+//         'shipmentNo': 4444,
+//         'productId': 1,
+//         'pricePerItem' : 5,
+//         'productName': 'cf35124b-0e41-45d2-a7de-b41008b780c6',
+//         'quantity': 993157,
+//         'price': '$2,763.16',
+//         'customer': 'Watson Cervantes'
+//     }
+// ];
 
 var data = data1;
 
 
 
 var idRenderer = function(recdata) {
-    return <Pill scheme="blue">{recdata.formattedValue}</Pill>; //<span style={{color: 'red', fontWeight: 'bold'}}>{recdata.formattedValue}</span>;
+    return <Pill scheme='blue'>{recdata.formattedValue}</Pill>; //<span style={{color: 'red', fontWeight: 'bold'}}>{recdata.formattedValue}</span>;
 };
 const onEdit = function(editData) {
 
@@ -37,32 +42,38 @@ const onEdit = function(editData) {
 
     data[index][field]= editData.value;
 };
+//
+// const totalFormatter = function(value) {
+//     return '$' + value;
+//
+// };
+// const totalSetter = function(record,id) {
+//
+//     return record.quantity * record.pricePerItem;
+//
+// };
+//
+// const totalRenderer = function(data) {
+//     return 'tots renderer';
+// };
+//
 
-const totalFormatter = function(value) {
-    return "$" + value;
-
-};
-const totalSetter = function(record,id) {
-
-    return record.quantity * record.pricePerItem;
-
-};
-
-const totalRenderer = function(data) {
-    return "tots renderer";
-};
-
-ReactDOM.render(<Datatable  data={data}>
-                <Column cellAlign={"center"} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
+const renderDatatable = () => {
+    ReactDOM.render(
+            <Datatable onEdit={onEdit}  data={data}>
+                <Column visible={false} cellAlign={'center'} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
                 <Column id='productId' title='Product Id'/>
                 <Column id='price' title='Price'/>
+                <Column editable={true}  id='quantity' title='Quantity'/>
             </Datatable>, document.getElementById('cont1'));
+};
+renderDatatable();
 //
 // function renderGrid() {
 //
 //     ReactDOM.render(
-//         <Datagrid data={data} width={"100%"}>
-//             <Column cellAlign={"center"} id='shipmentNo'/>
+//         <Datagrid data={data} width={'100%'}>
+//             <Column cellAlign={'center'} id='shipmentNo'/>
 //             <Column id='productId' title='Product Id'/>
 //             <Column width={300} id='productName' title='Product Name'/>
 //             <Column editable={true}  id='quantity' title='Quantity'/>
@@ -82,7 +93,7 @@ ReactDOM.render(<Datatable  data={data}>
 //renderGrid();
 //
 //
-// var active1 = "shipment";
+// var active1 = 'shipment';
 //
 // var onTabClick = function(name) {
 //     active1 = name;
@@ -91,23 +102,23 @@ ReactDOM.render(<Datatable  data={data}>
 // var renderPortlet1 = function() {
 //
 //     React.render(
-//         <Portlet titleIcon="fa fa-bar-chart" title="React Panel" subtitle="this is a subtitle">
+//         <Portlet titleIcon='fa fa-bar-chart' title='React Panel' subtitle='this is a subtitle'>
 //             <TabActionBar active='shipment' onTabActivated={onTabClick}>
-//                 <TAction name='shipment' text=" Shipment "></TAction>
-//                 <TAction name='settlement' text=" Settlement "></TAction>
-//                 <TAction name='empties' text=" Empties "></TAction>
+//                 <TAction name='shipment' text=' Shipment '></TAction>
+//                 <TAction name='settlement' text=' Settlement '></TAction>
+//                 <TAction name='empties' text=' Empties '></TAction>
 //             </TabActionBar>
-//             <View name="shipment" visible={active1}>
+//             <View name='shipment' visible={active1}>
 //                 <Datatable  data={data}>
-//                     <Column cellAlign={"center"} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
+//                     <Column cellAlign={'center'} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
 //                     <Column id='productId' title='Product Id'/>
 //                     <Column id='price' title='Price'/>
 //                 </Datatable>
 //             </View>
-//             <View name="settlement" visible={active1}>
+//             <View name='settlement' visible={active1}>
 //                 <span>Settlement</span>
 //             </View>
-//             <View name="empties" visible={active1}>
+//             <View name='empties' visible={active1}>
 //                 <span>Empties</span>
 //             </View>
 //         </Portlet>,
@@ -116,23 +127,23 @@ ReactDOM.render(<Datatable  data={data}>
 // };
 // renderPortlet1();
 // React.render(
-//     <Portlet titleIcon="fa fa-bar-chart" title="React Panel" subtitle="this is a subtitle">
+//     <Portlet titleIcon='fa fa-bar-chart' title='React Panel' subtitle='this is a subtitle'>
 //         <ActionBar>
-//             <Action><Btn scheme="green" text=" Btn 1 "/></Action>
-//             <Action><Btn scheme="green" text=" Btn 2 "/></Action>
-//             <Action><Btn scheme="green" text=" Btn 3 "/></Action>
+//             <Action><Btn scheme='green' text=' Btn 1 '/></Action>
+//             <Action><Btn scheme='green' text=' Btn 2 '/></Action>
+//             <Action><Btn scheme='green' text=' Btn 3 '/></Action>
 //         </ActionBar>
 //
-//         <View name="datagrid" visible="datagrid2">
+//         <View name='datagrid' visible='datagrid2'>
 //             <Datatable  data={data}>
-//                 <Column cellAlign={"center"} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
+//                 <Column cellAlign={'center'} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
 //                 <Column id='productId' title='Product Id'/>
 //                 <Column id='price' title='Price'/>
 //             </Datatable>
 //         </View>
-//         <View name="datagrid2" visible="datagrid2">
+//         <View name='datagrid2' visible='datagrid2'>
 //             <Datatable  data={data}>
-//                 <Column cellAlign={"center"} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
+//                 <Column cellAlign={'center'} id='shipmentNo' title='Shipment No' renderer={idRenderer}/>
 //                 <Column id='productId' title='Product Id2'/>
 //                 <Column id='price' title='Price'/>
 //             </Datatable>

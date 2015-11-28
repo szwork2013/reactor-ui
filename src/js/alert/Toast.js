@@ -8,7 +8,7 @@ import radium from 'radium';
 import {styles} from '../baseStyle';
 
 
-const {createElement, cloneElement} = React;
+const {cloneElement} = React;
 
 const style = {
     base: {
@@ -16,7 +16,7 @@ const style = {
         position: 'relative',
         transition:  'right 0.16s ease-in',
         padding: 16,
-        minWidth: 300,
+        width: 300,
         fontWeight: 400,
         textAlign: 'center'
     }
@@ -38,7 +38,10 @@ const TYPES_TO_SCHEME = {
 
 const Toast = radium(React.createClass({
     propTypes: {
-            type: React.PropTypes.oneOf([TYPES.success,TYPES.error,TYPES.warning,TYPES.info])
+        type: React.PropTypes.oneOf([TYPES.success,TYPES.error,TYPES.warning,TYPES.info]),
+        onComponentUnmounted: React.PropTypes.func,
+        onComponentMounted: React.PropTypes.func,
+        children: React.PropTypes.node
     },
     getInitialState() {
         return { mounted: false };
@@ -72,7 +75,7 @@ let toastContainer;
 
 const createContainer = function() {
     if ( !toastContainer ) {
-        toastContainer = document.createElement("div");
+        toastContainer = document.createElement('div');
         const {style} = toastContainer;
         style.position = 'fixed';
         style.right = '12px';
@@ -88,11 +91,13 @@ const onComponentMounted = (mountNode,el,toastInstance) => {
 
     setTimeout( () => {
         toastInstance.setState({mounted:false});
-        el.addEventListener('transitionend', ()=> {
-            React.unmountComponentAtNode(mountNode);
-        });
+        if ( el ) {
+            el.addEventListener('transitionend', ()=> {
+                unmountComponentAtNode(mountNode);
+            });
+        }
     }, toastInstance.props.duration );
-}
+};
 
 const onComponentUnmounted = (mountNode) => {
     setTimeout( () => {
@@ -106,17 +111,17 @@ const createToastContainer = () => {
     return element;
 };
 
+
 export function toast(toastElement) {
     createContainer();
     const toastContainerEl = createToastContainer();
 
     toastContainer.appendChild(toastContainerEl);
     render(cloneElement(toastElement,{
-                        onComponentUnmounted: onComponentUnmounted.bind(null, toastContainerEl),
-                        onComponentMounted: onComponentMounted.bind(null,toastContainerEl)
-                    }),
-                    toastContainerEl);
-};
+        onComponentUnmounted: onComponentUnmounted.bind(null, toastContainerEl),
+        onComponentMounted: onComponentMounted.bind(null,toastContainerEl)
+    }), toastContainerEl);
+}
 
 export {Toast};
 export default Toast;

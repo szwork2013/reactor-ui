@@ -9,6 +9,16 @@ const {Children} =  React ;
 const ENTER_KEY = 13;
 const ESC_KEY = 27;
 
+
+const dispatchEditData = (props,editorData) => {
+    if ( props.onEdit ) {
+        props.onEdit(editorData);
+    } else {
+        console.warn('no onEdit function is given to handle edit data');
+    }
+
+};
+
 const DatatableMixin = {
 
     _createColumnConfig(propsToUse) {
@@ -17,28 +27,32 @@ const DatatableMixin = {
         var cellConfig = [];
 
         Children.forEach(children, (child)=> {
-            cellConfig.push(child.props);
+            if ( child.props.visible === true || (!child.props.visible && child.props.visible !== false) ) {
+                cellConfig.push(child.props);
+            }
+
         });
 
         return cellConfig;
 
     },
 
-    _onCellClick(event,ref,index,config,id) {
-        var recordData = this.getRecordData(index,config,ref);
-        var editorData = assign(recordData,{oldValue: recordData.value});
+    _onCellClick(event,ref,index,config) {
+        const currentEditorData = this.state.editorData;
+        const recordData = this.getRecordData(index,config,ref);
+        const editorData = assign(recordData,{oldValue: recordData.value});
+
+        if ( currentEditorData ) {
+            dispatchEditData(this.props,currentEditorData);
+        }
 
         this.setState( { editorData : editorData });
     },
 
 
     _onEditorKeyDown(e) {
-        var editorData = this.state.editorData;
         if ( e.keyCode === ENTER_KEY ) {
-            if ( this.props.onEdit ) {
-                this.props.onEdit(editorData);
-
-            }
+            dispatchEditData(this.props,this.state.editorData);
             this.setState({editorData : null});
         } else if ( e.keyCode === ESC_KEY ) {
             this.setState({editorData : null});
@@ -46,15 +60,19 @@ const DatatableMixin = {
 
     },
 
+
+
     _editorInputChange: function(k,v) {
         var editorData = assign(this.state.editorData,{});
         editorData.value = v;
         this.setState({editorData});
     },
 
+
     _createEditor() {
         if ( this.state.editorData && this.state.editorData.config.editable  ) {
             var editorData = this.state.editorData;
+
             return <div  ref="editorContainer" style={{ left: editorData.cellRef.left, top: editorData.cellRef.top + editorData.cellRef.height,position: 'absolute'}}>
                 <Input onKeyDown={this._onEditorKeyDown} onInputChange={this._editorInputChange}
                     showLabel={false} value={editorData.value} style={{position: 'relative', width: editorData.cellRef.width, height: editorData.cellRef.height}} />
@@ -63,12 +81,9 @@ const DatatableMixin = {
         }
         return null;
 
-    },
-
-
-    ////<input ref="editorInput" onChange={this._editorInputChange} value={editorData.value} style={{width: editorData.cellRef.width, height: editorData.cellRef.height}} />
+    }
 
 };
 
 
-module.exports = DatatableMixin;
+export default DatatableMixin;
